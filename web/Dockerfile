@@ -1,14 +1,18 @@
-FROM node:20-alpine AS build
-WORKDIR /web
-COPY package.json package-lock.json* ./
-RUN npm install
-COPY . .
-RUN npm run build
+# Dockerfile for Frontend (Web)
 
-FROM node:20-alpine
-WORKDIR /web
-COPY --from=build /web/package.json ./package.json
-COPY --from=build /web/node_modules ./node_modules
-COPY --from=build /web/dist ./dist
-EXPOSE 4173
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "4173"]
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies first for caching
+COPY package*.json ./
+RUN npm install
+
+# Copy source
+COPY . .
+
+# Expose Vite dev port
+EXPOSE 5173
+
+# Start Vite in dev mode
+CMD ["npm", "run", "dev", "--", "--host"]
