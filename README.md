@@ -1,62 +1,39 @@
 # Health_Backend
 
-Подробная инструкция для новичка: запуск проекта и проверка авторизации (Шаг 2: Auth/JWT).
+Да, можно запускать как **готовый один контейнер**: `docker run` и сайт сразу работает.
 
-## 0) Что уже реализовано
+## Вариант 1 (рекомендую для старта): один standalone-контейнер
 
-- Инфраструктура: `db` + `api` + `web` + `nginx` через Docker Compose.
-- Backend: FastAPI + PostgreSQL + SQLAlchemy.
-- Auth endpoints:
-  - `POST /api/v1/auth/login`
-  - `POST /api/v1/auth/refresh`
-  - `POST /api/v1/auth/register-doctor` (только ADMIN)
-- Health endpoint: `GET /api/v1/health`
-- Swagger: `/api/docs`
+Этот режим не требует отдельной Postgres/Nginx/web-служб.
+Внутри контейнера уже:
+- FastAPI backend,
+- собранный React frontend,
+- SQLite база (файл `health.db`).
 
----
-
-## 1) Быстрый запуск
-
-### 1.1 Подготовка `.env`
-
-Linux/macOS:
+### 1) Собрать образ
 
 ```bash
-cp .env.example .env
+docker build -f Dockerfile.standalone -t health-backend:standalone .
 ```
 
-Windows PowerShell:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Откройте `.env` и обязательно проверьте:
-- `JWT_SECRET` (замените на случайную строку)
-- `ADMIN_EMAIL`
-- `ADMIN_PASSWORD`
-
-### 1.2 Запуск
+### 2) Запустить контейнер
 
 ```bash
-docker compose up --build
+docker run -d --name health-backend -p 8080:8080 \
+  -e JWT_SECRET="super_secret_change_me" \
+  -e ADMIN_EMAIL="admin@example.com" \
+  -e ADMIN_PASSWORD="change_me_please" \
+  health-backend:standalone
 ```
 
-или:
-
-- Linux/macOS: `./scripts/dev-up.sh`
-- Windows PowerShell: `./scripts/dev-up.ps1`
-
----
-
-## 2) Проверка, что всё поднялось
+### 3) Проверить, что всё работает
 
 Откройте:
 - http://localhost:8080
 - http://localhost:8080/api/docs
 - http://localhost:8080/api/v1/health
 
-Проверка health в терминале:
+Проверка API:
 
 ```bash
 curl http://localhost:8080/api/v1/health
@@ -68,15 +45,7 @@ curl http://localhost:8080/api/v1/health
 {"status":"OK"}
 ```
 
----
-
-## 3) Проверка Auth (очень пошагово)
-
-Ниже команды для Linux/macOS (bash). Для PowerShell JSON можно отправить через Postman/Insomnia или `Invoke-RestMethod`.
-
-### 3.1 Логин админом
-
-> На старте API автоматически создаёт ADMIN из `.env` (`ADMIN_EMAIL` + `ADMIN_PASSWORD`).
+### 4) Проверка логина администратора
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/auth/login \
@@ -85,98 +54,58 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 ```
 
 Ожидаемый результат:
-- В ответе есть `access_token`, `refresh_token`, `user.role = "ADMIN"`.
+- приходят `access_token` и `refresh_token`.
 
-### 3.2 Обновление access-token
-
-Подставьте ваш refresh token:
+### 5) Остановка/удаление
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/auth/refresh \
-  -H "Content-Type: application/json" \
-  -d '{"refresh_token":"<ВАШ_REFRESH_TOKEN>"}'
-```
-
-Ожидаемый результат:
-- Новый `access_token`.
-
-### 3.3 Создание врача (только ADMIN)
-
-Подставьте access token администратора:
-
-```bash
-curl -X POST http://localhost:8080/api/v1/auth/register-doctor \
-  -H "Authorization: Bearer <ВАШ_ACCESS_TOKEN>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email":"doctor1@example.com",
-    "password":"doctor123",
-    "full_name":"Dr. John Doe",
-    "specialty":"Cardiology",
-    "phone":"+123456789"
-  }'
-```
-
-Ожидаемый результат:
-- Объект пользователя с `role = "DOCTOR"`.
-
-### 3.4 Логин под врачом
-
-```bash
-curl -X POST http://localhost:8080/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"doctor1@example.com","password":"doctor123"}'
-```
-
-Ожидаемый результат:
-- Возвращаются токены и `user.role = "DOCTOR"`.
-
----
-
-## 4) Частые ошибки и решения
-
-### Ошибка: `docker: command not found`
-- Установите Docker Desktop/Engine.
-- Перезапустите терминал.
-
-### Ошибка: `401 Invalid email or password`
-- Проверьте `ADMIN_EMAIL`/`ADMIN_PASSWORD` в `.env`.
-- Если меняли `.env` после первого запуска, перезапустите контейнеры:
-  ```bash
-  docker compose down -v
-  docker compose up --build
-  ```
-
-### Ошибка: `403 Admin role required` при `register-doctor`
-- Вы используете токен не администратора.
-- Выполните логин под ADMIN и возьмите новый access token.
-
-### Swagger не открывается
-- Проверьте статус контейнеров:
-  ```bash
-  docker compose ps
-  docker compose logs api --tail=200
-  docker compose logs nginx --tail=200
-  ```
-
----
-
-## 5) Полезные команды
-
-Остановить:
-
-```bash
-docker compose down
-```
-
-Остановить + удалить данные БД:
-
-```bash
-docker compose down -v
+docker stop health-backend
+docker rm health-backend
 ```
 
 ---
 
-## 6) Что делаем дальше
+## Вариант 2: полный docker compose (db + api + web + nginx)
 
-Следующий шаг: `patients` и `profiles` (CRUD, валидация, camelCase JSON, импорт/экспорт совместимый с мобильным приложением).
+Если нужен режим ближе к production-разделению сервисов, используйте compose.
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+Открыть:
+- http://localhost:8080
+- http://localhost:8080/api/docs
+
+---
+
+## Готовые скрипты
+
+### Linux/macOS
+
+- Standalone: `./scripts/standalone-build-run.sh`
+- Compose: `./scripts/dev-up.sh`
+
+### Windows PowerShell
+
+- Standalone: `./scripts/standalone-build-run.ps1`
+- Compose: `./scripts/dev-up.ps1`
+
+---
+
+## Частые проблемы
+
+1. `docker: command not found` — Docker не установлен или не запущен.
+2. `port 8080 already in use` — освободите порт или смените `-p 8080:8080`.
+3. Неверный логин админа — проверьте `ADMIN_EMAIL`/`ADMIN_PASSWORD`, с которыми запускали контейнер.
+4. Если поменяли env — пересоздайте контейнер (`docker rm -f health-backend`, потом `docker run ...`).
+
+---
+
+## Что уже реализовано в API
+
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/refresh`
+- `POST /api/v1/auth/register-doctor` (только ADMIN)
+- `GET /api/v1/health`

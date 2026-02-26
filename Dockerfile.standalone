@@ -1,0 +1,32 @@
+# Stage 1: build frontend
+FROM node:20-alpine AS web-build
+WORKDIR /web
+COPY web/package.json ./package.json
+RUN npm install
+COPY web/ ./
+RUN npm run build
+
+# Stage 2: build backend runtime
+FROM python:3.11-slim
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+COPY backend/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/app ./app
+COPY --from=web-build /web/dist ./app/static
+
+# SQLite by default for true single-container start
+ENV DATABASE_URL=sqlite:///./health.db
+ENV CORS_ORIGINS=http://localhost:8080
+ENV ADMIN_EMAIL=admin@example.com
+ENV ADMIN_PASSWORD=change_me_please
+ENV ADMIN_FULL_NAME=System Admin
+ENV JWT_SECRET=replace_with_long_random_secret
+
+EXPOSE 8080
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]

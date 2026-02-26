@@ -1,5 +1,9 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from app.api.auth import router as auth_router
@@ -19,6 +23,11 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+
+static_dir = Path(__file__).parent / 'static'
+assets_dir = static_dir / 'assets'
+if assets_dir.exists():
+    app.mount('/assets', StaticFiles(directory=assets_dir), name='assets')
 
 
 @app.on_event('startup')
@@ -41,3 +50,11 @@ def on_startup() -> None:
 @app.get('/api/v1/health')
 def health() -> dict[str, str]:
     return {'status': 'OK'}
+
+
+@app.get('/')
+def web_root() -> FileResponse:
+    index_file = static_dir / 'index.html'
+    if index_file.exists():
+        return FileResponse(index_file)
+    return FileResponse(Path(__file__).parent / 'fallback-index.html')

@@ -10,7 +10,11 @@ class Base(DeclarativeBase):
     pass
 
 
-engine = create_engine(settings.database_url, future=True)
+engine_kwargs: dict[str, object] = {'future': True}
+if settings.database_url.startswith('sqlite'):
+    engine_kwargs['connect_args'] = {'check_same_thread': False}
+
+engine = create_engine(settings.database_url, **engine_kwargs)
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, class_=Session)
 
 
