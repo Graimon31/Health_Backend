@@ -1,180 +1,175 @@
 # Health_Backend
 
-Подробная инструкция для запуска проекта **с нуля** (как для новичка).
+Подробная инструкция для новичка: запуск проекта и проверка авторизации (Шаг 2: Auth/JWT).
 
-Проект поднимает 4 сервиса через Docker:
-- `db` — PostgreSQL (порт `5432`)
-- `api` — FastAPI (порт `8000`, наружу через Nginx)
-- `web` — React + Vite (внутри Docker)
-- `nginx` — единая точка входа (порт `8080`)
+## 0) Что уже реализовано
 
----
-
-## 1. Что уже есть в репозитории
-
-- `docker-compose.yml` — описание всех сервисов.
-- `backend/` — минимальный backend с `GET /api/v1/health`.
-- `web/` — минимальный frontend.
-- `nginx/default.conf` — прокси для `/`, `/api`, `/ws`.
-- `.env.example` — пример переменных окружения.
-- `scripts/dev-up.sh` и `scripts/dev-up.ps1` — запуск в 1 команду.
+- Инфраструктура: `db` + `api` + `web` + `nginx` через Docker Compose.
+- Backend: FastAPI + PostgreSQL + SQLAlchemy.
+- Auth endpoints:
+  - `POST /api/v1/auth/login`
+  - `POST /api/v1/auth/refresh`
+  - `POST /api/v1/auth/register-doctor` (только ADMIN)
+- Health endpoint: `GET /api/v1/health`
+- Swagger: `/api/docs`
 
 ---
 
-## 2. Что нужно установить заранее
+## 1) Быстрый запуск
 
-> Нужно установить **Docker Desktop** и **Git**. Node/Python локально не обязательны для запуска через Docker.
+### 1.1 Подготовка `.env`
 
-### 2.1 Windows
-1. Установите Docker Desktop: https://www.docker.com/products/docker-desktop/
-2. Установите Git: https://git-scm.com/download/win
-3. Перезагрузите ПК.
-4. Запустите Docker Desktop и дождитесь статуса **Engine running**.
+Linux/macOS:
 
-Проверка в PowerShell:
-
-```powershell
-docker --version
-git --version
-```
-
-Ожидаемый результат: команды выводят версии без ошибок.
-
-### 2.2 macOS
-1. Установите Docker Desktop (версия для вашего CPU): https://www.docker.com/products/docker-desktop/
-2. Установите Git (или `xcode-select --install`).
-3. Запустите Docker Desktop.
-
-Проверка в Terminal:
-
-```bash
-docker --version
-git --version
-```
-
-### 2.3 Linux
-1. Установите Docker Engine: https://docs.docker.com/engine/install/
-2. Установите Docker Compose plugin (по инструкции для дистрибутива).
-3. Установите Git: `sudo apt install git` (или аналог).
-
-Проверка:
-
-```bash
-docker --version
-docker compose version
-git --version
-```
-
----
-
-## 3. Клонирование проекта
-
-```bash
-git clone <URL_ВАШЕГО_РЕПО>
-cd Health_Backend
-```
-
-Проверка:
-
-```bash
-pwd
-```
-
-Ожидаемый результат: текущая папка `.../Health_Backend`.
-
----
-
-## 4. Настройка `.env`
-
-Скопируйте шаблон:
-
-### Linux/macOS
 ```bash
 cp .env.example .env
 ```
 
-### Windows PowerShell
+Windows PowerShell:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Откройте `.env` и при необходимости поменяйте значения.
-Минимально можно оставить как есть для локального старта.
+Откройте `.env` и обязательно проверьте:
+- `JWT_SECRET` (замените на случайную строку)
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
 
-Текущие переменные:
-- `DATABASE_URL=postgresql+psycopg://health_user:health_pass@db:5432/health`
-- `JWT_SECRET=replace_with_long_random_secret`
-- `CORS_ORIGINS=http://localhost:8080`
-- `ADMIN_EMAIL=admin@example.com`
-- `ADMIN_PASSWORD=change_me`
-- `DEMO_SEED=true`
-
-Рекомендуется поменять `JWT_SECRET` на случайную строку.
-
-Пример генерации:
-- Linux/macOS: `openssl rand -hex 32`
-- PowerShell: `[guid]::NewGuid().ToString("N") + [guid]::NewGuid().ToString("N")`
-
----
-
-## 5. Запуск проекта
-
-### Вариант A — напрямую через docker compose
+### 1.2 Запуск
 
 ```bash
 docker compose up --build
 ```
 
-### Вариант B — через скрипт
+или:
 
-- Linux/macOS:
-  ```bash
-  ./scripts/dev-up.sh
-  ```
-- Windows PowerShell:
-  ```powershell
-  ./scripts/dev-up.ps1
-  ```
-
-Что должно появиться в логах:
-- `health_db` — PostgreSQL started / ready to accept connections
-- `health_api` — Uvicorn running on `0.0.0.0:8000`
-- `health_web` — Vite preview listening on `4173`
-- `health_nginx` — Nginx started
+- Linux/macOS: `./scripts/dev-up.sh`
+- Windows PowerShell: `./scripts/dev-up.ps1`
 
 ---
 
-## 6. Проверка после запуска
+## 2) Проверка, что всё поднялось
 
-Откройте в браузере:
+Откройте:
+- http://localhost:8080
+- http://localhost:8080/api/docs
+- http://localhost:8080/api/v1/health
 
-1. `http://localhost:8080` — стартовая страница frontend.
-2. `http://localhost:8080/api/docs` — Swagger UI FastAPI.
-3. `http://localhost:8080/api/v1/health` — health-check endpoint.
-
-Ожидаемый ответ health:
-
-```json
-{"status":"OK"}
-```
-
-Проверка через curl:
+Проверка health в терминале:
 
 ```bash
 curl http://localhost:8080/api/v1/health
 ```
 
+Ожидаемый ответ:
+
+```json
+{"status":"OK"}
+```
+
 ---
 
-## 7. Остановка проекта
+## 3) Проверка Auth (очень пошагово)
 
-Остановить контейнеры:
+Ниже команды для Linux/macOS (bash). Для PowerShell JSON можно отправить через Postman/Insomnia или `Invoke-RestMethod`.
+
+### 3.1 Логин админом
+
+> На старте API автоматически создаёт ADMIN из `.env` (`ADMIN_EMAIL` + `ADMIN_PASSWORD`).
+
+```bash
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@example.com","password":"change_me_please"}'
+```
+
+Ожидаемый результат:
+- В ответе есть `access_token`, `refresh_token`, `user.role = "ADMIN"`.
+
+### 3.2 Обновление access-token
+
+Подставьте ваш refresh token:
+
+```bash
+curl -X POST http://localhost:8080/api/v1/auth/refresh \
+  -H "Content-Type: application/json" \
+  -d '{"refresh_token":"<ВАШ_REFRESH_TOKEN>"}'
+```
+
+Ожидаемый результат:
+- Новый `access_token`.
+
+### 3.3 Создание врача (только ADMIN)
+
+Подставьте access token администратора:
+
+```bash
+curl -X POST http://localhost:8080/api/v1/auth/register-doctor \
+  -H "Authorization: Bearer <ВАШ_ACCESS_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email":"doctor1@example.com",
+    "password":"doctor123",
+    "full_name":"Dr. John Doe",
+    "specialty":"Cardiology",
+    "phone":"+123456789"
+  }'
+```
+
+Ожидаемый результат:
+- Объект пользователя с `role = "DOCTOR"`.
+
+### 3.4 Логин под врачом
+
+```bash
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"doctor1@example.com","password":"doctor123"}'
+```
+
+Ожидаемый результат:
+- Возвращаются токены и `user.role = "DOCTOR"`.
+
+---
+
+## 4) Частые ошибки и решения
+
+### Ошибка: `docker: command not found`
+- Установите Docker Desktop/Engine.
+- Перезапустите терминал.
+
+### Ошибка: `401 Invalid email or password`
+- Проверьте `ADMIN_EMAIL`/`ADMIN_PASSWORD` в `.env`.
+- Если меняли `.env` после первого запуска, перезапустите контейнеры:
+  ```bash
+  docker compose down -v
+  docker compose up --build
+  ```
+
+### Ошибка: `403 Admin role required` при `register-doctor`
+- Вы используете токен не администратора.
+- Выполните логин под ADMIN и возьмите новый access token.
+
+### Swagger не открывается
+- Проверьте статус контейнеров:
+  ```bash
+  docker compose ps
+  docker compose logs api --tail=200
+  docker compose logs nginx --tail=200
+  ```
+
+---
+
+## 5) Полезные команды
+
+Остановить:
 
 ```bash
 docker compose down
 ```
 
-Остановить и удалить том базы данных (осторожно: удаляет данные БД):
+Остановить + удалить данные БД:
 
 ```bash
 docker compose down -v
@@ -182,49 +177,6 @@ docker compose down -v
 
 ---
 
-## 8. Частые проблемы и решения
+## 6) Что делаем дальше
 
-### Проблема 1: `docker: command not found`
-Причина: Docker не установлен или не запущен.
-Решение: установить/запустить Docker Desktop, перезапустить терминал.
-
-### Проблема 2: порт `8080`/`5432` уже занят
-Проверьте, кто занимает порт:
-- Linux/macOS: `lsof -i :8080`
-- Windows: `netstat -ano | findstr :8080`
-
-Завершите процесс или смените порт в `docker-compose.yml`.
-
-### Проблема 3: в GitHub на `main` всё ещё только README
-Причина: изменения в другой ветке.
-Решение: убедиться, что PR **замёржен в `main`**.
-
-### Проблема 4: Swagger не открывается
-1. Проверьте, что контейнер `health_api` запущен: `docker compose ps`.
-2. Посмотрите логи API: `docker compose logs api --tail=200`.
-3. Проверьте прокси в `nginx/default.conf`.
-
-### Проблема 5: frontend открывается, но API 502
-1. `docker compose ps` — API должен быть `Up`.
-2. `docker compose logs nginx --tail=200`.
-3. `docker compose logs api --tail=200`.
-
----
-
-## 9. Быстрый чек-лист перед работой
-
-- [ ] Docker установлен и запущен
-- [ ] Репозиторий склонирован
-- [ ] Создан `.env` из `.env.example`
-- [ ] Выполнен `docker compose up --build`
-- [ ] Открываются `http://localhost:8080`, `/api/docs`, `/api/v1/health`
-
----
-
-## 10. Следующий шаг
-
-После успешного старта каркаса переходим к реализации:
-- auth (`/api/v1/auth/...`),
-- модели БД и миграции,
-- пациенты/профили,
-- чат и т.д.
+Следующий шаг: `patients` и `profiles` (CRUD, валидация, camelCase JSON, импорт/экспорт совместимый с мобильным приложением).

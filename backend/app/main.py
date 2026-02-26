@@ -1,8 +1,43 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
 
-app = FastAPI(title="Health Backend API", docs_url="/api/docs", openapi_url="/api/openapi.json")
+from app.api.auth import router as auth_router
+from app.core.config import settings
+from app.db import Base, engine
+from app.models.user import User, UserRole
+from app.security import hash_password
+
+app = FastAPI(title='Health Backend API', docs_url='/api/docs', openapi_url='/api/openapi.json')
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[origin.strip() for origin in settings.cors_origins.split(',') if origin.strip()],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
+
+app.include_router(auth_router)
 
 
-@app.get("/api/v1/health")
+@app.on_event('startup')
+def on_startup() -> None:
+    Base.metadata.create_all(bind=engine)
+    with Session(engine) as db:
+        admin = db.query(User).filter(User.email == settings.admin_email).first()
+        if admin is None:
+            db.add(
+                User(
+                    email=settings.admin_email,
+                    password_hash=hash_password(settings.admin_password),
+                    role=UserRole.ADMIN,
+                    full_name=settings.admin_full_name,
+                )
+            )
+            db.commit()
+
+
+@app.get('/api/v1/health')
 def health() -> dict[str, str]:
-    return {"status": "OK"}
+    return {'status': 'OK'}
