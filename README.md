@@ -1,8 +1,13 @@
 # Health_Backend — запуск «одной кнопкой»
 
-Да, сделано так, чтобы вы запускали **один скрипт**, и сайт сразу поднимался.
+Вы правы: нужно, чтобы запускалось «нажал и работает». Исправил.
 
-## Самый простой путь (one-click)
+Что важно:
+- устранена ошибка `bcrypt` при старте (зафиксирована совместимая версия `bcrypt==4.0.1`),
+- сохранение БД вынесено в отдельный volume `/app/data`,
+- one-click скрипт поднимает контейнер и ждёт health-status `healthy`.
+
+## 1) Запуск одной кнопкой
 
 ### Linux / macOS
 
@@ -16,35 +21,31 @@
 ./scripts/one-click-start.ps1
 ```
 
-Скрипт автоматически:
-1. Собирает образ `health-backend:standalone`.
-2. Пересоздаёт контейнер `health-backend`.
-3. Запускает его на порту `8080`.
-4. Ждёт статуса `healthy`.
-5. Печатает готовые ссылки.
-
-После успешного запуска открывайте:
+После `✅ Ready` открывайте:
 - http://localhost:8080
 - http://localhost:8080/api/docs
 - http://localhost:8080/api/v1/health
 
 ---
 
-## Что внутри standalone-контейнера
+## 2) Если был старый упавший контейнер (рекомендую выполнить один раз)
 
-- FastAPI backend
-- React frontend (собран и встроен)
-- SQLite база внутри контейнера
-- Автосоздание администратора (`ADMIN_EMAIL`/`ADMIN_PASSWORD`)
-- Healthcheck для контроля готовности
+```bash
+docker rm -f health-backend || true
+docker volume rm health_backend_data || true
+```
 
-То есть это реально «из коробки»: **один контейнер = работающий сайт + API**.
+Потом снова:
+
+```bash
+./scripts/one-click-start.sh
+```
+
+> Это очистит старое состояние и гарантированно стартанёт на новой версии.
 
 ---
 
-## Параметры (опционально)
-
-Перед запуском можно задать свои значения:
+## 3) Настройка админа (опционально)
 
 ### Linux/macOS
 
@@ -52,6 +53,7 @@
 export JWT_SECRET='super_secret'
 export ADMIN_EMAIL='admin@example.com'
 export ADMIN_PASSWORD='my_strong_password'
+export ADMIN_FULL_NAME='System Admin'
 ./scripts/one-click-start.sh
 ```
 
@@ -61,12 +63,13 @@ export ADMIN_PASSWORD='my_strong_password'
 $env:JWT_SECRET='super_secret'
 $env:ADMIN_EMAIL='admin@example.com'
 $env:ADMIN_PASSWORD='my_strong_password'
+$env:ADMIN_FULL_NAME='System Admin'
 ./scripts/one-click-start.ps1
 ```
 
 ---
 
-## Проверка логина администратора
+## 4) Проверка авторизации
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/auth/login \
@@ -74,11 +77,11 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
   -d '{"email":"admin@example.com","password":"my_strong_password"}'
 ```
 
-Если пароль не меняли, по умолчанию `change_me_please`.
+Если пароль не задавали, используйте `change_me_please`.
 
 ---
 
-## Остановка (one-click)
+## 5) Остановка
 
 ### Linux / macOS
 
@@ -94,20 +97,13 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 
 ---
 
-## Если хотите режим с несколькими контейнерами
+## 6) Что именно сломалось у вас и что исправлено
 
-Оставлен и старый путь через compose:
+У вас падало на старте с ошибкой passlib/bcrypt (`module 'bcrypt' has no attribute '__about__'`).
+Причина: несовместимая версия `bcrypt`.
+Исправление в проекте:
+- добавлен явный пин `bcrypt==4.0.1` в `backend/requirements.txt`.
 
-```bash
-cp .env.example .env
-docker compose up --build
-```
-
----
-
-## Частые проблемы
-
-1. `docker: command not found` → Docker не установлен/не запущен.
-2. `port 8080 already in use` → освободите порт или поменяйте порт в скрипте.
-3. Не проходит логин admin → проверьте, какие `ADMIN_EMAIL`/`ADMIN_PASSWORD` передали в окружении.
-4. Контейнер не стал healthy → `docker logs health-backend --tail 200`.
+Также улучшено:
+- в Dockerfile удалены секреты из `ENV` (меньше предупреждений Docker),
+- SQLite хранится в `/app/data/health.db` (персистентно и без перетирания кода).

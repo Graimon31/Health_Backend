@@ -23,16 +23,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/app ./app
 COPY --from=web-build /web/dist ./app/static
 
-# SQLite by default for true single-container start
-ENV DATABASE_URL=sqlite:///./health.db
+# Non-secret defaults only
+ENV DATABASE_URL=sqlite:////app/data/health.db
 ENV CORS_ORIGINS=http://localhost:8080
 ENV ADMIN_EMAIL=admin@example.com
-ENV ADMIN_PASSWORD=change_me_please
 ENV ADMIN_FULL_NAME=System Admin
-ENV JWT_SECRET=replace_with_long_random_secret
+
+RUN mkdir -p /app/data
 
 EXPOSE 8080
 
-HEALTHCHECK --interval=10s --timeout=3s --retries=10 CMD curl -fsS http://127.0.0.1:8080/api/v1/health || exit 1
+HEALTHCHECK --interval=10s --timeout=3s --retries=12 CMD curl -fsS http://127.0.0.1:8080/api/v1/health || exit 1
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
