@@ -122,3 +122,19 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 ```bash
 ./scripts/one-click-start.sh
 ```
+
+
+## Новый макет Dashboard
+
+Добавлен кликабельный UI в стиле вашего макета:
+- левое меню (`Dashboard`, `Patients`, `Chat`, `FAQ`, `Settings`),
+- верхняя панель поиска и профиль,
+- KPI-карточки,
+- блоки `Alerts`, `Recent Activity`, `Unread Chats`, `Quick Actions`,
+- переключатель light/dark темы.
+
+Чтобы увидеть новую страницу, обязательно пересоберите и перезапустите:
+
+```bash
+./scripts/one-click-start.sh
+```
