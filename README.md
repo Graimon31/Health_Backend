@@ -138,3 +138,35 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 ```bash
 ./scripts/one-click-start.sh
 ```
+
+
+## Если открываете `http://localhost` и видите старый экран
+
+Скорее всего вы смотрите **другой контейнер/порт** (обычно старый nginx на `80`) или старый образ из кеша.
+
+Сделайте так:
+
+1. Запустите one-click (он сам чистит старые контейнеры и делает fresh build без cache):
+
+```bash
+./scripts/one-click-start.sh
+```
+
+2. Открывайте **точно этот адрес**:
+
+```text
+http://localhost:8080
+```
+
+3. Если браузер всё равно показывает старое:
+- hard refresh (`Cmd+Shift+R` / `Ctrl+F5`),
+- откройте в инкогнито,
+- проверьте, что в терминале есть строка `✅ New dashboard build detected.`
+
+4. Если порт 8080 занят, запустите на другом порту:
+
+```bash
+HOST_PORT=8090 ./scripts/one-click-start.sh
+```
+
+и откройте `http://localhost:8090`.
