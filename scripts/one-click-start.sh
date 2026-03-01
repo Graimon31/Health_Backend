@@ -43,7 +43,7 @@ if [[ "$status" != '"healthy"' ]]; then
 fi
 
 echo "[4/5] Verifying that the new dashboard UI is inside container..."
-if docker exec "$CONTAINER_NAME" sh -c "grep -q 'Search patients' /app/static/index.html"; then
+if docker exec "$CONTAINER_NAME" sh -c "grep -q 'Поиск пациентов' /app/static/index.html"; then
   echo "✅ New dashboard build detected."
 else
   echo "⚠️ Warning: dashboard marker not found in /app/static/index.html"
