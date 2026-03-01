@@ -153,67 +153,120 @@ function App() {
                 </button>
               );
             })}
-            <div style={{ marginTop: 'auto', padding: '8px 10px', borderTop: `1px solid ${colors.border}` }}>⚙️ Settings</div>
+            <div
+              style={{ marginTop: 'auto', padding: '8px 10px', borderTop: `1px solid ${colors.border}`, cursor: 'pointer', fontWeight: activeMenu === 'settings' ? 700 : 600, color: activeMenu === 'settings' ? '#2d71df' : colors.textMuted }}
+              onClick={() => setActiveMenu('settings')}
+            >
+              ⚙️ Settings
+            </div>
           </aside>
 
           <main style={{ padding: 22, color: colors.text }}>
-            <h1 style={{ marginTop: 0, marginBottom: 16 }}>Dashboard</h1>
+            {activeMenu === 'dashboard' && (
+              <>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Dashboard</h1>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(120px, 1fr))', gap: 12, marginBottom: 12 }}>
-              {kpiCards.map((card) => (
-                <div
-                  key={card.title}
-                  style={{
-                    background: colors.panelStrong,
-                    border: `1px solid ${colors.border}`,
-                    borderRadius: 10,
-                    padding: 14,
-                  }}
-                >
-                  <div style={{ color: colors.textMuted, fontSize: 14 }}>{card.title}</div>
-                  <div style={{ fontSize: 34, marginTop: 6, color: card.danger ? '#ef5350' : colors.text }}>{card.value}</div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <Panel title="Alerts" colors={colors}>
-                <Line text="John Doe - High Blood Pressure" badge="Active" />
-                <Line text="Anna Ivanova - High Heart Rate" badge="Active" />
-              </Panel>
-
-              <Panel title="Recent Activity" colors={colors}>
-                <Line text="Appointment scheduled with Sarah Brown" badge="New" />
-                <Line text="Patient feedback offer for Diree Morn" badge="New" />
-              </Panel>
-
-              <Panel title="Unread Chats" colors={colors}>
-                <Line text="John Doe" badge="5 min" />
-                <Line text="Elena Petrova" badge="4 min" />
-              </Panel>
-
-              <Panel title="Quick Actions" colors={colors}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-                  {['Add Patient', 'Import Profile', 'Export Profile'].map((action) => (
-                    <button
-                      key={action}
-                      onClick={() => window.alert(`${action} clicked`)}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(120px, 1fr))', gap: 12, marginBottom: 12 }}>
+                  {kpiCards.map((card) => (
+                    <div
+                      key={card.title}
                       style={{
-                        border: 'none',
-                        borderRadius: 8,
-                        background: colors.button,
-                        color: '#fff',
-                        padding: '10px 8px',
-                        fontWeight: 600,
-                        cursor: 'pointer',
+                        background: colors.panelStrong,
+                        border: `1px solid ${colors.border}`,
+                        borderRadius: 10,
+                        padding: 14,
                       }}
                     >
-                      {action}
-                    </button>
+                      <div style={{ color: colors.textMuted, fontSize: 14 }}>{card.title}</div>
+                      <div style={{ fontSize: 34, marginTop: 6, color: card.danger ? '#ef5350' : colors.text }}>{card.value}</div>
+                    </div>
                   ))}
                 </div>
-              </Panel>
-            </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <Panel title="Alerts" colors={colors}>
+                    <Line text="John Doe - High Blood Pressure" badge="Active" />
+                    <Line text="Anna Ivanova - High Heart Rate" badge="Active" />
+                  </Panel>
+
+                  <Panel title="Recent Activity" colors={colors}>
+                    <Line text="Appointment scheduled with Sarah Brown" badge="New" />
+                    <Line text="Patient feedback offer for Diree Morn" badge="New" />
+                  </Panel>
+
+                  <Panel title="Unread Chats" colors={colors}>
+                    <Line text="John Doe" badge="5 min" />
+                    <Line text="Elena Petrova" badge="4 min" />
+                  </Panel>
+
+                  <Panel title="Quick Actions" colors={colors}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+                      {['Add Patient', 'Import Profile', 'Export Profile'].map((action) => (
+                        <button
+                          key={action}
+                          onClick={() => window.alert(`${action} clicked`)}
+                          style={{
+                            border: 'none',
+                            borderRadius: 8,
+                            background: colors.button,
+                            color: '#fff',
+                            padding: '10px 8px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {action}
+                        </button>
+                      ))}
+                    </div>
+                  </Panel>
+                </div>
+              </>
+            )}
+
+            {activeMenu === 'patients' && (
+              <>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Patients</h1>
+                <Panel title="Patient List" colors={colors}>
+                  <div style={{ padding: '20px 0', textAlign: 'center', color: colors.textMuted }}>
+                    No patients found. Click "Add Patient" to get started.
+                  </div>
+                </Panel>
+              </>
+            )}
+
+            {activeMenu === 'chat' && (
+              <>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Chat</h1>
+                <Panel title="Recent Conversations" colors={colors}>
+                  <div style={{ padding: '20px 0', textAlign: 'center', color: colors.textMuted }}>
+                    Select a conversation to start chatting.
+                  </div>
+                </Panel>
+              </>
+            )}
+
+            {activeMenu === 'faq' && (
+              <>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>FAQ</h1>
+                <Panel title="Frequently Asked Questions" colors={colors}>
+                  <Line text="How do I add a new patient?" badge="General" />
+                  <Line text="How to export a profile?" badge="General" />
+                  <Line text="Can I change my password?" badge="Account" />
+                </Panel>
+              </>
+            )}
+
+            {activeMenu === 'settings' && (
+              <>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Settings</h1>
+                <Panel title="Preferences" colors={colors}>
+                  <Line text="Dark Mode" badge="Toggle in header" />
+                  <Line text="Notifications" badge="Enabled" />
+                  <Line text="Language" badge="English" />
+                </Panel>
+              </>
+            )}
           </main>
         </div>
       </div>
