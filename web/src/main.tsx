@@ -6,18 +6,17 @@ type MenuKey = 'dashboard' | 'patients' | 'chat' | 'faq' | 'settings';
 type ThemeMode = 'light' | 'dark';
 
 const menuItems: Array<{ key: MenuKey; label: string; icon: string }> = [
-  { key: 'dashboard', label: 'Dashboard', icon: '🏠' },
-  { key: 'patients', label: 'Patients', icon: '🧑‍⚕️' },
-  { key: 'chat', label: 'Chat', icon: '💬' },
+  { key: 'dashboard', label: 'Главная', icon: '🏠' },
+  { key: 'patients', label: 'Пациенты', icon: '🧑‍⚕️' },
+  { key: 'chat', label: 'Чаты', icon: '💬' },
   { key: 'faq', label: 'FAQ', icon: '❓' },
-  { key: 'settings', label: 'Settings', icon: '⚙️' },
 ];
 
 const kpiCards = [
-  { title: 'Total Patients', value: '128' },
-  { title: 'Alerts', value: '5 Critical', danger: true },
-  { title: 'Unread Messages', value: '12' },
-  { title: 'Recent Measurements', value: '122 / 81 mmHg' },
+  { title: 'Всего пациентов', value: '128' },
+  { title: 'Предупреждения', value: '5 Критич.', danger: true },
+  { title: 'Новые сообщения', value: '12' },
+  { title: 'Последние замеры', value: '122 / 81 мм рт. ст.' },
 ];
 
 function App() {
@@ -87,8 +86,8 @@ function App() {
           <div style={{ fontWeight: 800, fontSize: 28, color: '#3b82f6' }}>✚</div>
           <div style={{ fontWeight: 700, minWidth: 130 }}>HealthCodex</div>
           <input
-            aria-label="Search patients"
-            placeholder="Search patients..."
+            aria-label="Поиск пациентов"
+            placeholder="Поиск пациентов..."
             style={{
               flex: 1,
               maxWidth: 520,
@@ -116,7 +115,7 @@ function App() {
           <span style={{ fontSize: 20 }}>🔔</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600 }}>
             <span style={{ fontSize: 22 }}>👨‍⚕️</span>
-            Dr. Smith
+            Д-р Смирнов
           </div>
         </header>
 
@@ -153,18 +152,29 @@ function App() {
                 </button>
               );
             })}
-            <div
-              style={{ marginTop: 'auto', padding: '8px 10px', borderTop: `1px solid ${colors.border}`, cursor: 'pointer', fontWeight: activeMenu === 'settings' ? 700 : 600, color: activeMenu === 'settings' ? '#2d71df' : colors.textMuted }}
+            <button
               onClick={() => setActiveMenu('settings')}
+              style={{
+                marginTop: 'auto',
+                textAlign: 'left',
+                border: 'none',
+                background: activeMenu === 'settings' ? colors.active : 'transparent',
+                color: activeMenu === 'settings' ? '#2d71df' : colors.textMuted,
+                borderRadius: 8,
+                padding: '11px 12px',
+                cursor: 'pointer',
+                fontWeight: activeMenu === 'settings' ? 700 : 600,
+                borderTop: activeMenu === 'settings' ? 'none' : `1px solid ${colors.border}`,
+              }}
             >
-              ⚙️ Settings
-            </div>
+              <span style={{ marginRight: 8 }}>⚙️</span> Настройки
+            </button>
           </aside>
 
           <main style={{ padding: 22, color: colors.text }}>
             {activeMenu === 'dashboard' && (
               <>
-                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Dashboard</h1>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Главная панель</h1>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(120px, 1fr))', gap: 12, marginBottom: 12 }}>
                   {kpiCards.map((card) => (
@@ -184,24 +194,24 @@ function App() {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                  <Panel title="Alerts" colors={colors}>
-                    <Line text="John Doe - High Blood Pressure" badge="Active" />
-                    <Line text="Anna Ivanova - High Heart Rate" badge="Active" />
+                  <Panel title="Предупреждения" colors={colors}>
+                    <Line text="Иван Иванов - Высокое давление" badge="Активно" />
+                    <Line text="Анна Смирнова - Учащенный пульс" badge="Активно" />
                   </Panel>
 
-                  <Panel title="Recent Activity" colors={colors}>
-                    <Line text="Appointment scheduled with Sarah Brown" badge="New" />
-                    <Line text="Patient feedback offer for Diree Morn" badge="New" />
+                  <Panel title="Недавняя активность" colors={colors}>
+                    <Line text="Назначен прием (Мария Соколова)" badge="Новое" />
+                    <Line text="Отзыв от пациента (Дмитрий Морозов)" badge="Новое" />
                   </Panel>
 
-                  <Panel title="Unread Chats" colors={colors}>
-                    <Line text="John Doe" badge="5 min" />
-                    <Line text="Elena Petrova" badge="4 min" />
+                  <Panel title="Новые сообщения" colors={colors}>
+                    <Line text="Иван Иванов" badge="5 мин" />
+                    <Line text="Елена Петрова" badge="4 мин" />
                   </Panel>
 
-                  <Panel title="Quick Actions" colors={colors}>
+                  <Panel title="Быстрые действия" colors={colors}>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-                      {['Add Patient', 'Import Profile', 'Export Profile'].map((action) => (
+                      {['Добавить', 'Импорт', 'Экспорт'].map((action) => (
                         <button
                           key={action}
                           onClick={() => window.alert(`${action} clicked`)}
@@ -226,10 +236,10 @@ function App() {
 
             {activeMenu === 'patients' && (
               <>
-                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Patients</h1>
-                <Panel title="Patient List" colors={colors}>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Пациенты</h1>
+                <Panel title="Список пациентов" colors={colors}>
                   <div style={{ padding: '20px 0', textAlign: 'center', color: colors.textMuted }}>
-                    No patients found. Click "Add Patient" to get started.
+                    Пациенты не найдены. Нажмите "Добавить пациента" для начала.
                   </div>
                 </Panel>
               </>
@@ -237,10 +247,10 @@ function App() {
 
             {activeMenu === 'chat' && (
               <>
-                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Chat</h1>
-                <Panel title="Recent Conversations" colors={colors}>
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Чаты</h1>
+                <Panel title="Недавние беседы" colors={colors}>
                   <div style={{ padding: '20px 0', textAlign: 'center', color: colors.textMuted }}>
-                    Select a conversation to start chatting.
+                    Выберите чат, чтобы начать общение.
                   </div>
                 </Panel>
               </>
@@ -248,22 +258,22 @@ function App() {
 
             {activeMenu === 'faq' && (
               <>
-                <h1 style={{ marginTop: 0, marginBottom: 16 }}>FAQ</h1>
-                <Panel title="Frequently Asked Questions" colors={colors}>
-                  <Line text="How do I add a new patient?" badge="General" />
-                  <Line text="How to export a profile?" badge="General" />
-                  <Line text="Can I change my password?" badge="Account" />
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>FAQ (Частые вопросы)</h1>
+                <Panel title="Справочная информация" colors={colors}>
+                  <Line text="Как добавить нового пациента?" badge="Общие" />
+                  <Line text="Как экспортировать профиль?" badge="Общие" />
+                  <Line text="Как изменить пароль?" badge="Аккаунт" />
                 </Panel>
               </>
             )}
 
             {activeMenu === 'settings' && (
               <>
-                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Settings</h1>
-                <Panel title="Preferences" colors={colors}>
-                  <Line text="Dark Mode" badge="Toggle in header" />
-                  <Line text="Notifications" badge="Enabled" />
-                  <Line text="Language" badge="English" />
+                <h1 style={{ marginTop: 0, marginBottom: 16 }}>Настройки</h1>
+                <Panel title="Параметры" colors={colors}>
+                  <Line text="Темная тема" badge="Сверху в шапке" />
+                  <Line text="Уведомления" badge="Включены" />
+                  <Line text="Язык" badge="Русский" />
                 </Panel>
               </>
             )}
