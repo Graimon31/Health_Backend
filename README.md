@@ -1,172 +1,182 @@
-# Health_Backend — запуск «одной кнопкой»
+# Health Backend — Панель врача
 
-Вы правы: нужно, чтобы запускалось «нажал и работает». Исправил.
+Полноценное веб-приложение: **FastAPI** (бэкенд) + **React/TypeScript** (фронтенд) + **PostgreSQL** (БД).
 
-Что важно:
-- устранена ошибка `bcrypt` при старте (зафиксирована совместимая версия `bcrypt==4.0.1`),
-- сохранение БД вынесено в отдельный volume `/app/data`,
-- one-click скрипт поднимает контейнер и ждёт health-status `healthy`.
+---
 
-## 1) Запуск одной кнопкой
+## Быстрый старт
 
-### Linux / macOS
+### Требования
+
+- [Docker](https://docs.docker.com/get-docker/) и Docker Compose (входит в Docker Desktop)
+- Git
+
+### Вариант 1: Docker Compose (рекомендуемый)
+
+Полный стек: PostgreSQL + API + Frontend + Nginx.
 
 ```bash
-./scripts/one-click-start.sh
+git clone <repo-url> && cd Health_Backend
+
+# Запуск (одна команда)
+docker compose up --build -d
+
+# Или через Makefile
+make up
 ```
 
-### Windows PowerShell
+После запуска откройте:
+- **Приложение:** http://localhost:8080
+- **API документация (Swagger):** http://localhost:8080/api/docs
+- **Health check:** http://localhost:8080/api/v1/health
 
-```powershell
+Остановка:
+```bash
+docker compose down
+# или
+make down
+```
+
+### Вариант 2: Standalone контейнер (всё-в-одном)
+
+Один контейнер без PostgreSQL (используется SQLite). Проще всего для быстрого теста.
+
+```bash
+# Linux / macOS
+./scripts/one-click-start.sh
+
+# Windows PowerShell
 ./scripts/one-click-start.ps1
 ```
 
-После `✅ Ready` открывайте:
-- http://localhost:8080
-- http://localhost:8080/api/docs
-- http://localhost:8080/api/v1/health
-
----
-
-## 2) Если был старый упавший контейнер (рекомендую выполнить один раз)
-
-```bash
-docker rm -f health-backend || true
-docker volume rm health_backend_data || true
-```
-
-Потом снова:
-
-```bash
-./scripts/one-click-start.sh
-```
-
-> Это очистит старое состояние и гарантированно стартанёт на новой версии.
-
----
-
-## 3) Настройка админа (опционально)
-
-### Linux/macOS
-
-```bash
-export JWT_SECRET='super_secret'
-export ADMIN_EMAIL='admin@example.com'
-export ADMIN_PASSWORD='my_strong_password'
-export ADMIN_FULL_NAME='System Admin'
-./scripts/one-click-start.sh
-```
-
-### Windows PowerShell
-
-```powershell
-$env:JWT_SECRET='super_secret'
-$env:ADMIN_EMAIL='admin@example.com'
-$env:ADMIN_PASSWORD='my_strong_password'
-$env:ADMIN_FULL_NAME='System Admin'
-./scripts/one-click-start.ps1
-```
-
----
-
-## 4) Проверка авторизации
-
-```bash
-curl -X POST http://localhost:8080/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"my_strong_password"}'
-```
-
-Если пароль не задавали, используйте `change_me_please`.
-
----
-
-## 5) Остановка
-
-### Linux / macOS
-
+Остановка:
 ```bash
 ./scripts/one-click-stop.sh
 ```
 
-### Windows PowerShell
+---
 
-```powershell
-./scripts/one-click-stop.ps1
+## Учётные данные по умолчанию
+
+| Параметр | Значение |
+|----------|----------|
+| Email    | `admin@example.com` |
+| Пароль   | `change_me_please` |
+
+Можно настроить через переменные окружения:
+
+```bash
+# Docker Compose
+JWT_SECRET=my_secret ADMIN_EMAIL=me@mail.com ADMIN_PASSWORD=strongpass docker compose up --build -d
+
+# Standalone
+JWT_SECRET=my_secret ADMIN_EMAIL=me@mail.com ADMIN_PASSWORD=strongpass ./scripts/one-click-start.sh
 ```
 
 ---
 
-## 6) Что именно сломалось у вас и что исправлено
-
-У вас падало на старте с ошибкой passlib/bcrypt (`module 'bcrypt' has no attribute '__about__'`).
-Причина: несовместимая версия `bcrypt`.
-Исправление в проекте:
-- добавлен явный пин `bcrypt==4.0.1` в `backend/requirements.txt`.
-
-Также улучшено:
-- в Dockerfile удалены секреты из `ENV` (меньше предупреждений Docker),
-- SQLite хранится в `/app/data/health.db` (персистентно и без перетирания кода).
-
-
-## Почему на `localhost:8080` раньше казалось «пусто»
-
-Это была минимальная стартовая заглушка фронтенда (один экран с текстом), поэтому визуально казалось, что приложение «пустое».
-Сейчас стартовая страница показывает:
-- live-статус `GET /api/v1/health`,
-- быстрые ссылки на Swagger и health endpoint,
-- форму быстрого теста входа (`/api/v1/auth/login`).
-
-Если вы видите старую страницу, перезапустите one-click скрипт, чтобы пересобрать образ:
+## Проверка авторизации
 
 ```bash
-./scripts/one-click-start.sh
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@example.com","password":"change_me_please"}'
 ```
 
+---
 
-## Новый макет Dashboard
+## Запуск без Docker (для разработки)
 
-Добавлен кликабельный UI в стиле вашего макета:
-- левое меню (`Dashboard`, `Patients`, `Chat`, `FAQ`, `Settings`),
-- верхняя панель поиска и профиль,
-- KPI-карточки,
-- блоки `Alerts`, `Recent Activity`, `Unread Chats`, `Quick Actions`,
-- переключатель light/dark темы.
-
-Чтобы увидеть новую страницу, обязательно пересоберите и перезапустите:
+### Бэкенд
 
 ```bash
-./scripts/one-click-start.sh
+cd backend
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# Используем SQLite для простоты
+DATABASE_URL=sqlite:///./health.db \
+JWT_SECRET=dev_secret \
+ADMIN_PASSWORD=admin123 \
+uvicorn app.main:app --reload --port 8000
 ```
 
+API будет доступно на http://localhost:8000/api/docs
 
-## Если открываете `http://localhost` и видите старый экран
-
-Скорее всего вы смотрите **другой контейнер/порт** (обычно старый nginx на `80`) или старый образ из кеша.
-
-Сделайте так:
-
-1. Запустите one-click (он сам чистит старые контейнеры и делает fresh build без cache):
+### Фронтенд
 
 ```bash
-./scripts/one-click-start.sh
+cd web
+npm install
+npm run dev
 ```
 
-2. Открывайте **точно этот адрес**:
+Фронтенд будет доступен на http://localhost:3000
 
-```text
-http://localhost:8080
+---
+
+## Структура проекта
+
+```
+Health_Backend/
+├── backend/              # FastAPI бэкенд
+│   ├── app/
+│   │   ├── main.py       # Точка входа
+│   │   ├── db.py         # SQLAlchemy подключение
+│   │   ├── security.py   # JWT, хэширование паролей
+│   │   ├── api/          # Роуты (auth)
+│   │   ├── models/       # ORM модели (User)
+│   │   ├── schemas/      # Pydantic схемы
+│   │   └── core/         # Конфигурация
+│   ├── Dockerfile
+│   └── requirements.txt
+├── web/                  # React фронтенд
+│   ├── src/main.tsx      # Дашборд
+│   ├── Dockerfile
+│   └── package.json
+├── nginx/                # Реверс-прокси
+│   └── default.conf
+├── docker-compose.yml    # Полный стек
+├── Dockerfile.standalone # Всё-в-одном контейнер
+├── Makefile              # Быстрые команды
+└── scripts/              # One-click скрипты
 ```
 
-3. Если браузер всё равно показывает старое:
-- hard refresh (`Cmd+Shift+R` / `Ctrl+F5`),
-- откройте в инкогнито,
-- проверьте, что в терминале есть строка `✅ New dashboard build detected.`
+## API эндпоинты
 
-4. Если порт 8080 занят, запустите на другом порту:
+| Метод | Путь | Описание |
+|-------|------|----------|
+| GET   | `/api/v1/health` | Health check |
+| POST  | `/api/v1/auth/login` | Авторизация (JWT) |
+| POST  | `/api/v1/auth/refresh` | Обновление токена |
+| POST  | `/api/v1/auth/register-doctor` | Регистрация врача (только admin) |
 
+---
+
+## Makefile команды
+
+| Команда | Описание |
+|---------|----------|
+| `make up` | Запуск через docker-compose |
+| `make down` | Остановка |
+| `make standalone` | Запуск standalone контейнера |
+| `make logs` | Просмотр логов |
+| `make clean` | Полная очистка (контейнеры + данные) |
+
+---
+
+## Решение проблем
+
+**Порт 8080 занят:**
 ```bash
-HOST_PORT=8090 ./scripts/one-click-start.sh
+HOST_PORT=9090 docker compose up --build -d
+# или
+HOST_PORT=9090 ./scripts/one-click-start.sh
 ```
 
-и откройте `http://localhost:8090`.
+**Ошибка bcrypt (`module 'bcrypt' has no attribute '__about__'`):**
+Уже исправлено — `bcrypt==4.0.1` зафиксирован в requirements.txt.
+
+**Видите старую страницу в браузере:**
+Нажмите `Ctrl+F5` (hard refresh) или откройте в режиме инкогнито.
