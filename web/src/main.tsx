@@ -103,6 +103,63 @@ const translations: Record<Lang, Record<string, string>> = {
     male: 'Male',
     female: 'Female',
     medications: 'Current Medications',
+    // Health metric categories
+    catHeart: 'Heart & Circulation',
+    catTemp: 'Temperature',
+    catStress: 'Stress & Recovery',
+    catSleep: 'Sleep',
+    catActivity: 'Physical Activity',
+    catFitness: 'Fitness',
+    catBody: 'Body Composition',
+    catWellbeing: 'Well-being',
+    catNutrition: 'Nutrition & Habits',
+    catWomen: "Women's Health",
+    catEnv: 'Environment',
+    // Heart
+    mPulse: 'Pulse', mRestPulse: 'Resting Pulse', mMaxPulse: 'Max Pulse', mMinPulse: 'Min Pulse',
+    mHrv: 'HRV', mSpo2: 'SpO2', mBpSys: 'Systolic BP', mBpDia: 'Diastolic BP',
+    mRespRate: 'Respiratory Rate', mEcg: 'ECG', mArrhythmia: 'Arrhythmia Signs',
+    mPulseZones: 'Pulse Zones', mTrainPulse: 'Training Pulse', mAvgDayPulse: 'Avg Daily Pulse',
+    // Temp
+    mBodyTemp: 'Body Temp', mSkinTemp: 'Skin Temp',
+    // Stress
+    mStress: 'Stress Level', mRecovery: 'Recovery Level', mBodyBattery: 'Body Battery',
+    // Sleep
+    mSleepQuality: 'Sleep Quality', mSleepDuration: 'Sleep Duration',
+    mFallAsleep: 'Fall Asleep Time', mWakeUp: 'Wake Up Time',
+    mDeepSleep: 'Deep Sleep', mLightSleep: 'Light Sleep', mRemSleep: 'REM Sleep',
+    mNightWake: 'Night Awakenings', mDayNap: 'Day Nap', mSnoring: 'Snoring',
+    // Activity
+    mSteps: 'Steps', mDistance: 'Distance', mFloors: 'Floors',
+    mSedentary: 'Sedentary Time', mActiveTime: 'Active Time',
+    mModerateMin: 'Moderate Activity', mIntenseMin: 'Intense Activity',
+    mBurnedCal: 'Burned Calories', mActiveCal: 'Active Calories', mTotalEnergy: 'Total Energy',
+    mWalkPace: 'Walking Pace', mSpeed: 'Speed', mCadence: 'Cadence', mStrideLen: 'Stride Length',
+    // Fitness
+    mVo2max: 'VO2 Max', mCardioLoad: 'Cardio Load', mTrainLoad: 'Training Load', mRecoveryTime: 'Recovery Time',
+    // Body
+    mWeight: 'Weight', mBmi: 'BMI', mFatPct: 'Fat %', mMuscleMass: 'Muscle Mass',
+    mBodyWater: 'Body Water', mBoneMass: 'Bone Mass', mGlucose: 'Glucose',
+    // Wellbeing
+    mSymptoms: 'Symptoms', mDailyWell: 'Daily Well-being', mFatigue: 'Fatigue',
+    mAnxiety: 'Anxiety', mMood: 'Mood',
+    // Nutrition
+    mWater: 'Water Intake', mFoodCal: 'Food Calories', mCaffeine: 'Caffeine',
+    mAlcohol: 'Alcohol', mSmoking: 'Smoking', mMedsTaken: 'Medications Taken',
+    // Women
+    mCycleDay: 'Cycle Day', mOvulation: 'Ovulation',
+    // Env
+    mNoise: 'Noise Level', mSunExposure: 'Sun Exposure', mOutdoorTime: 'Outdoor Time', mLocation: 'Location',
+    // Units & misc
+    bpm: 'bpm', ms: 'ms', mmHg: 'mmHg', breathMin: 'br/min', pct: '%',
+    min: 'min', hrs: 'hrs', times: 'times', steps: 'steps', km: 'km',
+    kcal: 'kcal', minKm: 'min/km', kmH: 'km/h', stepsMin: 'steps/min',
+    cm: 'cm', kg: 'kg', ml: 'ml', mgDay: 'mg/day', dB: 'dB',
+    normal: 'Normal', elevated: 'Elevated', low: 'Low', high: 'High', good: 'Good', poor: 'Poor',
+    none: 'None', yes: 'Yes', no: 'No', moderate: 'Moderate',
+    forecastTitle: 'Health Forecast & Predictions',
+    riskLevel: 'Risk Level', prediction: 'Prediction', recommendation: 'Recommendation',
+    lowRisk: 'Low Risk', moderateRisk: 'Moderate Risk', highRisk: 'High Risk',
   },
   ru: {
     dashboard: 'Главная',
@@ -201,6 +258,63 @@ const translations: Record<Lang, Record<string, string>> = {
     male: 'Мужской',
     female: 'Женский',
     medications: 'Текущие препараты',
+    // Health metric categories
+    catHeart: 'Сердце и сосуды',
+    catTemp: 'Температура',
+    catStress: 'Стресс и восстановление',
+    catSleep: 'Сон',
+    catActivity: 'Физическая активность',
+    catFitness: 'Фитнес',
+    catBody: 'Состав тела',
+    catWellbeing: 'Самочувствие',
+    catNutrition: 'Питание и привычки',
+    catWomen: 'Женское здоровье',
+    catEnv: 'Окружение',
+    // Heart
+    mPulse: 'Пульс', mRestPulse: 'Пульс в покое', mMaxPulse: 'Макс. пульс', mMinPulse: 'Мин. пульс',
+    mHrv: 'ВСР (HRV)', mSpo2: 'SpO2', mBpSys: 'Сист. давление', mBpDia: 'Диаст. давление',
+    mRespRate: 'Частота дыхания', mEcg: 'ЭКГ', mArrhythmia: 'Признаки аритмии',
+    mPulseZones: 'Зоны пульса', mTrainPulse: 'Пульс на тренировке', mAvgDayPulse: 'Средний пульс за день',
+    // Temp
+    mBodyTemp: 'Температура тела', mSkinTemp: 'Температура кожи',
+    // Stress
+    mStress: 'Уровень стресса', mRecovery: 'Уровень восстановления', mBodyBattery: 'Энергия (Body Battery)',
+    // Sleep
+    mSleepQuality: 'Качество сна', mSleepDuration: 'Длительность сна',
+    mFallAsleep: 'Время засыпания', mWakeUp: 'Время пробуждения',
+    mDeepSleep: 'Глубокий сон', mLightSleep: 'Лёгкий сон', mRemSleep: 'Фаза REM',
+    mNightWake: 'Пробуждения ночью', mDayNap: 'Дневной сон', mSnoring: 'Храп',
+    // Activity
+    mSteps: 'Шаги', mDistance: 'Расстояние', mFloors: 'Этажи',
+    mSedentary: 'Время сидения', mActiveTime: 'Время активности',
+    mModerateMin: 'Умеренная активность', mIntenseMin: 'Интенсивная активность',
+    mBurnedCal: 'Сожжённые калории', mActiveCal: 'Активные калории', mTotalEnergy: 'Общий расход энергии',
+    mWalkPace: 'Темп ходьбы', mSpeed: 'Скорость', mCadence: 'Каденс', mStrideLen: 'Длина шага',
+    // Fitness
+    mVo2max: 'VO2 Max', mCardioLoad: 'Кардионагрузка', mTrainLoad: 'Тренировочная нагрузка', mRecoveryTime: 'Время восстановления',
+    // Body
+    mWeight: 'Масса тела', mBmi: 'ИМТ', mFatPct: '% жира', mMuscleMass: 'Мышечная масса',
+    mBodyWater: 'Вода в организме', mBoneMass: 'Костная масса', mGlucose: 'Глюкоза',
+    // Wellbeing
+    mSymptoms: 'Симптомы', mDailyWell: 'Самочувствие за день', mFatigue: 'Усталость',
+    mAnxiety: 'Тревожность', mMood: 'Настроение',
+    // Nutrition
+    mWater: 'Потребление воды', mFoodCal: 'Калории из еды', mCaffeine: 'Кофеин',
+    mAlcohol: 'Алкоголь', mSmoking: 'Курение', mMedsTaken: 'Приём лекарств',
+    // Women
+    mCycleDay: 'День цикла', mOvulation: 'Овуляция',
+    // Env
+    mNoise: 'Уровень шума', mSunExposure: 'Солнечный свет', mOutdoorTime: 'Время на улице', mLocation: 'Геолокация',
+    // Units & misc
+    bpm: 'уд/мин', ms: 'мс', mmHg: 'мм рт.ст.', breathMin: 'вд/мин', pct: '%',
+    min: 'мин', hrs: 'ч', times: 'раз', steps: 'шагов', km: 'км',
+    kcal: 'ккал', minKm: 'мин/км', kmH: 'км/ч', stepsMin: 'шаг/мин',
+    cm: 'см', kg: 'кг', ml: 'мл', mgDay: 'мг/день', dB: 'дБ',
+    normal: 'Норма', elevated: 'Повышен', low: 'Низкий', high: 'Высокий', good: 'Хорошо', poor: 'Плохо',
+    none: 'Нет', yes: 'Да', no: 'Нет', moderate: 'Умеренный',
+    forecastTitle: 'Прогноз здоровья и предсказания',
+    riskLevel: 'Уровень риска', prediction: 'Прогноз', recommendation: 'Рекомендация',
+    lowRisk: 'Низкий риск', moderateRisk: 'Умеренный риск', highRisk: 'Высокий риск',
   },
 };
 
@@ -249,6 +363,46 @@ interface PatientFull {
   bpHistory: number[];
   hrHistory: number[];
   visits: Array<{ date: string; doctor: string; notes: string; notesRu: string }>;
+  health: HealthMetrics;
+}
+
+interface HealthMetrics {
+  // Heart
+  pulse: number; restPulse: number; maxPulse: number; minPulse: number;
+  hrv: number; spo2: number; bpSys: number; bpDia: number;
+  respRate: number; ecg: string; arrhythmia: boolean;
+  pulseZones: string; trainPulse: number; avgDayPulse: number;
+  // Temp
+  bodyTemp: number; skinTemp: number;
+  // Stress
+  stress: number; recovery: number; bodyBattery: number;
+  // Sleep
+  sleepQuality: number; sleepDuration: number;
+  fallAsleep: string; wakeUp: string;
+  deepSleep: number; lightSleep: number; remSleep: number;
+  nightWake: number; dayNap: number; snoring: number;
+  // Activity
+  steps: number; distance: number; floors: number;
+  sedentary: number; activeTime: number;
+  moderateMin: number; intenseMin: number;
+  burnedCal: number; activeCal: number; totalEnergy: number;
+  walkPace: number; speed: number; cadence: number; strideLen: number;
+  // Fitness
+  vo2max: number; cardioLoad: number; trainLoad: number; recoveryTime: number;
+  // Body
+  weight: number; bmi: number; fatPct: number; muscleMass: number;
+  bodyWater: number; boneMass: number; glucose: number;
+  // Wellbeing
+  symptoms: string; dailyWell: number; fatigue: number; anxiety: number; mood: number;
+  // Nutrition
+  water: number; foodCal: number; caffeine: number; alcohol: number; smoking: number; medsTaken: boolean;
+  // Women (optional)
+  cycleDay: number | null; ovulation: boolean | null;
+  // Env
+  noise: number; sunExposure: number; outdoorTime: number; location: string;
+  // Trends (12 data points each - last 6 months biweekly)
+  bpTrend: number[]; hrTrend: number[]; stressTrend: number[];
+  sleepTrend: number[]; stepsTrend: number[]; weightTrend: number[];
 }
 
 /* ─── Patient Data ─── */
@@ -267,6 +421,29 @@ const patientsData: PatientFull[] = [
       { date: '2026-02-10', doctor: 'Dr. Smith', notes: 'Adjusted Amlodipine dosage to 5mg.', notesRu: 'Скорректирована доза Амлодипина до 5мг.' },
       { date: '2026-01-15', doctor: 'Dr. Lee', notes: 'Initial diagnosis. Started Lisinopril.', notesRu: 'Первичный диагноз. Назначен Лизиноприл.' },
     ],
+    health: {
+      pulse: 72, restPulse: 68, maxPulse: 145, minPulse: 58, hrv: 38, spo2: 98, bpSys: 138, bpDia: 85,
+      respRate: 16, ecg: 'Normal sinus rhythm', arrhythmia: false, pulseZones: '55% fat burn, 30% cardio, 15% peak',
+      trainPulse: 132, avgDayPulse: 74, bodyTemp: 36.6, skinTemp: 33.2,
+      stress: 62, recovery: 55, bodyBattery: 48,
+      sleepQuality: 65, sleepDuration: 6.5, fallAsleep: '23:45', wakeUp: '06:15',
+      deepSleep: 1.2, lightSleep: 3.1, remSleep: 1.5, nightWake: 2, dayNap: 0, snoring: 15,
+      steps: 6200, distance: 4.3, floors: 3, sedentary: 540, activeTime: 85,
+      moderateMin: 45, intenseMin: 15, burnedCal: 2150, activeCal: 650, totalEnergy: 2800,
+      walkPace: 9.2, speed: 6.5, cadence: 112, strideLen: 72,
+      vo2max: 32, cardioLoad: 65, trainLoad: 180, recoveryTime: 18,
+      weight: 82, bmi: 25.9, fatPct: 28, muscleMass: 35, bodyWater: 52, boneMass: 3.2, glucose: 5.4,
+      symptoms: '', dailyWell: 6, fatigue: 4, anxiety: 3, mood: 7,
+      water: 1800, foodCal: 2200, caffeine: 200, alcohol: 0, smoking: 0, medsTaken: true,
+      cycleDay: null, ovulation: null,
+      noise: 35, sunExposure: 45, outdoorTime: 40, location: 'New York, NY',
+      bpTrend: [145, 142, 138, 135, 130, 128, 125, 122, 120, 118, 119, 117],
+      hrTrend: [78, 76, 80, 74, 72, 75, 70, 68, 72, 70, 69, 68],
+      stressTrend: [75, 72, 68, 70, 65, 62, 60, 58, 62, 60, 58, 55],
+      sleepTrend: [5.8, 6.0, 6.2, 6.0, 6.5, 6.3, 6.8, 6.5, 7.0, 6.5, 6.8, 6.5],
+      stepsTrend: [4500, 5000, 5200, 5500, 5800, 6000, 6200, 5800, 6500, 6200, 6000, 6200],
+      weightTrend: [85, 84.5, 84, 83.5, 83, 83, 82.5, 82.5, 82, 82, 82, 82],
+    },
   },
   {
     id: 2, name: 'Anna Ivanova', age: 32, diagnosis: 'Tachycardia', diagnosisRu: 'Тахикардия', status: 'critical', lastVisit: '2026-03-08',
@@ -280,6 +457,29 @@ const patientsData: PatientFull[] = [
       { date: '2026-03-08', doctor: 'Dr. Smith', notes: 'HR elevated. Increased Metoprolol.', notesRu: 'Пульс учащён. Увеличена доза Метопролола.' },
       { date: '2026-02-20', doctor: 'Dr. Kim', notes: 'ECG shows sinus tachycardia.', notesRu: 'ЭКГ показала синусовую тахикардию.' },
     ],
+    health: {
+      pulse: 105, restPulse: 95, maxPulse: 185, minPulse: 72, hrv: 22, spo2: 96, bpSys: 128, bpDia: 78,
+      respRate: 20, ecg: 'Sinus tachycardia', arrhythmia: true, pulseZones: '20% fat burn, 50% cardio, 30% peak',
+      trainPulse: 165, avgDayPulse: 102, bodyTemp: 37.1, skinTemp: 34.0,
+      stress: 78, recovery: 35, bodyBattery: 30,
+      sleepQuality: 45, sleepDuration: 5.5, fallAsleep: '01:00', wakeUp: '06:30',
+      deepSleep: 0.8, lightSleep: 2.8, remSleep: 1.2, nightWake: 4, dayNap: 20, snoring: 0,
+      steps: 8500, distance: 6.1, floors: 5, sedentary: 420, activeTime: 120,
+      moderateMin: 60, intenseMin: 30, burnedCal: 1850, activeCal: 550, totalEnergy: 2400,
+      walkPace: 8.5, speed: 7.1, cadence: 118, strideLen: 68,
+      vo2max: 38, cardioLoad: 82, trainLoad: 250, recoveryTime: 28,
+      weight: 58, bmi: 21.3, fatPct: 22, muscleMass: 24, bodyWater: 58, boneMass: 2.5, glucose: 4.8,
+      symptoms: '', dailyWell: 4, fatigue: 7, anxiety: 8, mood: 4,
+      water: 1500, foodCal: 1600, caffeine: 300, alcohol: 0, smoking: 0, medsTaken: true,
+      cycleDay: 14, ovulation: true,
+      noise: 42, sunExposure: 30, outdoorTime: 25, location: 'Moscow, RU',
+      bpTrend: [120, 125, 128, 132, 130, 135, 138, 140, 137, 134, 132, 130],
+      hrTrend: [110, 108, 112, 105, 115, 120, 118, 108, 105, 100, 98, 95],
+      stressTrend: [82, 80, 85, 78, 82, 80, 78, 75, 78, 76, 74, 72],
+      sleepTrend: [4.5, 5.0, 4.8, 5.2, 5.5, 5.0, 5.8, 5.5, 5.2, 5.8, 5.5, 5.5],
+      stepsTrend: [9000, 8500, 9200, 8800, 8500, 8200, 8800, 8500, 8200, 8500, 8800, 8500],
+      weightTrend: [57, 57.5, 57, 58, 57.5, 58, 58, 57.5, 58, 58, 58, 58],
+    },
   },
   {
     id: 3, name: 'Sarah Brown', age: 58, diagnosis: 'Diabetes Type 2', diagnosisRu: 'Сахарный диабет 2 типа', status: 'monitoring', lastVisit: '2026-03-01',
@@ -293,6 +493,29 @@ const patientsData: PatientFull[] = [
       { date: '2026-03-01', doctor: 'Dr. Smith', notes: 'HbA1c: 7.1%. Adjust Metformin.', notesRu: 'HbA1c: 7,1%. Скорректировать дозу Метформина.' },
       { date: '2026-01-25', doctor: 'Dr. Smith', notes: 'Glucose trending up. Added Glimepiride.', notesRu: 'Глюкоза растёт. Добавлен Глимепирид.' },
     ],
+    health: {
+      pulse: 76, restPulse: 72, maxPulse: 140, minPulse: 60, hrv: 30, spo2: 97, bpSys: 135, bpDia: 82,
+      respRate: 17, ecg: 'Normal sinus rhythm', arrhythmia: false, pulseZones: '60% fat burn, 30% cardio, 10% peak',
+      trainPulse: 120, avgDayPulse: 78, bodyTemp: 36.5, skinTemp: 33.0,
+      stress: 55, recovery: 50, bodyBattery: 45,
+      sleepQuality: 60, sleepDuration: 7.0, fallAsleep: '23:00', wakeUp: '06:00',
+      deepSleep: 1.5, lightSleep: 3.2, remSleep: 1.5, nightWake: 1, dayNap: 0, snoring: 20,
+      steps: 4800, distance: 3.2, floors: 2, sedentary: 600, activeTime: 60,
+      moderateMin: 30, intenseMin: 10, burnedCal: 1950, activeCal: 450, totalEnergy: 2400,
+      walkPace: 10.5, speed: 5.7, cadence: 105, strideLen: 65,
+      vo2max: 26, cardioLoad: 50, trainLoad: 120, recoveryTime: 22,
+      weight: 75, bmi: 28.6, fatPct: 35, muscleMass: 28, bodyWater: 48, boneMass: 2.8, glucose: 7.2,
+      symptoms: '', dailyWell: 5, fatigue: 5, anxiety: 4, mood: 6,
+      water: 1600, foodCal: 2100, caffeine: 150, alcohol: 1, smoking: 0, medsTaken: true,
+      cycleDay: null, ovulation: null,
+      noise: 30, sunExposure: 35, outdoorTime: 30, location: 'Chicago, IL',
+      bpTrend: [130, 128, 132, 135, 130, 128, 125, 127, 124, 122, 120, 118],
+      hrTrend: [72, 74, 70, 68, 72, 76, 74, 70, 68, 70, 72, 70],
+      stressTrend: [60, 58, 62, 55, 58, 55, 52, 55, 50, 52, 50, 48],
+      sleepTrend: [6.5, 6.8, 7.0, 6.5, 7.0, 7.2, 7.0, 7.0, 7.2, 7.0, 7.0, 7.0],
+      stepsTrend: [3500, 4000, 4200, 4500, 4800, 4500, 5000, 4800, 4500, 5000, 4800, 4800],
+      weightTrend: [78, 77.5, 77, 76.5, 76, 76, 75.5, 75.5, 75, 75, 75, 75],
+    },
   },
   {
     id: 4, name: 'Elena Petrova', age: 27, diagnosis: 'Anemia', diagnosisRu: 'Анемия', status: 'stable', lastVisit: '2026-02-28',
@@ -306,6 +529,29 @@ const patientsData: PatientFull[] = [
       { date: '2026-02-28', doctor: 'Dr. Smith', notes: 'Hemoglobin rising — 11.2 g/dL. Continue iron.', notesRu: 'Гемоглобин растёт — 11,2 г/дл. Продолжить приём железа.' },
       { date: '2026-01-30', doctor: 'Dr. Lee', notes: 'Hemoglobin 9.8 g/dL. Started iron therapy.', notesRu: 'Гемоглобин 9,8 г/дл. Начата терапия железом.' },
     ],
+    health: {
+      pulse: 82, restPulse: 78, maxPulse: 155, minPulse: 62, hrv: 28, spo2: 99, bpSys: 112, bpDia: 70,
+      respRate: 15, ecg: 'Normal sinus rhythm', arrhythmia: false, pulseZones: '70% fat burn, 25% cardio, 5% peak',
+      trainPulse: 125, avgDayPulse: 80, bodyTemp: 36.4, skinTemp: 32.8,
+      stress: 40, recovery: 70, bodyBattery: 72,
+      sleepQuality: 80, sleepDuration: 8.0, fallAsleep: '22:30', wakeUp: '06:30',
+      deepSleep: 2.0, lightSleep: 3.5, remSleep: 2.0, nightWake: 0, dayNap: 0, snoring: 0,
+      steps: 7500, distance: 5.2, floors: 4, sedentary: 480, activeTime: 100,
+      moderateMin: 50, intenseMin: 20, burnedCal: 1600, activeCal: 400, totalEnergy: 2000,
+      walkPace: 8.8, speed: 6.8, cadence: 115, strideLen: 70,
+      vo2max: 35, cardioLoad: 55, trainLoad: 150, recoveryTime: 14,
+      weight: 52, bmi: 18.0, fatPct: 20, muscleMass: 22, bodyWater: 60, boneMass: 2.3, glucose: 4.5,
+      symptoms: '', dailyWell: 7, fatigue: 3, anxiety: 2, mood: 8,
+      water: 2000, foodCal: 1800, caffeine: 80, alcohol: 0, smoking: 0, medsTaken: true,
+      cycleDay: 8, ovulation: false,
+      noise: 28, sunExposure: 50, outdoorTime: 60, location: 'St. Petersburg, RU',
+      bpTrend: [110, 112, 108, 110, 112, 115, 113, 110, 112, 114, 112, 110],
+      hrTrend: [82, 80, 84, 78, 76, 80, 78, 76, 74, 76, 74, 72],
+      stressTrend: [45, 42, 48, 40, 42, 38, 40, 38, 36, 38, 36, 35],
+      sleepTrend: [7.5, 7.8, 8.0, 7.5, 8.0, 8.2, 8.0, 8.0, 8.0, 8.2, 8.0, 8.0],
+      stepsTrend: [6000, 6500, 7000, 7200, 7500, 7200, 7800, 7500, 7200, 7500, 7500, 7500],
+      weightTrend: [50, 50.5, 51, 51, 51.5, 51.5, 52, 52, 52, 52, 52, 52],
+    },
   },
   {
     id: 5, name: 'Michael Chen', age: 63, diagnosis: 'Coronary Artery Disease', diagnosisRu: 'Ишемическая болезнь сердца', status: 'monitoring', lastVisit: '2026-03-07',
@@ -320,6 +566,29 @@ const patientsData: PatientFull[] = [
       { date: '2026-02-15', doctor: 'Dr. Kim', notes: 'Echocardiogram: EF 55%. Stable.', notesRu: 'ЭхоКГ: ФВ 55%. Стабильно.' },
       { date: '2026-01-10', doctor: 'Dr. Smith', notes: 'Post-stent follow-up. Doing well.', notesRu: 'Контроль после стентирования. Состояние хорошее.' },
     ],
+    health: {
+      pulse: 66, restPulse: 60, maxPulse: 155, minPulse: 52, hrv: 25, spo2: 95, bpSys: 145, bpDia: 88,
+      respRate: 18, ecg: 'Minor ST changes', arrhythmia: false, pulseZones: '40% fat burn, 40% cardio, 20% peak',
+      trainPulse: 118, avgDayPulse: 68, bodyTemp: 36.7, skinTemp: 33.5,
+      stress: 70, recovery: 40, bodyBattery: 35,
+      sleepQuality: 50, sleepDuration: 6.0, fallAsleep: '00:15', wakeUp: '06:15',
+      deepSleep: 1.0, lightSleep: 3.0, remSleep: 1.2, nightWake: 3, dayNap: 15, snoring: 35,
+      steps: 3800, distance: 2.6, floors: 1, sedentary: 660, activeTime: 45,
+      moderateMin: 25, intenseMin: 5, burnedCal: 2200, activeCal: 400, totalEnergy: 2600,
+      walkPace: 11.0, speed: 5.5, cadence: 100, strideLen: 68,
+      vo2max: 24, cardioLoad: 72, trainLoad: 100, recoveryTime: 32,
+      weight: 88, bmi: 28.7, fatPct: 30, muscleMass: 34, bodyWater: 50, boneMass: 3.0, glucose: 6.1,
+      symptoms: '', dailyWell: 5, fatigue: 6, anxiety: 5, mood: 5,
+      water: 1400, foodCal: 2400, caffeine: 250, alcohol: 2, smoking: 0, medsTaken: true,
+      cycleDay: null, ovulation: null,
+      noise: 38, sunExposure: 25, outdoorTime: 20, location: 'San Francisco, CA',
+      bpTrend: [150, 148, 145, 140, 138, 135, 132, 130, 128, 126, 124, 122],
+      hrTrend: [68, 70, 66, 64, 68, 72, 70, 66, 64, 66, 64, 62],
+      stressTrend: [80, 78, 75, 72, 70, 72, 68, 70, 65, 68, 65, 62],
+      sleepTrend: [5.5, 5.8, 6.0, 5.5, 6.0, 6.2, 5.8, 6.0, 6.2, 6.0, 6.0, 6.0],
+      stepsTrend: [3000, 3200, 3500, 3800, 3500, 4000, 3800, 3500, 4000, 3800, 3800, 3800],
+      weightTrend: [92, 91, 90.5, 90, 89.5, 89, 88.5, 88.5, 88, 88, 88, 88],
+    },
   },
   {
     id: 6, name: 'Diree Morn', age: 41, diagnosis: 'Asthma', diagnosisRu: 'Бронхиальная астма', status: 'stable', lastVisit: '2026-03-03',
@@ -333,6 +602,29 @@ const patientsData: PatientFull[] = [
       { date: '2026-03-03', doctor: 'Dr. Smith', notes: 'Spirometry stable. No exacerbations.', notesRu: 'Спирометрия стабильная. Обострений нет.' },
       { date: '2026-01-20', doctor: 'Dr. Lee', notes: 'Seasonal allergy flare. Added Montelukast.', notesRu: 'Сезонное обострение аллергии. Добавлен Монтелукаст.' },
     ],
+    health: {
+      pulse: 72, restPulse: 65, maxPulse: 165, minPulse: 55, hrv: 42, spo2: 97, bpSys: 118, bpDia: 74,
+      respRate: 18, ecg: 'Normal sinus rhythm', arrhythmia: false, pulseZones: '50% fat burn, 35% cardio, 15% peak',
+      trainPulse: 140, avgDayPulse: 72, bodyTemp: 36.5, skinTemp: 33.1,
+      stress: 45, recovery: 65, bodyBattery: 62,
+      sleepQuality: 75, sleepDuration: 7.5, fallAsleep: '23:00', wakeUp: '06:30',
+      deepSleep: 1.8, lightSleep: 3.2, remSleep: 1.8, nightWake: 1, dayNap: 0, snoring: 5,
+      steps: 9200, distance: 6.8, floors: 6, sedentary: 400, activeTime: 140,
+      moderateMin: 65, intenseMin: 35, burnedCal: 2400, activeCal: 800, totalEnergy: 3200,
+      walkPace: 8.0, speed: 7.5, cadence: 120, strideLen: 75,
+      vo2max: 42, cardioLoad: 60, trainLoad: 220, recoveryTime: 12,
+      weight: 76, bmi: 23.5, fatPct: 18, muscleMass: 38, bodyWater: 58, boneMass: 3.1, glucose: 5.0,
+      symptoms: '', dailyWell: 8, fatigue: 2, anxiety: 2, mood: 8,
+      water: 2200, foodCal: 2300, caffeine: 120, alcohol: 1, smoking: 0, medsTaken: true,
+      cycleDay: null, ovulation: null,
+      noise: 32, sunExposure: 60, outdoorTime: 80, location: 'Austin, TX',
+      bpTrend: [118, 120, 116, 118, 120, 122, 118, 116, 118, 120, 118, 116],
+      hrTrend: [74, 72, 76, 70, 72, 74, 70, 68, 72, 70, 68, 70],
+      stressTrend: [50, 48, 52, 45, 48, 45, 42, 45, 42, 40, 42, 40],
+      sleepTrend: [7.0, 7.2, 7.5, 7.0, 7.5, 7.8, 7.5, 7.5, 7.5, 7.8, 7.5, 7.5],
+      stepsTrend: [8000, 8500, 8800, 9000, 9200, 9000, 9500, 9200, 9000, 9500, 9200, 9200],
+      weightTrend: [77, 77, 76.5, 76.5, 76, 76, 76, 76, 76, 76, 76, 76],
+    },
   },
 ];
 
@@ -523,42 +815,113 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
   );
 }
 
+/* ─── Collapsible Section ─── */
+
+function Section({ title, colors, defaultOpen, children }: { title: string; colors: Colors; defaultOpen?: boolean; children: React.ReactNode }) {
+  const [open, setOpen] = useState(defaultOpen ?? true);
+  return (
+    <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, marginBottom: 14, overflow: 'hidden' }}>
+      <div onClick={() => setOpen(!open)} style={{ padding: '14px 20px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', userSelect: 'none' }}>
+        <h3 style={{ margin: 0, fontSize: 16 }}>{title}</h3>
+        <span style={{ fontSize: 14, transform: open ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s', color: colors.textMuted }}>▼</span>
+      </div>
+      {open && <div style={{ padding: '0 20px 16px' }}>{children}</div>}
+    </div>
+  );
+}
+
+function MGrid({ children }: { children: React.ReactNode }) {
+  return <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 10 }}>{children}</div>;
+}
+
+/* ─── Forecast helpers ─── */
+
+function computeForecast(h: HealthMetrics, t: Record<string, string>): Array<{ area: string; risk: string; riskColor: string; pred: string; rec: string }> {
+  const forecasts: Array<{ area: string; risk: string; riskColor: string; pred: string; rec: string }> = [];
+  // BP forecast
+  const bpLast = h.bpTrend[h.bpTrend.length - 1];
+  const bpFirst = h.bpTrend[0];
+  const bpDelta = bpLast - bpFirst;
+  if (bpLast > 140 || bpDelta > 5) {
+    forecasts.push({ area: t.mBpSys, risk: t.highRisk, riskColor: '#ef5350', pred: `${bpLast + Math.round(bpDelta * 0.3)} ${t.mmHg}`, rec: t.mBpSys });
+  } else if (bpLast > 125) {
+    forecasts.push({ area: t.mBpSys, risk: t.moderateRisk, riskColor: '#f59e0b', pred: `${bpLast + Math.round(bpDelta * 0.2)} ${t.mmHg}`, rec: t.mBpSys });
+  } else {
+    forecasts.push({ area: t.mBpSys, risk: t.lowRisk, riskColor: '#22c55e', pred: `${bpLast + Math.round(bpDelta * 0.1)} ${t.mmHg}`, rec: t.mBpSys });
+  }
+  // HR forecast
+  const hrLast = h.hrTrend[h.hrTrend.length - 1];
+  if (hrLast > 100) {
+    forecasts.push({ area: t.mPulse, risk: t.highRisk, riskColor: '#ef5350', pred: `${hrLast - 5}–${hrLast + 5} ${t.bpm}`, rec: t.mPulse });
+  } else if (hrLast > 80) {
+    forecasts.push({ area: t.mPulse, risk: t.moderateRisk, riskColor: '#f59e0b', pred: `${hrLast - 3}–${hrLast + 3} ${t.bpm}`, rec: t.mPulse });
+  } else {
+    forecasts.push({ area: t.mPulse, risk: t.lowRisk, riskColor: '#22c55e', pred: `${hrLast - 2}–${hrLast + 2} ${t.bpm}`, rec: t.mPulse });
+  }
+  // Stress forecast
+  const stressLast = h.stressTrend[h.stressTrend.length - 1];
+  if (stressLast > 70) {
+    forecasts.push({ area: t.mStress, risk: t.highRisk, riskColor: '#ef5350', pred: `${stressLast}+`, rec: t.mStress });
+  } else if (stressLast > 50) {
+    forecasts.push({ area: t.mStress, risk: t.moderateRisk, riskColor: '#f59e0b', pred: `${stressLast - 5}–${stressLast}`, rec: t.mStress });
+  }
+  // Sleep forecast
+  const sleepLast = h.sleepTrend[h.sleepTrend.length - 1];
+  if (sleepLast < 6) {
+    forecasts.push({ area: t.mSleepDuration, risk: t.highRisk, riskColor: '#ef5350', pred: `${sleepLast} ${t.hrs}`, rec: t.mSleepDuration });
+  } else if (sleepLast < 7) {
+    forecasts.push({ area: t.mSleepDuration, risk: t.moderateRisk, riskColor: '#f59e0b', pred: `${sleepLast} ${t.hrs}`, rec: t.mSleepDuration });
+  }
+  // Weight/BMI
+  if (h.bmi > 28) {
+    forecasts.push({ area: t.mBmi, risk: t.moderateRisk, riskColor: '#f59e0b', pred: `${h.bmi}`, rec: t.mBmi });
+  }
+  // Glucose
+  if (h.glucose > 6.5) {
+    forecasts.push({ area: t.mGlucose, risk: t.highRisk, riskColor: '#ef5350', pred: `${h.glucose} mmol/L`, rec: t.mGlucose });
+  } else if (h.glucose > 5.6) {
+    forecasts.push({ area: t.mGlucose, risk: t.moderateRisk, riskColor: '#f59e0b', pred: `${h.glucose} mmol/L`, rec: t.mGlucose });
+  }
+  // SpO2
+  if (h.spo2 < 95) {
+    forecasts.push({ area: t.mSpo2, risk: t.highRisk, riskColor: '#ef5350', pred: `${h.spo2}%`, rec: t.mSpo2 });
+  }
+  return forecasts;
+}
+
 /* ─── Page: Patient Profile ─── */
 
 function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: PatientFull; colors: Colors; t: Record<string, string>; lang: Lang; onBack: () => void }) {
   const statusLabel = (s: string) => s === 'stable' ? t.stable : s === 'monitoring' ? t.monitoring : t.critical2;
   const statusColor = (s: string) => s === 'stable' ? '#22c55e' : s === 'monitoring' ? '#f59e0b' : colors.danger;
-
-  const months = lang === 'ru'
-    ? ['Окт', 'Ноя', 'Дек', 'Янв', 'Фев', 'Мар']
-    : ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+  const months = lang === 'ru' ? ['Окт', 'Ноя', 'Дек', 'Янв', 'Фев', 'Мар'] : ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
   const diagnosis = lang === 'ru' ? patient.diagnosisRu : patient.diagnosis;
   const allergies = lang === 'ru' ? patient.allergiesRu : patient.allergies;
   const medications = lang === 'ru' ? patient.medicationsRu : patient.medications;
-  const infoRow: React.CSSProperties = {
-    display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: `1px solid ${colors.border}`,
-  };
+  const h = patient.health;
+  const forecasts = computeForecast(h, t);
+
+  const infoRow: React.CSSProperties = { display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: `1px solid ${colors.border}` };
+
+  const valColor = (val: number, low: number, high: number) => val > high ? colors.danger : val < low ? '#f59e0b' : undefined;
+  const scaleColor = (val: number, okMax: number, warnMax: number) => val > warnMax ? colors.danger : val > okMax ? '#f59e0b' : '#22c55e';
 
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-        <button onClick={onBack} style={{ border: `1px solid ${colors.border}`, borderRadius: 8, background: 'transparent', color: colors.text, padding: '8px 16px', cursor: 'pointer', fontWeight: 600 }}>
-          ← {t.back}
-        </button>
+        <button onClick={onBack} style={{ border: `1px solid ${colors.border}`, borderRadius: 8, background: 'transparent', color: colors.text, padding: '8px 16px', cursor: 'pointer', fontWeight: 600 }}>← {t.back}</button>
         <h1 style={{ margin: 0 }}>{t.patientProfile}</h1>
       </div>
 
-      {/* Top summary card */}
-      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 24, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 24 }}>
+      {/* Summary */}
+      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 24, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 24 }}>
         <div style={{ width: 80, height: 80, borderRadius: '50%', background: colors.button, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36, color: '#fff', fontWeight: 700, flexShrink: 0 }}>
           {patient.name.split(' ').map((n) => n[0]).join('')}
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>{patient.name}</div>
           <div style={{ color: colors.textMuted, marginBottom: 8 }}>{diagnosis} · {patient.age} {t.age.toLowerCase()}</div>
-          <span style={{ background: statusColor(patient.status) + '22', color: statusColor(patient.status), padding: '4px 12px', borderRadius: 6, fontWeight: 600, fontSize: 13 }}>
-            {statusLabel(patient.status)}
-          </span>
+          <span style={{ background: statusColor(patient.status) + '22', color: statusColor(patient.status), padding: '4px 12px', borderRadius: 6, fontWeight: 600, fontSize: 13 }}>{statusLabel(patient.status)}</span>
         </div>
         <div style={{ textAlign: 'right', color: colors.textMuted, fontSize: 14 }}>
           <div>{t.lastVisit}: <strong style={{ color: colors.text }}>{patient.lastVisit}</strong></div>
@@ -566,18 +929,17 @@ function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: Pat
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
         {/* Personal Info */}
         <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
           <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.personalInfo}</h3>
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.dateOfBirth}</span><span>{patient.dob}</span></div>
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.gender}</span><span>{patient.gender === 'male' ? t.male : t.female}</span></div>
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.phone}</span><span>{patient.phone}</span></div>
-          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.address}</span><span style={{ textAlign: 'right', maxWidth: 200 }}>{patient.address}</span></div>
+          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.address}</span><span style={{ textAlign: 'right', maxWidth: 220 }}>{patient.address}</span></div>
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.bloodType}</span><span>{patient.bloodType}</span></div>
           <div style={{ ...infoRow, borderBottom: 'none' }}><span style={{ color: colors.textMuted }}>{t.allergies}</span><span style={{ color: patient.allergies !== 'None' ? colors.danger : colors.text }}>{allergies}</span></div>
         </div>
-
         {/* Medications */}
         <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
           <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.medications}</h3>
@@ -590,28 +952,192 @@ function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: Pat
         </div>
       </div>
 
-      {/* Health Metrics Grid */}
-      <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.healthMetrics}</h3>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 20 }}>
-        <MetricCard label={t.bloodPressure} value={`${patient.bpHistory[patient.bpHistory.length - 1]}/${Math.round(patient.bpHistory[patient.bpHistory.length - 1] * 0.6)}`} unit="mmHg" colors={colors} />
-        <MetricCard label={t.heartRate} value={`${patient.hrHistory[patient.hrHistory.length - 1]}`} unit="bpm" color={patient.hrHistory[patient.hrHistory.length - 1] > 100 ? colors.danger : undefined} colors={colors} />
-        <MetricCard label={t.weight} value={`${patient.weight}`} unit="kg" colors={colors} />
-        <MetricCard label={t.height} value={`${patient.height}`} unit="cm" colors={colors} />
-        <MetricCard label={t.temperature} value={`${patient.temperature}`} unit="°C" color={patient.temperature > 37.0 ? '#f59e0b' : undefined} colors={colors} />
-        <MetricCard label={t.oxygenSat} value={`${patient.oxygenSat}%`} unit="SpO2" color={patient.oxygenSat < 96 ? colors.danger : '#22c55e'} colors={colors} />
-        <MetricCard label={t.bmi} value={`${patient.bmi}`} unit="kg/m²" color={patient.bmi > 25 ? '#f59e0b' : undefined} colors={colors} />
-        <MetricCard label={t.glucose} value={`${patient.glucose}`} unit="mmol/L" color={patient.glucose > 6.0 ? '#f59e0b' : undefined} colors={colors} />
-      </div>
+      {/* ── Heart & Circulation ── */}
+      <Section title={t.catHeart} colors={colors}>
+        <MGrid>
+          <MetricCard label={t.mPulse} value={`${h.pulse}`} unit={t.bpm} color={valColor(h.pulse, 50, 100)} colors={colors} />
+          <MetricCard label={t.mRestPulse} value={`${h.restPulse}`} unit={t.bpm} color={valColor(h.restPulse, 50, 85)} colors={colors} />
+          <MetricCard label={t.mMaxPulse} value={`${h.maxPulse}`} unit={t.bpm} colors={colors} />
+          <MetricCard label={t.mMinPulse} value={`${h.minPulse}`} unit={t.bpm} colors={colors} />
+          <MetricCard label={t.mHrv} value={`${h.hrv}`} unit={t.ms} color={h.hrv < 30 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mSpo2} value={`${h.spo2}`} unit={t.pct} color={h.spo2 < 95 ? colors.danger : h.spo2 < 97 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mBpSys} value={`${h.bpSys}`} unit={t.mmHg} color={valColor(h.bpSys, 90, 140)} colors={colors} />
+          <MetricCard label={t.mBpDia} value={`${h.bpDia}`} unit={t.mmHg} color={valColor(h.bpDia, 60, 90)} colors={colors} />
+          <MetricCard label={t.mRespRate} value={`${h.respRate}`} unit={t.breathMin} color={valColor(h.respRate, 12, 20)} colors={colors} />
+          <MetricCard label={t.mEcg} value={h.ecg.length > 12 ? h.ecg.slice(0, 12) + '…' : h.ecg} unit="" colors={colors} />
+          <MetricCard label={t.mArrhythmia} value={h.arrhythmia ? t.yes : t.no} unit="" color={h.arrhythmia ? colors.danger : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mTrainPulse} value={`${h.trainPulse}`} unit={t.bpm} colors={colors} />
+          <MetricCard label={t.mAvgDayPulse} value={`${h.avgDayPulse}`} unit={t.bpm} colors={colors} />
+        </MGrid>
+      </Section>
 
-      {/* Forecast Chart */}
-      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20, marginBottom: 20 }}>
-        <h3 style={{ margin: '0 0 16px', fontSize: 16 }}>{t.forecast}</h3>
-        <LineChart data1={patient.bpHistory} data2={patient.hrHistory} label1={t.bpTrend} label2={t.hrTrend} colors={colors} months={months} />
-      </div>
+      {/* ── Temperature ── */}
+      <Section title={t.catTemp} colors={colors} defaultOpen={false}>
+        <MGrid>
+          <MetricCard label={t.mBodyTemp} value={`${h.bodyTemp}`} unit="°C" color={h.bodyTemp > 37.0 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mSkinTemp} value={`${h.skinTemp}`} unit="°C" colors={colors} />
+        </MGrid>
+      </Section>
 
-      {/* Visit History */}
-      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
-        <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.visitHistory}</h3>
+      {/* ── Stress & Recovery ── */}
+      <Section title={t.catStress} colors={colors}>
+        <MGrid>
+          <MetricCard label={t.mStress} value={`${h.stress}`} unit="/100" color={scaleColor(h.stress, 50, 70)} colors={colors} />
+          <MetricCard label={t.mRecovery} value={`${h.recovery}`} unit="/100" color={h.recovery < 40 ? colors.danger : h.recovery < 60 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mBodyBattery} value={`${h.bodyBattery}`} unit="/100" color={h.bodyBattery < 30 ? colors.danger : h.bodyBattery < 50 ? '#f59e0b' : '#22c55e'} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Sleep ── */}
+      <Section title={t.catSleep} colors={colors}>
+        <MGrid>
+          <MetricCard label={t.mSleepQuality} value={`${h.sleepQuality}`} unit="/100" color={h.sleepQuality < 50 ? colors.danger : h.sleepQuality < 70 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mSleepDuration} value={`${h.sleepDuration}`} unit={t.hrs} color={h.sleepDuration < 6 ? colors.danger : h.sleepDuration < 7 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mFallAsleep} value={h.fallAsleep} unit="" colors={colors} />
+          <MetricCard label={t.mWakeUp} value={h.wakeUp} unit="" colors={colors} />
+          <MetricCard label={t.mDeepSleep} value={`${h.deepSleep}`} unit={t.hrs} color={h.deepSleep < 1.0 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mLightSleep} value={`${h.lightSleep}`} unit={t.hrs} colors={colors} />
+          <MetricCard label={t.mRemSleep} value={`${h.remSleep}`} unit={t.hrs} colors={colors} />
+          <MetricCard label={t.mNightWake} value={`${h.nightWake}`} unit={t.times} color={h.nightWake > 3 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mDayNap} value={`${h.dayNap}`} unit={t.min} colors={colors} />
+          <MetricCard label={t.mSnoring} value={`${h.snoring}`} unit={t.min} color={h.snoring > 30 ? '#f59e0b' : undefined} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Physical Activity ── */}
+      <Section title={t.catActivity} colors={colors}>
+        <MGrid>
+          <MetricCard label={t.mSteps} value={`${h.steps.toLocaleString()}`} unit={t.steps} color={h.steps < 5000 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mDistance} value={`${h.distance}`} unit={t.km} colors={colors} />
+          <MetricCard label={t.mFloors} value={`${h.floors}`} unit="" colors={colors} />
+          <MetricCard label={t.mSedentary} value={`${Math.round(h.sedentary / 60)}`} unit={t.hrs} color={h.sedentary > 540 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mActiveTime} value={`${h.activeTime}`} unit={t.min} colors={colors} />
+          <MetricCard label={t.mModerateMin} value={`${h.moderateMin}`} unit={t.min} colors={colors} />
+          <MetricCard label={t.mIntenseMin} value={`${h.intenseMin}`} unit={t.min} colors={colors} />
+          <MetricCard label={t.mBurnedCal} value={`${h.burnedCal}`} unit={t.kcal} colors={colors} />
+          <MetricCard label={t.mActiveCal} value={`${h.activeCal}`} unit={t.kcal} colors={colors} />
+          <MetricCard label={t.mTotalEnergy} value={`${h.totalEnergy}`} unit={t.kcal} colors={colors} />
+          <MetricCard label={t.mWalkPace} value={`${h.walkPace}`} unit={t.minKm} colors={colors} />
+          <MetricCard label={t.mSpeed} value={`${h.speed}`} unit={t.kmH} colors={colors} />
+          <MetricCard label={t.mCadence} value={`${h.cadence}`} unit={t.stepsMin} colors={colors} />
+          <MetricCard label={t.mStrideLen} value={`${h.strideLen}`} unit={t.cm} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Fitness ── */}
+      <Section title={t.catFitness} colors={colors} defaultOpen={false}>
+        <MGrid>
+          <MetricCard label={t.mVo2max} value={`${h.vo2max}`} unit="ml/kg/min" color={h.vo2max < 30 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mCardioLoad} value={`${h.cardioLoad}`} unit="/100" color={scaleColor(h.cardioLoad, 60, 80)} colors={colors} />
+          <MetricCard label={t.mTrainLoad} value={`${h.trainLoad}`} unit="" colors={colors} />
+          <MetricCard label={t.mRecoveryTime} value={`${h.recoveryTime}`} unit={t.hrs} color={h.recoveryTime > 24 ? '#f59e0b' : undefined} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Body Composition ── */}
+      <Section title={t.catBody} colors={colors}>
+        <MGrid>
+          <MetricCard label={t.mWeight} value={`${h.weight}`} unit={t.kg} colors={colors} />
+          <MetricCard label={t.mBmi} value={`${h.bmi}`} unit="kg/m²" color={h.bmi > 25 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mFatPct} value={`${h.fatPct}`} unit={t.pct} color={h.fatPct > 30 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mMuscleMass} value={`${h.muscleMass}`} unit={t.kg} colors={colors} />
+          <MetricCard label={t.mBodyWater} value={`${h.bodyWater}`} unit={t.pct} colors={colors} />
+          <MetricCard label={t.mBoneMass} value={`${h.boneMass}`} unit={t.kg} colors={colors} />
+          <MetricCard label={t.mGlucose} value={`${h.glucose}`} unit="mmol/L" color={h.glucose > 6.5 ? colors.danger : h.glucose > 5.6 ? '#f59e0b' : undefined} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Well-being ── */}
+      <Section title={t.catWellbeing} colors={colors} defaultOpen={false}>
+        <MGrid>
+          <MetricCard label={t.mSymptoms} value={h.symptoms || t.none} unit="" colors={colors} />
+          <MetricCard label={t.mDailyWell} value={`${h.dailyWell}`} unit="/10" color={h.dailyWell < 4 ? colors.danger : h.dailyWell < 6 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mFatigue} value={`${h.fatigue}`} unit="/10" color={scaleColor(h.fatigue, 5, 7)} colors={colors} />
+          <MetricCard label={t.mAnxiety} value={`${h.anxiety}`} unit="/10" color={scaleColor(h.anxiety, 5, 7)} colors={colors} />
+          <MetricCard label={t.mMood} value={`${h.mood}`} unit="/10" color={h.mood < 4 ? colors.danger : h.mood < 6 ? '#f59e0b' : '#22c55e'} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Nutrition & Habits ── */}
+      <Section title={t.catNutrition} colors={colors} defaultOpen={false}>
+        <MGrid>
+          <MetricCard label={t.mWater} value={`${h.water}`} unit={t.ml} color={h.water < 1500 ? '#f59e0b' : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mFoodCal} value={`${h.foodCal}`} unit={t.kcal} colors={colors} />
+          <MetricCard label={t.mCaffeine} value={`${h.caffeine}`} unit={t.mgDay} color={h.caffeine > 400 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mAlcohol} value={`${h.alcohol}`} unit={t.times} color={h.alcohol > 2 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mSmoking} value={`${h.smoking}`} unit={t.times} color={h.smoking > 0 ? colors.danger : '#22c55e'} colors={colors} />
+          <MetricCard label={t.mMedsTaken} value={h.medsTaken ? t.yes : t.no} unit="" color={h.medsTaken ? '#22c55e' : '#f59e0b'} colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Women's Health (if applicable) ── */}
+      {h.cycleDay !== null && (
+        <Section title={t.catWomen} colors={colors} defaultOpen={false}>
+          <MGrid>
+            <MetricCard label={t.mCycleDay} value={`${h.cycleDay}`} unit="" colors={colors} />
+            <MetricCard label={t.mOvulation} value={h.ovulation ? t.yes : t.no} unit="" colors={colors} />
+          </MGrid>
+        </Section>
+      )}
+
+      {/* ── Environment ── */}
+      <Section title={t.catEnv} colors={colors} defaultOpen={false}>
+        <MGrid>
+          <MetricCard label={t.mNoise} value={`${h.noise}`} unit={t.dB} color={h.noise > 50 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mSunExposure} value={`${h.sunExposure}`} unit={t.min} colors={colors} />
+          <MetricCard label={t.mOutdoorTime} value={`${h.outdoorTime}`} unit={t.min} color={h.outdoorTime < 30 ? '#f59e0b' : undefined} colors={colors} />
+          <MetricCard label={t.mLocation} value={h.location} unit="" colors={colors} />
+        </MGrid>
+      </Section>
+
+      {/* ── Forecast Charts ── */}
+      <Section title={t.forecastTitle} colors={colors}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 16 }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, color: colors.textMuted }}>{t.mBpSys} + {t.mPulse}</div>
+            <LineChart data1={h.bpTrend} data2={h.hrTrend} label1={t.bpTrend} label2={t.hrTrend} colors={colors} months={months} />
+          </div>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, color: colors.textMuted }}>{t.mStress} + {t.mSleepDuration}</div>
+            <LineChart data1={h.stressTrend} data2={h.sleepTrend.map((v) => v * 10)} label1={t.mStress} label2={`${t.mSleepDuration} (×10)`} colors={colors} months={months} />
+          </div>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 16 }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, color: colors.textMuted }}>{t.mSteps}</div>
+            <LineChart data1={h.stepsTrend} data2={h.weightTrend.map((v) => v * 100)} label1={t.mSteps} label2={`${t.mWeight} (×100)`} colors={colors} months={months} />
+          </div>
+        </div>
+
+        {/* Risk predictions */}
+        {forecasts.length > 0 && (
+          <div style={{ border: `1px solid ${colors.border}`, borderRadius: 10, overflow: 'hidden' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+              <thead>
+                <tr style={{ borderBottom: `2px solid ${colors.border}`, textAlign: 'left' }}>
+                  <th style={{ padding: '10px 14px', color: colors.textMuted, fontWeight: 600 }}>{t.healthMetrics}</th>
+                  <th style={{ padding: '10px 14px', color: colors.textMuted, fontWeight: 600 }}>{t.riskLevel}</th>
+                  <th style={{ padding: '10px 14px', color: colors.textMuted, fontWeight: 600 }}>{t.prediction}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {forecasts.map((f, i) => (
+                  <tr key={i} style={{ borderBottom: `1px solid ${colors.border}` }}>
+                    <td style={{ padding: '10px 14px', fontWeight: 600 }}>{f.area}</td>
+                    <td style={{ padding: '10px 14px' }}>
+                      <span style={{ background: f.riskColor + '22', color: f.riskColor, padding: '3px 10px', borderRadius: 6, fontWeight: 600, fontSize: 12 }}>{f.risk}</span>
+                    </td>
+                    <td style={{ padding: '10px 14px', color: colors.textMuted }}>{f.pred}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Section>
+
+      {/* ── Visit History ── */}
+      <Section title={t.visitHistory} colors={colors} defaultOpen={false}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
           <thead>
             <tr style={{ borderBottom: `2px solid ${colors.border}`, textAlign: 'left' }}>
@@ -630,7 +1156,7 @@ function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: Pat
             ))}
           </tbody>
         </table>
-      </div>
+      </Section>
     </>
   );
 }
