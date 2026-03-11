@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 
 /* ─── Localization ─── */
@@ -875,19 +875,22 @@ function App() {
     { key: 'settings', label: t.settings, icon: '⚙️' },
   ];
 
+  const mainRef = useRef<HTMLElement>(null);
+
   const handleMenuClick = (key: MenuKey) => {
     setActiveMenu(key);
     setSelectedPatientId(null);
+    mainRef.current?.scrollTo(0, 0);
   };
 
   const renderPage = useCallback(() => {
     if (activeMenu === 'patients' && selectedPatientId !== null) {
       const patient = patientsData.find((p) => p.id === selectedPatientId);
-      if (patient) return <PatientProfilePage patient={patient} colors={colors} t={t} lang={lang} onBack={() => setSelectedPatientId(null)} />;
+      if (patient) return <PatientProfilePage patient={patient} colors={colors} t={t} lang={lang} onBack={() => { setSelectedPatientId(null); mainRef.current?.scrollTo(0, 0); }} />;
     }
     switch (activeMenu) {
       case 'dashboard': return <DashboardPage colors={colors} t={t} />;
-      case 'patients': return <PatientsPage colors={colors} t={t} lang={lang} onOpenPatient={setSelectedPatientId} />;
+      case 'patients': return <PatientsPage colors={colors} t={t} lang={lang} onOpenPatient={(id) => { setSelectedPatientId(id); mainRef.current?.scrollTo(0, 0); }} />;
       case 'chat': return <ChatPage colors={colors} t={t} />;
       case 'faq': return <FAQPage colors={colors} t={t} />;
       case 'settings': return <SettingsPage colors={colors} t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} />;
@@ -946,7 +949,7 @@ function App() {
           </aside>
 
           {/* Main content */}
-          <main style={{ padding: 28, color: colors.text, overflowY: 'auto' }}>
+          <main ref={mainRef} style={{ padding: 28, color: colors.text, overflowY: 'auto' }}>
             {renderPage()}
           </main>
         </div>
