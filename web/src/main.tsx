@@ -228,6 +228,7 @@ interface PatientFull {
   name: string;
   age: number;
   diagnosis: string;
+  diagnosisRu: string;
   status: string;
   lastVisit: string;
   dob: string;
@@ -236,6 +237,7 @@ interface PatientFull {
   address: string;
   bloodType: string;
   allergies: string;
+  allergiesRu: string;
   weight: number;
   height: number;
   temperature: number;
@@ -243,86 +245,93 @@ interface PatientFull {
   bmi: number;
   glucose: number;
   medications: string[];
+  medicationsRu: string[];
   bpHistory: number[];
   hrHistory: number[];
-  visits: Array<{ date: string; doctor: string; notes: string }>;
+  visits: Array<{ date: string; doctor: string; notes: string; notesRu: string }>;
 }
 
 /* ─── Patient Data ─── */
 
 const patientsData: PatientFull[] = [
   {
-    id: 1, name: 'John Doe', age: 45, diagnosis: 'Hypertension', status: 'stable', lastVisit: '2026-03-05',
+    id: 1, name: 'John Doe', age: 45, diagnosis: 'Hypertension', diagnosisRu: 'Гипертония', status: 'stable', lastVisit: '2026-03-05',
     dob: '1981-06-15', gender: 'male', phone: '+1 (555) 123-4567', address: '42 Elm Street, New York, NY',
-    bloodType: 'A+', allergies: 'Penicillin', weight: 82, height: 178, temperature: 36.6, oxygenSat: 98, bmi: 25.9, glucose: 5.4,
+    bloodType: 'A+', allergies: 'Penicillin', allergiesRu: 'Пенициллин', weight: 82, height: 178, temperature: 36.6, oxygenSat: 98, bmi: 25.9, glucose: 5.4,
     medications: ['Lisinopril 10mg', 'Amlodipine 5mg', 'Aspirin 81mg'],
+    medicationsRu: ['Лизиноприл 10мг', 'Амлодипин 5мг', 'Аспирин 81мг'],
     bpHistory: [145, 142, 138, 135, 130, 128, 125, 122, 120, 118, 119, 117],
     hrHistory: [78, 76, 80, 74, 72, 75, 70, 68, 72, 70, 69, 68],
     visits: [
-      { date: '2026-03-05', doctor: 'Dr. Smith', notes: 'BP improved. Continue current medication.' },
-      { date: '2026-02-10', doctor: 'Dr. Smith', notes: 'Adjusted Amlodipine dosage to 5mg.' },
-      { date: '2026-01-15', doctor: 'Dr. Lee', notes: 'Initial diagnosis. Started Lisinopril.' },
+      { date: '2026-03-05', doctor: 'Dr. Smith', notes: 'BP improved. Continue current medication.', notesRu: 'Давление улучшилось. Продолжить текущее лечение.' },
+      { date: '2026-02-10', doctor: 'Dr. Smith', notes: 'Adjusted Amlodipine dosage to 5mg.', notesRu: 'Скорректирована доза Амлодипина до 5мг.' },
+      { date: '2026-01-15', doctor: 'Dr. Lee', notes: 'Initial diagnosis. Started Lisinopril.', notesRu: 'Первичный диагноз. Назначен Лизиноприл.' },
     ],
   },
   {
-    id: 2, name: 'Anna Ivanova', age: 32, diagnosis: 'Tachycardia', status: 'critical', lastVisit: '2026-03-08',
-    dob: '1994-02-20', gender: 'female', phone: '+7 (916) 234-5678', address: 'ul. Tverskaya 12, Moscow',
-    bloodType: 'B-', allergies: 'None', weight: 58, height: 165, temperature: 37.1, oxygenSat: 96, bmi: 21.3, glucose: 4.8,
+    id: 2, name: 'Anna Ivanova', age: 32, diagnosis: 'Tachycardia', diagnosisRu: 'Тахикардия', status: 'critical', lastVisit: '2026-03-08',
+    dob: '1994-02-20', gender: 'female', phone: '+7 (916) 234-5678', address: 'ул. Тверская 12, Москва',
+    bloodType: 'B-', allergies: 'None', allergiesRu: 'Нет', weight: 58, height: 165, temperature: 37.1, oxygenSat: 96, bmi: 21.3, glucose: 4.8,
     medications: ['Metoprolol 50mg', 'Magnesium 400mg'],
+    medicationsRu: ['Метопролол 50мг', 'Магний 400мг'],
     bpHistory: [120, 125, 128, 132, 130, 135, 138, 140, 137, 134, 132, 130],
     hrHistory: [110, 108, 112, 105, 115, 120, 118, 108, 105, 100, 98, 95],
     visits: [
-      { date: '2026-03-08', doctor: 'Dr. Smith', notes: 'HR elevated. Increased Metoprolol.' },
-      { date: '2026-02-20', doctor: 'Dr. Kim', notes: 'ECG shows sinus tachycardia.' },
+      { date: '2026-03-08', doctor: 'Dr. Smith', notes: 'HR elevated. Increased Metoprolol.', notesRu: 'Пульс учащён. Увеличена доза Метопролола.' },
+      { date: '2026-02-20', doctor: 'Dr. Kim', notes: 'ECG shows sinus tachycardia.', notesRu: 'ЭКГ показала синусовую тахикардию.' },
     ],
   },
   {
-    id: 3, name: 'Sarah Brown', age: 58, diagnosis: 'Diabetes Type 2', status: 'monitoring', lastVisit: '2026-03-01',
+    id: 3, name: 'Sarah Brown', age: 58, diagnosis: 'Diabetes Type 2', diagnosisRu: 'Сахарный диабет 2 типа', status: 'monitoring', lastVisit: '2026-03-01',
     dob: '1968-11-03', gender: 'female', phone: '+1 (555) 987-6543', address: '88 Oak Ave, Chicago, IL',
-    bloodType: 'O+', allergies: 'Sulfa drugs', weight: 75, height: 162, temperature: 36.5, oxygenSat: 97, bmi: 28.6, glucose: 7.2,
+    bloodType: 'O+', allergies: 'Sulfa drugs', allergiesRu: 'Сульфаниламиды', weight: 75, height: 162, temperature: 36.5, oxygenSat: 97, bmi: 28.6, glucose: 7.2,
     medications: ['Metformin 1000mg', 'Glimepiride 2mg', 'Atorvastatin 20mg'],
+    medicationsRu: ['Метформин 1000мг', 'Глимепирид 2мг', 'Аторвастатин 20мг'],
     bpHistory: [130, 128, 132, 135, 130, 128, 125, 127, 124, 122, 120, 118],
     hrHistory: [72, 74, 70, 68, 72, 76, 74, 70, 68, 70, 72, 70],
     visits: [
-      { date: '2026-03-01', doctor: 'Dr. Smith', notes: 'HbA1c: 7.1%. Adjust Metformin.' },
-      { date: '2026-01-25', doctor: 'Dr. Smith', notes: 'Glucose trending up. Added Glimepiride.' },
+      { date: '2026-03-01', doctor: 'Dr. Smith', notes: 'HbA1c: 7.1%. Adjust Metformin.', notesRu: 'HbA1c: 7,1%. Скорректировать дозу Метформина.' },
+      { date: '2026-01-25', doctor: 'Dr. Smith', notes: 'Glucose trending up. Added Glimepiride.', notesRu: 'Глюкоза растёт. Добавлен Глимепирид.' },
     ],
   },
   {
-    id: 4, name: 'Elena Petrova', age: 27, diagnosis: 'Anemia', status: 'stable', lastVisit: '2026-02-28',
-    dob: '1999-07-10', gender: 'female', phone: '+7 (903) 111-2233', address: 'ul. Lenina 5, St. Petersburg',
-    bloodType: 'AB+', allergies: 'None', weight: 52, height: 170, temperature: 36.4, oxygenSat: 99, bmi: 18.0, glucose: 4.5,
+    id: 4, name: 'Elena Petrova', age: 27, diagnosis: 'Anemia', diagnosisRu: 'Анемия', status: 'stable', lastVisit: '2026-02-28',
+    dob: '1999-07-10', gender: 'female', phone: '+7 (903) 111-2233', address: 'ул. Ленина 5, Санкт-Петербург',
+    bloodType: 'AB+', allergies: 'None', allergiesRu: 'Нет', weight: 52, height: 170, temperature: 36.4, oxygenSat: 99, bmi: 18.0, glucose: 4.5,
     medications: ['Ferrous sulfate 325mg', 'Vitamin C 500mg', 'Folic acid 1mg'],
+    medicationsRu: ['Сульфат железа 325мг', 'Витамин C 500мг', 'Фолиевая кислота 1мг'],
     bpHistory: [110, 112, 108, 110, 112, 115, 113, 110, 112, 114, 112, 110],
     hrHistory: [82, 80, 84, 78, 76, 80, 78, 76, 74, 76, 74, 72],
     visits: [
-      { date: '2026-02-28', doctor: 'Dr. Smith', notes: 'Hemoglobin rising — 11.2 g/dL. Continue iron.' },
-      { date: '2026-01-30', doctor: 'Dr. Lee', notes: 'Hemoglobin 9.8 g/dL. Started iron therapy.' },
+      { date: '2026-02-28', doctor: 'Dr. Smith', notes: 'Hemoglobin rising — 11.2 g/dL. Continue iron.', notesRu: 'Гемоглобин растёт — 11,2 г/дл. Продолжить приём железа.' },
+      { date: '2026-01-30', doctor: 'Dr. Lee', notes: 'Hemoglobin 9.8 g/dL. Started iron therapy.', notesRu: 'Гемоглобин 9,8 г/дл. Начата терапия железом.' },
     ],
   },
   {
-    id: 5, name: 'Michael Chen', age: 63, diagnosis: 'Coronary Artery Disease', status: 'monitoring', lastVisit: '2026-03-07',
+    id: 5, name: 'Michael Chen', age: 63, diagnosis: 'Coronary Artery Disease', diagnosisRu: 'Ишемическая болезнь сердца', status: 'monitoring', lastVisit: '2026-03-07',
     dob: '1963-04-22', gender: 'male', phone: '+1 (555) 456-7890', address: '15 Pine Rd, San Francisco, CA',
-    bloodType: 'O-', allergies: 'Ibuprofen', weight: 88, height: 175, temperature: 36.7, oxygenSat: 95, bmi: 28.7, glucose: 6.1,
+    bloodType: 'O-', allergies: 'Ibuprofen', allergiesRu: 'Ибупрофен', weight: 88, height: 175, temperature: 36.7, oxygenSat: 95, bmi: 28.7, glucose: 6.1,
     medications: ['Clopidogrel 75mg', 'Atorvastatin 40mg', 'Metoprolol 25mg', 'Aspirin 81mg'],
+    medicationsRu: ['Клопидогрел 75мг', 'Аторвастатин 40мг', 'Метопролол 25мг', 'Аспирин 81мг'],
     bpHistory: [150, 148, 145, 140, 138, 135, 132, 130, 128, 126, 124, 122],
     hrHistory: [68, 70, 66, 64, 68, 72, 70, 66, 64, 66, 64, 62],
     visits: [
-      { date: '2026-03-07', doctor: 'Dr. Smith', notes: 'Stress test negative. Continue monitoring.' },
-      { date: '2026-02-15', doctor: 'Dr. Kim', notes: 'Echocardiogram: EF 55%. Stable.' },
-      { date: '2026-01-10', doctor: 'Dr. Smith', notes: 'Post-stent follow-up. Doing well.' },
+      { date: '2026-03-07', doctor: 'Dr. Smith', notes: 'Stress test negative. Continue monitoring.', notesRu: 'Нагрузочный тест отрицательный. Продолжить наблюдение.' },
+      { date: '2026-02-15', doctor: 'Dr. Kim', notes: 'Echocardiogram: EF 55%. Stable.', notesRu: 'ЭхоКГ: ФВ 55%. Стабильно.' },
+      { date: '2026-01-10', doctor: 'Dr. Smith', notes: 'Post-stent follow-up. Doing well.', notesRu: 'Контроль после стентирования. Состояние хорошее.' },
     ],
   },
   {
-    id: 6, name: 'Diree Morn', age: 41, diagnosis: 'Asthma', status: 'stable', lastVisit: '2026-03-03',
+    id: 6, name: 'Diree Morn', age: 41, diagnosis: 'Asthma', diagnosisRu: 'Бронхиальная астма', status: 'stable', lastVisit: '2026-03-03',
     dob: '1985-09-18', gender: 'male', phone: '+1 (555) 321-0987', address: '7 Maple Ln, Austin, TX',
-    bloodType: 'A-', allergies: 'Dust, Pollen', weight: 76, height: 180, temperature: 36.5, oxygenSat: 97, bmi: 23.5, glucose: 5.0,
+    bloodType: 'A-', allergies: 'Dust, Pollen', allergiesRu: 'Пыль, Пыльца', weight: 76, height: 180, temperature: 36.5, oxygenSat: 97, bmi: 23.5, glucose: 5.0,
     medications: ['Fluticasone inhaler', 'Salbutamol PRN', 'Montelukast 10mg'],
+    medicationsRu: ['Флутиказон ингалятор', 'Сальбутамол по требованию', 'Монтелукаст 10мг'],
     bpHistory: [118, 120, 116, 118, 120, 122, 118, 116, 118, 120, 118, 116],
     hrHistory: [74, 72, 76, 70, 72, 74, 70, 68, 72, 70, 68, 70],
     visits: [
-      { date: '2026-03-03', doctor: 'Dr. Smith', notes: 'Spirometry stable. No exacerbations.' },
-      { date: '2026-01-20', doctor: 'Dr. Lee', notes: 'Seasonal allergy flare. Added Montelukast.' },
+      { date: '2026-03-03', doctor: 'Dr. Smith', notes: 'Spirometry stable. No exacerbations.', notesRu: 'Спирометрия стабильная. Обострений нет.' },
+      { date: '2026-01-20', doctor: 'Dr. Lee', notes: 'Seasonal allergy flare. Added Montelukast.', notesRu: 'Сезонное обострение аллергии. Добавлен Монтелукаст.' },
     ],
   },
 ];
@@ -516,11 +525,16 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
 
 /* ─── Page: Patient Profile ─── */
 
-function PatientProfilePage({ patient, colors, t, onBack }: { patient: PatientFull; colors: Colors; t: Record<string, string>; onBack: () => void }) {
+function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: PatientFull; colors: Colors; t: Record<string, string>; lang: Lang; onBack: () => void }) {
   const statusLabel = (s: string) => s === 'stable' ? t.stable : s === 'monitoring' ? t.monitoring : t.critical2;
   const statusColor = (s: string) => s === 'stable' ? '#22c55e' : s === 'monitoring' ? '#f59e0b' : colors.danger;
 
-  const months = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+  const months = lang === 'ru'
+    ? ['Окт', 'Ноя', 'Дек', 'Янв', 'Фев', 'Мар']
+    : ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+  const diagnosis = lang === 'ru' ? patient.diagnosisRu : patient.diagnosis;
+  const allergies = lang === 'ru' ? patient.allergiesRu : patient.allergies;
+  const medications = lang === 'ru' ? patient.medicationsRu : patient.medications;
   const infoRow: React.CSSProperties = {
     display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: `1px solid ${colors.border}`,
   };
@@ -541,7 +555,7 @@ function PatientProfilePage({ patient, colors, t, onBack }: { patient: PatientFu
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>{patient.name}</div>
-          <div style={{ color: colors.textMuted, marginBottom: 8 }}>{patient.diagnosis} · {patient.age} {t.age.toLowerCase()}</div>
+          <div style={{ color: colors.textMuted, marginBottom: 8 }}>{diagnosis} · {patient.age} {t.age.toLowerCase()}</div>
           <span style={{ background: statusColor(patient.status) + '22', color: statusColor(patient.status), padding: '4px 12px', borderRadius: 6, fontWeight: 600, fontSize: 13 }}>
             {statusLabel(patient.status)}
           </span>
@@ -561,14 +575,14 @@ function PatientProfilePage({ patient, colors, t, onBack }: { patient: PatientFu
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.phone}</span><span>{patient.phone}</span></div>
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.address}</span><span style={{ textAlign: 'right', maxWidth: 200 }}>{patient.address}</span></div>
           <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.bloodType}</span><span>{patient.bloodType}</span></div>
-          <div style={{ ...infoRow, borderBottom: 'none' }}><span style={{ color: colors.textMuted }}>{t.allergies}</span><span style={{ color: patient.allergies !== 'None' ? colors.danger : colors.text }}>{patient.allergies}</span></div>
+          <div style={{ ...infoRow, borderBottom: 'none' }}><span style={{ color: colors.textMuted }}>{t.allergies}</span><span style={{ color: patient.allergies !== 'None' ? colors.danger : colors.text }}>{allergies}</span></div>
         </div>
 
         {/* Medications */}
         <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
           <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.medications}</h3>
-          {patient.medications.map((med, i) => (
-            <div key={i} style={{ padding: '10px 0', borderBottom: i < patient.medications.length - 1 ? `1px solid ${colors.border}` : 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+          {medications.map((med, i) => (
+            <div key={i} style={{ padding: '10px 0', borderBottom: i < medications.length - 1 ? `1px solid ${colors.border}` : 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 8, height: 8, borderRadius: '50%', background: colors.button, flexShrink: 0 }} />
               <span>{med}</span>
             </div>
@@ -611,7 +625,7 @@ function PatientProfilePage({ patient, colors, t, onBack }: { patient: PatientFu
               <tr key={i} style={{ borderBottom: `1px solid ${colors.border}` }}>
                 <td style={{ padding: '10px 14px', fontWeight: 600, whiteSpace: 'nowrap' }}>{v.date}</td>
                 <td style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>{v.doctor}</td>
-                <td style={{ padding: '10px 14px', color: colors.textMuted }}>{v.notes}</td>
+                <td style={{ padding: '10px 14px', color: colors.textMuted }}>{lang === 'ru' ? v.notesRu : v.notes}</td>
               </tr>
             ))}
           </tbody>
@@ -623,7 +637,7 @@ function PatientProfilePage({ patient, colors, t, onBack }: { patient: PatientFu
 
 /* ─── Page: Patients ─── */
 
-function PatientsPage({ colors, t, onOpenPatient }: { colors: Colors; t: Record<string, string>; onOpenPatient: (id: number) => void }) {
+function PatientsPage({ colors, t, lang, onOpenPatient }: { colors: Colors; t: Record<string, string>; lang: Lang; onOpenPatient: (id: number) => void }) {
   const [search, setSearch] = useState('');
   const filtered = patientsData.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
 
@@ -664,7 +678,7 @@ function PatientsPage({ colors, t, onOpenPatient }: { colors: Colors; t: Record<
               >
                 <td style={{ padding: '12px 14px', fontWeight: 600 }}>{p.name}</td>
                 <td style={{ padding: '12px 14px' }}>{p.age}</td>
-                <td style={{ padding: '12px 14px' }}>{p.diagnosis}</td>
+                <td style={{ padding: '12px 14px' }}>{lang === 'ru' ? p.diagnosisRu : p.diagnosis}</td>
                 <td style={{ padding: '12px 14px' }}>
                   <span style={{ background: statusColor(p.status) + '22', color: statusColor(p.status), padding: '4px 10px', borderRadius: 6, fontWeight: 600, fontSize: 12 }}>
                     {statusLabel(p.status)}
@@ -869,11 +883,11 @@ function App() {
   const renderPage = useCallback(() => {
     if (activeMenu === 'patients' && selectedPatientId !== null) {
       const patient = patientsData.find((p) => p.id === selectedPatientId);
-      if (patient) return <PatientProfilePage patient={patient} colors={colors} t={t} onBack={() => setSelectedPatientId(null)} />;
+      if (patient) return <PatientProfilePage patient={patient} colors={colors} t={t} lang={lang} onBack={() => setSelectedPatientId(null)} />;
     }
     switch (activeMenu) {
       case 'dashboard': return <DashboardPage colors={colors} t={t} />;
-      case 'patients': return <PatientsPage colors={colors} t={t} onOpenPatient={setSelectedPatientId} />;
+      case 'patients': return <PatientsPage colors={colors} t={t} lang={lang} onOpenPatient={setSelectedPatientId} />;
       case 'chat': return <ChatPage colors={colors} t={t} />;
       case 'faq': return <FAQPage colors={colors} t={t} />;
       case 'settings': return <SettingsPage colors={colors} t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} />;
