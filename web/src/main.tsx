@@ -27,7 +27,6 @@ const translations: Record<Lang, Record<string, string>> = {
     exportProfile: 'Export Profile',
     active: 'Active',
     new: 'New',
-    // Patients page
     patientList: 'Patient List',
     name: 'Name',
     age: 'Age',
@@ -37,13 +36,11 @@ const translations: Record<Lang, Record<string, string>> = {
     stable: 'Stable',
     monitoring: 'Monitoring',
     critical2: 'Critical',
-    // Chat page
     conversations: 'Conversations',
     typeMessage: 'Type a message...',
     send: 'Send',
     online: 'Online',
     offline: 'Offline',
-    // FAQ page
     faqTitle: 'Frequently Asked Questions',
     faq1q: 'How do I add a new patient?',
     faq1a: 'Go to the Patients section and click "Add Patient" button, then fill in the required information.',
@@ -55,7 +52,6 @@ const translations: Record<Lang, Record<string, string>> = {
     faq4a: 'Go to Settings and find the "Change Password" section. Enter your current password and the new one.',
     faq5q: 'What do the alert levels mean?',
     faq5a: 'Critical — immediate attention needed. Active — ongoing monitoring required. Stable — within normal parameters.',
-    // Settings page
     general: 'General',
     appearance: 'Appearance',
     notifications: 'Notifications',
@@ -78,6 +74,35 @@ const translations: Record<Lang, Record<string, string>> = {
     email: 'Email',
     role: 'Role',
     doctor: 'Doctor',
+    // Patient profile
+    patientProfile: 'Patient Profile',
+    back: 'Back',
+    personalInfo: 'Personal Information',
+    dateOfBirth: 'Date of Birth',
+    gender: 'Gender',
+    phone: 'Phone',
+    address: 'Address',
+    bloodType: 'Blood Type',
+    allergies: 'Allergies',
+    healthMetrics: 'Health Metrics',
+    bloodPressure: 'Blood Pressure',
+    heartRate: 'Heart Rate',
+    weight: 'Weight',
+    height: 'Height',
+    temperature: 'Temperature',
+    oxygenSat: 'Oxygen Saturation',
+    bmi: 'BMI',
+    glucose: 'Glucose',
+    forecast: 'Health Forecast (6 months)',
+    bpTrend: 'Blood Pressure Trend',
+    hrTrend: 'Heart Rate Trend',
+    visitHistory: 'Visit History',
+    date: 'Date',
+    doctor2: 'Doctor',
+    notes: 'Notes',
+    male: 'Male',
+    female: 'Female',
+    medications: 'Current Medications',
   },
   ru: {
     dashboard: 'Главная',
@@ -100,7 +125,6 @@ const translations: Record<Lang, Record<string, string>> = {
     exportProfile: 'Экспорт профиля',
     active: 'Активна',
     new: 'Новое',
-    // Patients page
     patientList: 'Список пациентов',
     name: 'Имя',
     age: 'Возраст',
@@ -110,13 +134,11 @@ const translations: Record<Lang, Record<string, string>> = {
     stable: 'Стабильно',
     monitoring: 'Наблюдение',
     critical2: 'Критично',
-    // Chat page
     conversations: 'Диалоги',
     typeMessage: 'Введите сообщение...',
     send: 'Отправить',
     online: 'Онлайн',
     offline: 'Оффлайн',
-    // FAQ page
     faqTitle: 'Часто задаваемые вопросы',
     faq1q: 'Как добавить нового пациента?',
     faq1a: 'Перейдите в раздел "Пациенты" и нажмите кнопку "Добавить пациента", затем заполните необходимую информацию.',
@@ -128,7 +150,6 @@ const translations: Record<Lang, Record<string, string>> = {
     faq4a: 'Перейдите в "Настройки" и найдите раздел "Изменить пароль". Введите текущий и новый пароль.',
     faq5q: 'Что означают уровни тревог?',
     faq5a: 'Критично — требуется немедленное внимание. Активна — требуется наблюдение. Стабильно — в пределах нормы.',
-    // Settings page
     general: 'Общие',
     appearance: 'Внешний вид',
     notifications: 'Уведомления',
@@ -151,6 +172,35 @@ const translations: Record<Lang, Record<string, string>> = {
     email: 'Email',
     role: 'Роль',
     doctor: 'Врач',
+    // Patient profile
+    patientProfile: 'Профиль пациента',
+    back: 'Назад',
+    personalInfo: 'Личная информация',
+    dateOfBirth: 'Дата рождения',
+    gender: 'Пол',
+    phone: 'Телефон',
+    address: 'Адрес',
+    bloodType: 'Группа крови',
+    allergies: 'Аллергии',
+    healthMetrics: 'Показатели здоровья',
+    bloodPressure: 'Давление',
+    heartRate: 'Пульс',
+    weight: 'Вес',
+    height: 'Рост',
+    temperature: 'Температура',
+    oxygenSat: 'Сатурация O2',
+    bmi: 'ИМТ',
+    glucose: 'Глюкоза',
+    forecast: 'Прогноз здоровья (6 месяцев)',
+    bpTrend: 'Тренд давления',
+    hrTrend: 'Тренд пульса',
+    visitHistory: 'История визитов',
+    date: 'Дата',
+    doctor2: 'Врач',
+    notes: 'Заметки',
+    male: 'Мужской',
+    female: 'Женский',
+    medications: 'Текущие препараты',
   },
 };
 
@@ -173,13 +223,117 @@ interface Colors {
   danger: string;
 }
 
+interface PatientFull {
+  id: number;
+  name: string;
+  age: number;
+  diagnosis: string;
+  status: string;
+  lastVisit: string;
+  dob: string;
+  gender: 'male' | 'female';
+  phone: string;
+  address: string;
+  bloodType: string;
+  allergies: string;
+  weight: number;
+  height: number;
+  temperature: number;
+  oxygenSat: number;
+  bmi: number;
+  glucose: number;
+  medications: string[];
+  bpHistory: number[];
+  hrHistory: number[];
+  visits: Array<{ date: string; doctor: string; notes: string }>;
+}
+
+/* ─── Patient Data ─── */
+
+const patientsData: PatientFull[] = [
+  {
+    id: 1, name: 'John Doe', age: 45, diagnosis: 'Hypertension', status: 'stable', lastVisit: '2026-03-05',
+    dob: '1981-06-15', gender: 'male', phone: '+1 (555) 123-4567', address: '42 Elm Street, New York, NY',
+    bloodType: 'A+', allergies: 'Penicillin', weight: 82, height: 178, temperature: 36.6, oxygenSat: 98, bmi: 25.9, glucose: 5.4,
+    medications: ['Lisinopril 10mg', 'Amlodipine 5mg', 'Aspirin 81mg'],
+    bpHistory: [145, 142, 138, 135, 130, 128, 125, 122, 120, 118, 119, 117],
+    hrHistory: [78, 76, 80, 74, 72, 75, 70, 68, 72, 70, 69, 68],
+    visits: [
+      { date: '2026-03-05', doctor: 'Dr. Smith', notes: 'BP improved. Continue current medication.' },
+      { date: '2026-02-10', doctor: 'Dr. Smith', notes: 'Adjusted Amlodipine dosage to 5mg.' },
+      { date: '2026-01-15', doctor: 'Dr. Lee', notes: 'Initial diagnosis. Started Lisinopril.' },
+    ],
+  },
+  {
+    id: 2, name: 'Anna Ivanova', age: 32, diagnosis: 'Tachycardia', status: 'critical', lastVisit: '2026-03-08',
+    dob: '1994-02-20', gender: 'female', phone: '+7 (916) 234-5678', address: 'ul. Tverskaya 12, Moscow',
+    bloodType: 'B-', allergies: 'None', weight: 58, height: 165, temperature: 37.1, oxygenSat: 96, bmi: 21.3, glucose: 4.8,
+    medications: ['Metoprolol 50mg', 'Magnesium 400mg'],
+    bpHistory: [120, 125, 128, 132, 130, 135, 138, 140, 137, 134, 132, 130],
+    hrHistory: [110, 108, 112, 105, 115, 120, 118, 108, 105, 100, 98, 95],
+    visits: [
+      { date: '2026-03-08', doctor: 'Dr. Smith', notes: 'HR elevated. Increased Metoprolol.' },
+      { date: '2026-02-20', doctor: 'Dr. Kim', notes: 'ECG shows sinus tachycardia.' },
+    ],
+  },
+  {
+    id: 3, name: 'Sarah Brown', age: 58, diagnosis: 'Diabetes Type 2', status: 'monitoring', lastVisit: '2026-03-01',
+    dob: '1968-11-03', gender: 'female', phone: '+1 (555) 987-6543', address: '88 Oak Ave, Chicago, IL',
+    bloodType: 'O+', allergies: 'Sulfa drugs', weight: 75, height: 162, temperature: 36.5, oxygenSat: 97, bmi: 28.6, glucose: 7.2,
+    medications: ['Metformin 1000mg', 'Glimepiride 2mg', 'Atorvastatin 20mg'],
+    bpHistory: [130, 128, 132, 135, 130, 128, 125, 127, 124, 122, 120, 118],
+    hrHistory: [72, 74, 70, 68, 72, 76, 74, 70, 68, 70, 72, 70],
+    visits: [
+      { date: '2026-03-01', doctor: 'Dr. Smith', notes: 'HbA1c: 7.1%. Adjust Metformin.' },
+      { date: '2026-01-25', doctor: 'Dr. Smith', notes: 'Glucose trending up. Added Glimepiride.' },
+    ],
+  },
+  {
+    id: 4, name: 'Elena Petrova', age: 27, diagnosis: 'Anemia', status: 'stable', lastVisit: '2026-02-28',
+    dob: '1999-07-10', gender: 'female', phone: '+7 (903) 111-2233', address: 'ul. Lenina 5, St. Petersburg',
+    bloodType: 'AB+', allergies: 'None', weight: 52, height: 170, temperature: 36.4, oxygenSat: 99, bmi: 18.0, glucose: 4.5,
+    medications: ['Ferrous sulfate 325mg', 'Vitamin C 500mg', 'Folic acid 1mg'],
+    bpHistory: [110, 112, 108, 110, 112, 115, 113, 110, 112, 114, 112, 110],
+    hrHistory: [82, 80, 84, 78, 76, 80, 78, 76, 74, 76, 74, 72],
+    visits: [
+      { date: '2026-02-28', doctor: 'Dr. Smith', notes: 'Hemoglobin rising — 11.2 g/dL. Continue iron.' },
+      { date: '2026-01-30', doctor: 'Dr. Lee', notes: 'Hemoglobin 9.8 g/dL. Started iron therapy.' },
+    ],
+  },
+  {
+    id: 5, name: 'Michael Chen', age: 63, diagnosis: 'Coronary Artery Disease', status: 'monitoring', lastVisit: '2026-03-07',
+    dob: '1963-04-22', gender: 'male', phone: '+1 (555) 456-7890', address: '15 Pine Rd, San Francisco, CA',
+    bloodType: 'O-', allergies: 'Ibuprofen', weight: 88, height: 175, temperature: 36.7, oxygenSat: 95, bmi: 28.7, glucose: 6.1,
+    medications: ['Clopidogrel 75mg', 'Atorvastatin 40mg', 'Metoprolol 25mg', 'Aspirin 81mg'],
+    bpHistory: [150, 148, 145, 140, 138, 135, 132, 130, 128, 126, 124, 122],
+    hrHistory: [68, 70, 66, 64, 68, 72, 70, 66, 64, 66, 64, 62],
+    visits: [
+      { date: '2026-03-07', doctor: 'Dr. Smith', notes: 'Stress test negative. Continue monitoring.' },
+      { date: '2026-02-15', doctor: 'Dr. Kim', notes: 'Echocardiogram: EF 55%. Stable.' },
+      { date: '2026-01-10', doctor: 'Dr. Smith', notes: 'Post-stent follow-up. Doing well.' },
+    ],
+  },
+  {
+    id: 6, name: 'Diree Morn', age: 41, diagnosis: 'Asthma', status: 'stable', lastVisit: '2026-03-03',
+    dob: '1985-09-18', gender: 'male', phone: '+1 (555) 321-0987', address: '7 Maple Ln, Austin, TX',
+    bloodType: 'A-', allergies: 'Dust, Pollen', weight: 76, height: 180, temperature: 36.5, oxygenSat: 97, bmi: 23.5, glucose: 5.0,
+    medications: ['Fluticasone inhaler', 'Salbutamol PRN', 'Montelukast 10mg'],
+    bpHistory: [118, 120, 116, 118, 120, 122, 118, 116, 118, 120, 118, 116],
+    hrHistory: [74, 72, 76, 70, 72, 74, 70, 68, 72, 70, 68, 70],
+    visits: [
+      { date: '2026-03-03', doctor: 'Dr. Smith', notes: 'Spirometry stable. No exacerbations.' },
+      { date: '2026-01-20', doctor: 'Dr. Lee', notes: 'Seasonal allergy flare. Added Montelukast.' },
+    ],
+  },
+];
+
 /* ─── Helpers ─── */
 
 function useColors(theme: ThemeMode): Colors {
   return useMemo(() => {
     if (theme === 'dark') {
       return {
-        pageBg: '#d9dde7',
+        pageBg: '#0f172a',
         shellBg: 'linear-gradient(125deg, #13254b 0%, #101f3f 55%, #1d3f77 100%)',
         panel: 'rgba(20, 36, 67, 0.86)',
         panelStrong: 'rgba(27, 50, 90, 0.95)',
@@ -246,6 +400,72 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
   );
 }
 
+function MetricCard({ label, value, unit, color, colors }: { label: string; value: string; unit: string; color?: string; colors: Colors }) {
+  return (
+    <div style={{ background: colors.panelStrong, border: `1px solid ${colors.border}`, borderRadius: 10, padding: '14px 16px' }}>
+      <div style={{ color: colors.textMuted, fontSize: 12, marginBottom: 6 }}>{label}</div>
+      <div style={{ fontSize: 26, fontWeight: 700, color: color || colors.text }}>{value}</div>
+      <div style={{ color: colors.textMuted, fontSize: 12, marginTop: 2 }}>{unit}</div>
+    </div>
+  );
+}
+
+/* ─── SVG Chart Component ─── */
+
+function LineChart({ data1, data2, label1, label2, colors, months }: {
+  data1: number[]; data2: number[]; label1: string; label2: string; colors: Colors; months: string[];
+}) {
+  const W = 700;
+  const H = 220;
+  const padL = 45;
+  const padR = 15;
+  const padT = 20;
+  const padB = 35;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+
+  const allVals = [...data1, ...data2];
+  const minV = Math.min(...allVals) - 5;
+  const maxV = Math.max(...allVals) + 5;
+  const range = maxV - minV || 1;
+
+  const toX = (i: number) => padL + (i / (data1.length - 1)) * chartW;
+  const toY = (v: number) => padT + chartH - ((v - minV) / range) * chartH;
+
+  const path = (data: number[]) => data.map((v, i) => `${i === 0 ? 'M' : 'L'}${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(' ');
+
+  const gridLines = 5;
+  const gridVals = Array.from({ length: gridLines }, (_, i) => minV + (range / (gridLines - 1)) * i);
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', maxHeight: 260 }}>
+      {/* Grid */}
+      {gridVals.map((v) => (
+        <g key={v}>
+          <line x1={padL} x2={W - padR} y1={toY(v)} y2={toY(v)} stroke={colors.border} strokeWidth={1} />
+          <text x={padL - 6} y={toY(v) + 4} textAnchor="end" fontSize={11} fill={colors.textMuted}>{Math.round(v)}</text>
+        </g>
+      ))}
+      {/* X labels */}
+      {months.map((m, i) => {
+        const idx = Math.round((i / (months.length - 1)) * (data1.length - 1));
+        return <text key={m} x={toX(idx)} y={H - 8} textAnchor="middle" fontSize={11} fill={colors.textMuted}>{m}</text>;
+      })}
+      {/* Lines */}
+      <path d={path(data1)} fill="none" stroke="#3678e9" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
+      <path d={path(data2)} fill="none" stroke="#ef5350" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
+      {/* Dots */}
+      {data1.map((v, i) => <circle key={`a${i}`} cx={toX(i)} cy={toY(v)} r={3.5} fill="#3678e9" />)}
+      {data2.map((v, i) => <circle key={`b${i}`} cx={toX(i)} cy={toY(v)} r={3.5} fill="#ef5350" />)}
+      {/* Legend */}
+      <rect x={padL + 10} y={4} width={12} height={12} rx={3} fill="#3678e9" />
+      <text x={padL + 26} y={14} fontSize={12} fill={colors.text}>{label1}</text>
+      <rect x={padL + 170} y={4} width={12} height={12} rx={3} fill="#ef5350" />
+      <text x={padL + 186} y={14} fontSize={12} fill={colors.text}>{label2}</text>
+    </svg>
+  );
+}
+
 /* ─── Page: Dashboard ─── */
 
 function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string> }) {
@@ -259,15 +479,15 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
   return (
     <>
       <h1 style={{ marginTop: 0, marginBottom: 16 }}>{t.dashboard}</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(120px, 1fr))', gap: 12, marginBottom: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(140px, 1fr))', gap: 14, marginBottom: 14 }}>
         {kpiCards.map((card) => (
-          <div key={card.title} style={{ background: colors.panelStrong, border: `1px solid ${colors.border}`, borderRadius: 10, padding: 14 }}>
+          <div key={card.title} style={{ background: colors.panelStrong, border: `1px solid ${colors.border}`, borderRadius: 10, padding: 18 }}>
             <div style={{ color: colors.textMuted, fontSize: 14 }}>{card.title}</div>
             <div style={{ fontSize: 34, marginTop: 6, color: card.danger ? colors.danger : colors.text }}>{card.value}</div>
           </div>
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
         <Panel title={t.alertsPanel} colors={colors}>
           <Line text="John Doe - High Blood Pressure" badge={t.active} />
           <Line text="Anna Ivanova - High Heart Rate" badge={t.active} />
@@ -283,11 +503,7 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
         <Panel title={t.quickActions} colors={colors}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
             {[t.addPatient, t.importProfile, t.exportProfile].map((action) => (
-              <button
-                key={action}
-                onClick={() => window.alert(`${action} clicked`)}
-                style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 8px', fontWeight: 600, cursor: 'pointer' }}
-              >
+              <button key={action} onClick={() => window.alert(`${action} clicked`)} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 8px', fontWeight: 600, cursor: 'pointer' }}>
                 {action}
               </button>
             ))}
@@ -298,40 +514,127 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
   );
 }
 
+/* ─── Page: Patient Profile ─── */
+
+function PatientProfilePage({ patient, colors, t, onBack }: { patient: PatientFull; colors: Colors; t: Record<string, string>; onBack: () => void }) {
+  const statusLabel = (s: string) => s === 'stable' ? t.stable : s === 'monitoring' ? t.monitoring : t.critical2;
+  const statusColor = (s: string) => s === 'stable' ? '#22c55e' : s === 'monitoring' ? '#f59e0b' : colors.danger;
+
+  const months = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+  const infoRow: React.CSSProperties = {
+    display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: `1px solid ${colors.border}`,
+  };
+
+  return (
+    <>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+        <button onClick={onBack} style={{ border: `1px solid ${colors.border}`, borderRadius: 8, background: 'transparent', color: colors.text, padding: '8px 16px', cursor: 'pointer', fontWeight: 600 }}>
+          ← {t.back}
+        </button>
+        <h1 style={{ margin: 0 }}>{t.patientProfile}</h1>
+      </div>
+
+      {/* Top summary card */}
+      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 24, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 24 }}>
+        <div style={{ width: 80, height: 80, borderRadius: '50%', background: colors.button, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36, color: '#fff', fontWeight: 700, flexShrink: 0 }}>
+          {patient.name.split(' ').map((n) => n[0]).join('')}
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>{patient.name}</div>
+          <div style={{ color: colors.textMuted, marginBottom: 8 }}>{patient.diagnosis} · {patient.age} {t.age.toLowerCase()}</div>
+          <span style={{ background: statusColor(patient.status) + '22', color: statusColor(patient.status), padding: '4px 12px', borderRadius: 6, fontWeight: 600, fontSize: 13 }}>
+            {statusLabel(patient.status)}
+          </span>
+        </div>
+        <div style={{ textAlign: 'right', color: colors.textMuted, fontSize: 14 }}>
+          <div>{t.lastVisit}: <strong style={{ color: colors.text }}>{patient.lastVisit}</strong></div>
+          <div style={{ marginTop: 4 }}>{t.bloodType}: <strong style={{ color: colors.text }}>{patient.bloodType}</strong></div>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+        {/* Personal Info */}
+        <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
+          <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.personalInfo}</h3>
+          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.dateOfBirth}</span><span>{patient.dob}</span></div>
+          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.gender}</span><span>{patient.gender === 'male' ? t.male : t.female}</span></div>
+          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.phone}</span><span>{patient.phone}</span></div>
+          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.address}</span><span style={{ textAlign: 'right', maxWidth: 200 }}>{patient.address}</span></div>
+          <div style={infoRow}><span style={{ color: colors.textMuted }}>{t.bloodType}</span><span>{patient.bloodType}</span></div>
+          <div style={{ ...infoRow, borderBottom: 'none' }}><span style={{ color: colors.textMuted }}>{t.allergies}</span><span style={{ color: patient.allergies !== 'None' ? colors.danger : colors.text }}>{patient.allergies}</span></div>
+        </div>
+
+        {/* Medications */}
+        <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
+          <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.medications}</h3>
+          {patient.medications.map((med, i) => (
+            <div key={i} style={{ padding: '10px 0', borderBottom: i < patient.medications.length - 1 ? `1px solid ${colors.border}` : 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: colors.button, flexShrink: 0 }} />
+              <span>{med}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Health Metrics Grid */}
+      <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.healthMetrics}</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 20 }}>
+        <MetricCard label={t.bloodPressure} value={`${patient.bpHistory[patient.bpHistory.length - 1]}/${Math.round(patient.bpHistory[patient.bpHistory.length - 1] * 0.6)}`} unit="mmHg" colors={colors} />
+        <MetricCard label={t.heartRate} value={`${patient.hrHistory[patient.hrHistory.length - 1]}`} unit="bpm" color={patient.hrHistory[patient.hrHistory.length - 1] > 100 ? colors.danger : undefined} colors={colors} />
+        <MetricCard label={t.weight} value={`${patient.weight}`} unit="kg" colors={colors} />
+        <MetricCard label={t.height} value={`${patient.height}`} unit="cm" colors={colors} />
+        <MetricCard label={t.temperature} value={`${patient.temperature}`} unit="°C" color={patient.temperature > 37.0 ? '#f59e0b' : undefined} colors={colors} />
+        <MetricCard label={t.oxygenSat} value={`${patient.oxygenSat}%`} unit="SpO2" color={patient.oxygenSat < 96 ? colors.danger : '#22c55e'} colors={colors} />
+        <MetricCard label={t.bmi} value={`${patient.bmi}`} unit="kg/m²" color={patient.bmi > 25 ? '#f59e0b' : undefined} colors={colors} />
+        <MetricCard label={t.glucose} value={`${patient.glucose}`} unit="mmol/L" color={patient.glucose > 6.0 ? '#f59e0b' : undefined} colors={colors} />
+      </div>
+
+      {/* Forecast Chart */}
+      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20, marginBottom: 20 }}>
+        <h3 style={{ margin: '0 0 16px', fontSize: 16 }}>{t.forecast}</h3>
+        <LineChart data1={patient.bpHistory} data2={patient.hrHistory} label1={t.bpTrend} label2={t.hrTrend} colors={colors} months={months} />
+      </div>
+
+      {/* Visit History */}
+      <div style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20 }}>
+        <h3 style={{ margin: '0 0 12px', fontSize: 16 }}>{t.visitHistory}</h3>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+          <thead>
+            <tr style={{ borderBottom: `2px solid ${colors.border}`, textAlign: 'left' }}>
+              <th style={{ padding: '10px 14px', color: colors.textMuted, fontWeight: 600 }}>{t.date}</th>
+              <th style={{ padding: '10px 14px', color: colors.textMuted, fontWeight: 600 }}>{t.doctor2}</th>
+              <th style={{ padding: '10px 14px', color: colors.textMuted, fontWeight: 600 }}>{t.notes}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patient.visits.map((v, i) => (
+              <tr key={i} style={{ borderBottom: `1px solid ${colors.border}` }}>
+                <td style={{ padding: '10px 14px', fontWeight: 600, whiteSpace: 'nowrap' }}>{v.date}</td>
+                <td style={{ padding: '10px 14px', whiteSpace: 'nowrap' }}>{v.doctor}</td>
+                <td style={{ padding: '10px 14px', color: colors.textMuted }}>{v.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+}
+
 /* ─── Page: Patients ─── */
 
-const patientsData = [
-  { name: 'John Doe', age: 45, diagnosis: 'Hypertension', status: 'stable', lastVisit: '2026-03-05' },
-  { name: 'Anna Ivanova', age: 32, diagnosis: 'Tachycardia', status: 'critical', lastVisit: '2026-03-08' },
-  { name: 'Sarah Brown', age: 58, diagnosis: 'Diabetes Type 2', status: 'monitoring', lastVisit: '2026-03-01' },
-  { name: 'Elena Petrova', age: 27, diagnosis: 'Anemia', status: 'stable', lastVisit: '2026-02-28' },
-  { name: 'Michael Chen', age: 63, diagnosis: 'Coronary Artery Disease', status: 'monitoring', lastVisit: '2026-03-07' },
-  { name: 'Diree Morn', age: 41, diagnosis: 'Asthma', status: 'stable', lastVisit: '2026-03-03' },
-];
-
-function PatientsPage({ colors, t }: { colors: Colors; t: Record<string, string> }) {
+function PatientsPage({ colors, t, onOpenPatient }: { colors: Colors; t: Record<string, string>; onOpenPatient: (id: number) => void }) {
   const [search, setSearch] = useState('');
   const filtered = patientsData.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
 
-  const statusLabel = (s: string) => {
-    if (s === 'stable') return t.stable;
-    if (s === 'monitoring') return t.monitoring;
-    return t.critical2;
-  };
-  const statusColor = (s: string) => {
-    if (s === 'stable') return '#22c55e';
-    if (s === 'monitoring') return '#f59e0b';
-    return colors.danger;
-  };
+  const statusLabel = (s: string) => s === 'stable' ? t.stable : s === 'monitoring' ? t.monitoring : t.critical2;
+  const statusColor = (s: string) => s === 'stable' ? '#22c55e' : s === 'monitoring' ? '#f59e0b' : colors.danger;
 
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
         <h1 style={{ margin: 0 }}>{t.patientList}</h1>
-        <button
-          onClick={() => window.alert(`${t.addPatient} clicked`)}
-          style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 18px', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}
-        >
+        <button onClick={() => window.alert(`${t.addPatient} clicked`)} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 18px', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}>
           + {t.addPatient}
         </button>
       </div>
@@ -352,7 +655,13 @@ function PatientsPage({ colors, t }: { colors: Colors; t: Record<string, string>
           </thead>
           <tbody>
             {filtered.map((p) => (
-              <tr key={p.name} style={{ borderBottom: `1px solid ${colors.border}`, cursor: 'pointer' }}>
+              <tr
+                key={p.id}
+                onClick={() => onOpenPatient(p.id)}
+                style={{ borderBottom: `1px solid ${colors.border}`, cursor: 'pointer', transition: 'background 0.15s' }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = colors.active)}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+              >
                 <td style={{ padding: '12px 14px', fontWeight: 600 }}>{p.name}</td>
                 <td style={{ padding: '12px 14px' }}>{p.age}</td>
                 <td style={{ padding: '12px 14px' }}>{p.diagnosis}</td>
@@ -396,18 +705,11 @@ function ChatPage({ colors, t }: { colors: Colors; t: Record<string, string> }) 
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 0, height: 600, borderRadius: 10, overflow: 'hidden', border: `1px solid ${colors.border}` }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 0, height: 'calc(100vh - 140px)', borderRadius: 10, overflow: 'hidden', border: `1px solid ${colors.border}` }}>
       <div style={{ background: colors.panelStrong, borderRight: `1px solid ${colors.border}`, overflowY: 'auto' }}>
         <div style={{ padding: '14px', fontWeight: 700, fontSize: 16, borderBottom: `1px solid ${colors.border}` }}>{t.conversations}</div>
         {chatContacts.map((c, i) => (
-          <div
-            key={c.name}
-            onClick={() => setSelected(i)}
-            style={{
-              padding: '12px 14px', cursor: 'pointer', borderBottom: `1px solid ${colors.border}`,
-              background: i === selected ? colors.active : 'transparent',
-            }}
-          >
+          <div key={c.name} onClick={() => setSelected(i)} style={{ padding: '12px 14px', cursor: 'pointer', borderBottom: `1px solid ${colors.border}`, background: i === selected ? colors.active : 'transparent' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontWeight: 600 }}>{c.name}</span>
               <span style={{ fontSize: 11, color: colors.textMuted }}>{c.time}</span>
@@ -427,30 +729,15 @@ function ChatPage({ colors, t }: { colors: Colors; t: Record<string, string> }) 
         <div style={{ flex: 1, padding: '14px 18px', overflowY: 'auto' }}>
           {messages.map((m, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: m.from === 'doctor' ? 'flex-end' : 'flex-start', marginBottom: 10 }}>
-              <div style={{
-                background: m.from === 'doctor' ? colors.button : colors.panelStrong,
-                color: m.from === 'doctor' ? '#fff' : colors.text,
-                padding: '10px 14px', borderRadius: 12, maxWidth: '70%', fontSize: 14, lineHeight: 1.5,
-              }}>
+              <div style={{ background: m.from === 'doctor' ? colors.button : colors.panelStrong, color: m.from === 'doctor' ? '#fff' : colors.text, padding: '10px 14px', borderRadius: 12, maxWidth: '70%', fontSize: 14, lineHeight: 1.5 }}>
                 {m.text}
               </div>
             </div>
           ))}
         </div>
         <div style={{ display: 'flex', gap: 8, padding: '12px 18px', borderTop: `1px solid ${colors.border}` }}>
-          <input
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder={t.typeMessage}
-            style={{ flex: 1, padding: '10px 14px', borderRadius: 8, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, outline: 'none' }}
-          />
-          <button
-            onClick={handleSend}
-            style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 18px', fontWeight: 600, cursor: 'pointer' }}
-          >
-            {t.send}
-          </button>
+          <input value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} placeholder={t.typeMessage} style={{ flex: 1, padding: '10px 14px', borderRadius: 8, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, outline: 'none' }} />
+          <button onClick={handleSend} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 18px', fontWeight: 600, cursor: 'pointer' }}>{t.send}</button>
         </div>
       </div>
     </div>
@@ -474,18 +761,11 @@ function FAQPage({ colors, t }: { colors: Colors; t: Record<string, string> }) {
       <h1 style={{ marginTop: 0, marginBottom: 20 }}>{t.faqTitle}</h1>
       {faqs.map((faq, i) => (
         <div key={i} style={{ background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 10, marginBottom: 10, overflow: 'hidden' }}>
-          <div
-            onClick={() => setOpenIdx(openIdx === i ? null : i)}
-            style={{ padding: '14px 18px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 600 }}
-          >
+          <div onClick={() => setOpenIdx(openIdx === i ? null : i)} style={{ padding: '14px 18px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 600 }}>
             {faq.q}
             <span style={{ fontSize: 18, transform: openIdx === i ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>▼</span>
           </div>
-          {openIdx === i && (
-            <div style={{ padding: '0 18px 14px', color: colors.textMuted, lineHeight: 1.6 }}>
-              {faq.a}
-            </div>
-          )}
+          {openIdx === i && <div style={{ padding: '0 18px 14px', color: colors.textMuted, lineHeight: 1.6 }}>{faq.a}</div>}
         </div>
       ))}
     </>
@@ -504,56 +784,27 @@ function SettingsPage({ colors, t, lang, setLang, theme, setTheme }: {
   const [alertNotif, setAlertNotif] = useState(true);
   const [saved, setSaved] = useState(false);
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
-  };
+  const handleSave = () => { setSaved(true); setTimeout(() => setSaved(false), 2000); };
 
-  const sectionStyle: React.CSSProperties = {
-    background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 10, padding: 20, marginBottom: 16,
-  };
-  const labelRow: React.CSSProperties = {
-    display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0',
-    borderBottom: `1px solid ${colors.border}`,
-  };
+  const sectionStyle: React.CSSProperties = { background: colors.panel, border: `1px solid ${colors.border}`, borderRadius: 10, padding: 20, marginBottom: 16 };
+  const labelRow: React.CSSProperties = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: `1px solid ${colors.border}` };
 
   return (
     <>
       <h1 style={{ marginTop: 0, marginBottom: 20 }}>{t.settings}</h1>
-
-      {/* Profile */}
       <div style={sectionStyle}>
         <h3 style={{ margin: '0 0 12px' }}>{t.profileInfo}</h3>
-        <div style={labelRow}>
-          <span style={{ color: colors.textMuted }}>{t.fullName}</span>
-          <span style={{ fontWeight: 600 }}>Dr. Smith</span>
-        </div>
-        <div style={labelRow}>
-          <span style={{ color: colors.textMuted }}>{t.email}</span>
-          <span style={{ fontWeight: 600 }}>admin@example.com</span>
-        </div>
-        <div style={{ ...labelRow, borderBottom: 'none' }}>
-          <span style={{ color: colors.textMuted }}>{t.role}</span>
-          <span style={{ fontWeight: 600 }}>{t.doctor}</span>
-        </div>
+        <div style={labelRow}><span style={{ color: colors.textMuted }}>{t.fullName}</span><span style={{ fontWeight: 600 }}>Dr. Smith</span></div>
+        <div style={labelRow}><span style={{ color: colors.textMuted }}>{t.email}</span><span style={{ fontWeight: 600 }}>admin@example.com</span></div>
+        <div style={{ ...labelRow, borderBottom: 'none' }}><span style={{ color: colors.textMuted }}>{t.role}</span><span style={{ fontWeight: 600 }}>{t.doctor}</span></div>
       </div>
-
-      {/* General */}
       <div style={sectionStyle}>
         <h3 style={{ margin: '0 0 12px' }}>{t.general}</h3>
         <div style={labelRow}>
           <span>{t.language}</span>
           <div style={{ display: 'flex', gap: 4 }}>
             {(['en', 'ru'] as Lang[]).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                style={{
-                  border: `1px solid ${colors.border}`, borderRadius: 6, padding: '6px 14px', cursor: 'pointer',
-                  background: lang === l ? colors.button : 'transparent',
-                  color: lang === l ? '#fff' : colors.text, fontWeight: 600,
-                }}
-              >
+              <button key={l} onClick={() => setLang(l)} style={{ border: `1px solid ${colors.border}`, borderRadius: 6, padding: '6px 14px', cursor: 'pointer', background: lang === l ? colors.button : 'transparent', color: lang === l ? '#fff' : colors.text, fontWeight: 600 }}>
                 {l.toUpperCase()}
               </button>
             ))}
@@ -563,31 +814,19 @@ function SettingsPage({ colors, t, lang, setLang, theme, setTheme }: {
           <span>{t.theme}</span>
           <div style={{ display: 'flex', gap: 4 }}>
             {(['light', 'dark'] as ThemeMode[]).map((tm) => (
-              <button
-                key={tm}
-                onClick={() => setTheme(tm)}
-                style={{
-                  border: `1px solid ${colors.border}`, borderRadius: 6, padding: '6px 14px', cursor: 'pointer',
-                  background: theme === tm ? colors.button : 'transparent',
-                  color: theme === tm ? '#fff' : colors.text, fontWeight: 600,
-                }}
-              >
+              <button key={tm} onClick={() => setTheme(tm)} style={{ border: `1px solid ${colors.border}`, borderRadius: 6, padding: '6px 14px', cursor: 'pointer', background: theme === tm ? colors.button : 'transparent', color: theme === tm ? '#fff' : colors.text, fontWeight: 600 }}>
                 {tm === 'light' ? t.lightTheme : t.darkTheme}
               </button>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Notifications */}
       <div style={sectionStyle}>
         <h3 style={{ margin: '0 0 12px' }}>{t.notifications}</h3>
         <div style={labelRow}><span>{t.emailNotifications}</span><Toggle checked={emailNotif} onChange={setEmailNotif} /></div>
         <div style={labelRow}><span>{t.pushNotifications}</span><Toggle checked={pushNotif} onChange={setPushNotif} /></div>
         <div style={{ ...labelRow, borderBottom: 'none' }}><span>{t.alertNotifications}</span><Toggle checked={alertNotif} onChange={setAlertNotif} /></div>
       </div>
-
-      {/* Security */}
       <div style={sectionStyle}>
         <h3 style={{ margin: '0 0 12px' }}>{t.security}</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -596,11 +835,7 @@ function SettingsPage({ colors, t, lang, setLang, theme, setTheme }: {
           <input placeholder={t.confirmPassword} type="password" style={{ padding: '10px 14px', borderRadius: 8, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, outline: 'none' }} />
         </div>
       </div>
-
-      <button
-        onClick={handleSave}
-        style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '12px 32px', fontWeight: 600, cursor: 'pointer', fontSize: 15 }}
-      >
+      <button onClick={handleSave} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '12px 32px', fontWeight: 600, cursor: 'pointer', fontSize: 15 }}>
         {saved ? t.saved : t.save}
       </button>
     </>
@@ -613,6 +848,7 @@ function App() {
   const [activeMenu, setActiveMenu] = useState<MenuKey>('dashboard');
   const [theme, setTheme] = useState<ThemeMode>('light');
   const [lang, setLang] = useState<Lang>('en');
+  const [selectedPatientId, setSelectedPatientId] = useState<number | null>(null);
 
   const colors = useColors(theme);
   const t = translations[lang];
@@ -625,38 +861,42 @@ function App() {
     { key: 'settings', label: t.settings, icon: '⚙️' },
   ];
 
+  const handleMenuClick = (key: MenuKey) => {
+    setActiveMenu(key);
+    setSelectedPatientId(null);
+  };
+
   const renderPage = useCallback(() => {
+    if (activeMenu === 'patients' && selectedPatientId !== null) {
+      const patient = patientsData.find((p) => p.id === selectedPatientId);
+      if (patient) return <PatientProfilePage patient={patient} colors={colors} t={t} onBack={() => setSelectedPatientId(null)} />;
+    }
     switch (activeMenu) {
       case 'dashboard': return <DashboardPage colors={colors} t={t} />;
-      case 'patients': return <PatientsPage colors={colors} t={t} />;
+      case 'patients': return <PatientsPage colors={colors} t={t} onOpenPatient={setSelectedPatientId} />;
       case 'chat': return <ChatPage colors={colors} t={t} />;
       case 'faq': return <FAQPage colors={colors} t={t} />;
       case 'settings': return <SettingsPage colors={colors} t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} />;
     }
-  }, [activeMenu, colors, t, lang, theme]);
+  }, [activeMenu, colors, t, lang, theme, selectedPatientId]);
 
   return (
-    <div style={{ background: colors.pageBg, minHeight: '100vh', padding: 28, boxSizing: 'border-box', fontFamily: 'Inter, Arial, sans-serif' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', borderRadius: 16, overflow: 'hidden', border: `1px solid ${colors.border}`, background: colors.shellBg, boxShadow: '0 20px 60px rgba(7,24,58,0.18)' }}>
+    <div style={{ background: colors.pageBg, minHeight: '100vh', fontFamily: 'Inter, Arial, sans-serif', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: colors.shellBg }}>
         {/* Header */}
-        <header style={{ height: 74, borderBottom: `1px solid ${colors.border}`, display: 'flex', alignItems: 'center', gap: 16, padding: '0 18px', color: colors.text }}>
+        <header style={{ height: 64, borderBottom: `1px solid ${colors.border}`, display: 'flex', alignItems: 'center', gap: 16, padding: '0 24px', color: colors.text, flexShrink: 0 }}>
           <div style={{ fontWeight: 800, fontSize: 28, color: '#3b82f6' }}>✚</div>
-          <div style={{ fontWeight: 700, minWidth: 130 }}>HealthCodex</div>
+          <div style={{ fontWeight: 700, fontSize: 18, minWidth: 130 }}>HealthCodex</div>
           <input
             aria-label="Search patients"
             placeholder={t.searchPatients}
-            style={{ flex: 1, maxWidth: 520, borderRadius: 10, border: `1px solid ${colors.border}`, padding: '10px 12px', background: colors.inputBg, color: colors.text, outline: 'none' }}
+            style={{ flex: 1, maxWidth: 600, borderRadius: 10, border: `1px solid ${colors.border}`, padding: '10px 14px', background: colors.inputBg, color: colors.text, outline: 'none', fontSize: 14 }}
           />
-          <button
-            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            style={{ borderRadius: 10, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, padding: '8px 10px', cursor: 'pointer' }}
-          >
+          <div style={{ flex: 1 }} />
+          <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} style={{ borderRadius: 10, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, padding: '8px 10px', cursor: 'pointer' }}>
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
-          <button
-            onClick={() => setLang(lang === 'en' ? 'ru' : 'en')}
-            style={{ borderRadius: 10, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, padding: '8px 12px', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}
-          >
+          <button onClick={() => setLang(lang === 'en' ? 'ru' : 'en')} style={{ borderRadius: 10, border: `1px solid ${colors.border}`, background: colors.inputBg, color: colors.text, padding: '8px 12px', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>
             {lang === 'en' ? 'RU' : 'EN'}
           </button>
           <span style={{ fontSize: 20 }}>🔔</span>
@@ -667,21 +907,21 @@ function App() {
         </header>
 
         {/* Body */}
-        <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', minHeight: 680 }}>
+        <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '220px 1fr', minHeight: 0 }}>
           {/* Sidebar */}
-          <aside style={{ borderRight: `1px solid ${colors.border}`, padding: 12, color: colors.textMuted, display: 'flex', flexDirection: 'column' }}>
+          <aside style={{ borderRight: `1px solid ${colors.border}`, padding: 12, color: colors.textMuted, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
             {menuItems.map((item) => {
               const isActive = item.key === activeMenu;
               return (
                 <button
                   key={item.key}
-                  onClick={() => setActiveMenu(item.key)}
+                  onClick={() => handleMenuClick(item.key)}
                   style={{
                     textAlign: 'left', marginBottom: 8, border: 'none',
                     background: isActive ? colors.active : 'transparent',
                     color: isActive ? '#2d71df' : colors.textMuted,
                     borderRadius: 8, padding: '11px 12px', cursor: 'pointer',
-                    fontWeight: isActive ? 700 : 600,
+                    fontWeight: isActive ? 700 : 600, fontSize: 14,
                   }}
                 >
                   <span style={{ marginRight: 8 }}>{item.icon}</span>
@@ -692,7 +932,7 @@ function App() {
           </aside>
 
           {/* Main content */}
-          <main style={{ padding: 22, color: colors.text, overflowY: 'auto' }}>
+          <main style={{ padding: 28, color: colors.text, overflowY: 'auto' }}>
             {renderPage()}
           </main>
         </div>
