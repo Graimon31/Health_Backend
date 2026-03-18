@@ -32,5 +32,11 @@ class AuthResponse(BaseModel):
     user: UserOut
 
 
+class RegisterRequest(BaseModel):
+    email: EmailStr
+    password: str
+    full_name: str
+
+
 class RefreshResponse(BaseModel):
     access_token: str

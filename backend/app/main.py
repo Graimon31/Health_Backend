@@ -7,8 +7,13 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from app.api.auth import router as auth_router
+from app.api.doctor import router as doctor_router
+from app.api.measurements import router as measurements_router
+from app.api.patient import router as patient_router
 from app.core.config import settings
 from app.db import Base, engine
+from app.models.measurement import Measurement  # noqa: F401
+from app.models.patient_profile import PatientProfile  # noqa: F401
 from app.models.user import User, UserRole
 from app.security import hash_password
 
@@ -23,6 +28,9 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(measurements_router)
+app.include_router(patient_router)
+app.include_router(doctor_router)
 
 static_dir = Path(__file__).parent / 'static'
 assets_dir = static_dir / 'assets'
