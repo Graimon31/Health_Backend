@@ -160,6 +160,15 @@ const translations: Record<Lang, Record<string, string>> = {
     forecastTitle: 'Health Forecast & Predictions',
     riskLevel: 'Risk Level', prediction: 'Prediction', recommendation: 'Recommendation',
     lowRisk: 'Low Risk', moderateRisk: 'Moderate Risk', highRisk: 'High Risk',
+    // Add patient modal
+    addPatientTitle: 'Add New Patient',
+    patientName: 'Full Name',
+    patientAge: 'Age',
+    patientDiagnosis: 'Diagnosis',
+    patientPhone: 'Phone',
+    cancel: 'Cancel',
+    create: 'Create',
+    fieldRequired: 'Please fill in all required fields',
   },
   ru: {
     dashboard: 'Главная',
@@ -315,6 +324,15 @@ const translations: Record<Lang, Record<string, string>> = {
     forecastTitle: 'Прогноз здоровья и предсказания',
     riskLevel: 'Уровень риска', prediction: 'Прогноз', recommendation: 'Рекомендация',
     lowRisk: 'Низкий риск', moderateRisk: 'Умеренный риск', highRisk: 'Высокий риск',
+    // Add patient modal
+    addPatientTitle: 'Добавить нового пациента',
+    patientName: 'ФИО',
+    patientAge: 'Возраст',
+    patientDiagnosis: 'Диагноз',
+    patientPhone: 'Телефон',
+    cancel: 'Отмена',
+    create: 'Создать',
+    fieldRequired: 'Пожалуйста, заполните все обязательные поля',
   },
 };
 
@@ -767,9 +785,70 @@ function LineChart({ data1, data2, label1, label2, colors, months }: {
   );
 }
 
+/* ─── Add Patient Modal ─── */
+
+function AddPatientModal({ colors, t, onClose, onAdd }: { colors: Colors; t: Record<string, string>; onClose: () => void; onAdd: (p: { name: string; age: number; diagnosis: string; phone: string }) => void }) {
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [diagnosis, setDiagnosis] = useState('');
+  const [phone, setPhone] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = () => {
+    if (!name.trim() || !age.trim() || !diagnosis.trim()) {
+      setError(t.fieldRequired);
+      return;
+    }
+    onAdd({ name: name.trim(), age: parseInt(age, 10), diagnosis: diagnosis.trim(), phone: phone.trim() });
+    onClose();
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%', padding: '10px 14px', borderRadius: 8,
+    border: `1px solid ${colors.border}`, background: colors.inputBg,
+    color: colors.text, fontSize: 14, boxSizing: 'border-box', outline: 'none',
+  };
+  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: 4, fontWeight: 600, fontSize: 14, color: colors.textMuted };
+
+  return (
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ background: colors.panel, borderRadius: 14, padding: 28, width: 420, maxWidth: '90vw', border: `1px solid ${colors.border}` }}>
+        <h2 style={{ margin: '0 0 20px', color: colors.text }}>{t.addPatientTitle}</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div>
+            <label style={labelStyle}>{t.patientName} *</label>
+            <input value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.patientAge} *</label>
+            <input type="number" min="0" max="150" value={age} onChange={(e) => setAge(e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.patientDiagnosis} *</label>
+            <input value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.patientPhone}</label>
+            <input value={phone} onChange={(e) => setPhone(e.target.value)} style={inputStyle} />
+          </div>
+          {error && <div style={{ color: colors.danger, fontSize: 13, fontWeight: 600 }}>{error}</div>}
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 6 }}>
+            <button onClick={onClose} style={{ border: `1px solid ${colors.border}`, borderRadius: 8, background: 'transparent', color: colors.text, padding: '10px 20px', fontWeight: 600, cursor: 'pointer' }}>
+              {t.cancel}
+            </button>
+            <button onClick={handleSubmit} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 20px', fontWeight: 600, cursor: 'pointer' }}>
+              {t.create}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Page: Dashboard ─── */
 
-function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string> }) {
+function DashboardPage({ colors, t, onAddPatient }: { colors: Colors; t: Record<string, string>; onAddPatient: () => void }) {
   const kpiCards = [
     { title: t.totalPatients, value: '128' },
     { title: t.alerts, value: `5 ${t.critical}`, danger: true },
@@ -802,12 +881,10 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
           <Line text="Elena Petrova" badge="4 min" />
         </Panel>
         <Panel title={t.quickActions} colors={colors}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            {[t.addPatient, t.importProfile, t.exportProfile].map((action) => (
-              <button key={action} onClick={() => window.alert(`${action} clicked`)} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 8px', fontWeight: 600, cursor: 'pointer' }}>
-                {action}
-              </button>
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 8 }}>
+            <button onClick={onAddPatient} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 8px', fontWeight: 600, cursor: 'pointer' }}>
+              {t.addPatient}
+            </button>
           </div>
         </Panel>
       </div>
@@ -1024,15 +1101,6 @@ function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: Pat
         </MGrid>
       </Section>
 
-      {/* ── Fitness ── */}
-      <Section title={t.catFitness} colors={colors} defaultOpen={false}>
-        <MGrid>
-          <MetricCard label={t.mVo2max} value={`${h.vo2max}`} unit="ml/kg/min" color={h.vo2max < 30 ? '#f59e0b' : '#22c55e'} colors={colors} />
-          <MetricCard label={t.mCardioLoad} value={`${h.cardioLoad}`} unit="/100" color={scaleColor(h.cardioLoad, 60, 80)} colors={colors} />
-          <MetricCard label={t.mTrainLoad} value={`${h.trainLoad}`} unit="" colors={colors} />
-          <MetricCard label={t.mRecoveryTime} value={`${h.recoveryTime}`} unit={t.hrs} color={h.recoveryTime > 24 ? '#f59e0b' : undefined} colors={colors} />
-        </MGrid>
-      </Section>
 
       {/* ── Body Composition ── */}
       <Section title={t.catBody} colors={colors}>
@@ -1163,9 +1231,9 @@ function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: Pat
 
 /* ─── Page: Patients ─── */
 
-function PatientsPage({ colors, t, lang, onOpenPatient }: { colors: Colors; t: Record<string, string>; lang: Lang; onOpenPatient: (id: number) => void }) {
+function PatientsPage({ colors, t, lang, onOpenPatient, patients, onAddPatient }: { colors: Colors; t: Record<string, string>; lang: Lang; onOpenPatient: (id: number) => void; patients: PatientFull[]; onAddPatient: () => void }) {
   const [search, setSearch] = useState('');
-  const filtered = patientsData.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
+  const filtered = patients.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
 
   const statusLabel = (s: string) => s === 'stable' ? t.stable : s === 'monitoring' ? t.monitoring : t.critical2;
   const statusColor = (s: string) => s === 'stable' ? '#22c55e' : s === 'monitoring' ? '#f59e0b' : colors.danger;
@@ -1174,7 +1242,7 @@ function PatientsPage({ colors, t, lang, onOpenPatient }: { colors: Colors; t: R
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
         <h1 style={{ margin: 0 }}>{t.patientList}</h1>
-        <button onClick={() => window.alert(`${t.addPatient} clicked`)} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 18px', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}>
+        <button onClick={onAddPatient} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 18px', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}>
           + {t.addPatient}
         </button>
       </div>
@@ -1389,9 +1457,33 @@ function App() {
   const [theme, setTheme] = useState<ThemeMode>('light');
   const [lang, setLang] = useState<Lang>('en');
   const [selectedPatientId, setSelectedPatientId] = useState<number | null>(null);
+  const [patients, setPatients] = useState<PatientFull[]>(patientsData);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const colors = useColors(theme);
   const t = translations[lang];
+
+  const handleAddPatient = (data: { name: string; age: number; diagnosis: string; phone: string }) => {
+    const basePatient = patientsData[0];
+    const newId = Math.max(...patients.map((p) => p.id)) + 1;
+    const today = new Date().toISOString().slice(0, 10);
+    const newPatient: PatientFull = {
+      ...basePatient,
+      id: newId,
+      name: data.name,
+      age: data.age,
+      diagnosis: data.diagnosis,
+      diagnosisRu: data.diagnosis,
+      status: 'stable',
+      lastVisit: today,
+      phone: data.phone || '-',
+      medications: [],
+      medicationsRu: [],
+      visits: [],
+      health: { ...basePatient.health },
+    };
+    setPatients((prev) => [newPatient, ...prev]);
+  };
 
   const menuItems: Array<{ key: MenuKey; label: string; icon: string }> = [
     { key: 'dashboard', label: t.dashboard, icon: '🏠' },
@@ -1409,19 +1501,21 @@ function App() {
     mainRef.current?.scrollTo(0, 0);
   };
 
+  const openAddModal = () => setShowAddModal(true);
+
   const renderPage = useCallback(() => {
     if (activeMenu === 'patients' && selectedPatientId !== null) {
-      const patient = patientsData.find((p) => p.id === selectedPatientId);
+      const patient = patients.find((p) => p.id === selectedPatientId);
       if (patient) return <PatientProfilePage patient={patient} colors={colors} t={t} lang={lang} onBack={() => { setSelectedPatientId(null); mainRef.current?.scrollTo(0, 0); }} />;
     }
     switch (activeMenu) {
-      case 'dashboard': return <DashboardPage colors={colors} t={t} />;
-      case 'patients': return <PatientsPage colors={colors} t={t} lang={lang} onOpenPatient={(id) => { setSelectedPatientId(id); mainRef.current?.scrollTo(0, 0); }} />;
+      case 'dashboard': return <DashboardPage colors={colors} t={t} onAddPatient={openAddModal} />;
+      case 'patients': return <PatientsPage colors={colors} t={t} lang={lang} patients={patients} onOpenPatient={(id) => { setSelectedPatientId(id); mainRef.current?.scrollTo(0, 0); }} onAddPatient={openAddModal} />;
       case 'chat': return <ChatPage colors={colors} t={t} />;
       case 'faq': return <FAQPage colors={colors} t={t} />;
       case 'settings': return <SettingsPage colors={colors} t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} />;
     }
-  }, [activeMenu, colors, t, lang, theme, selectedPatientId]);
+  }, [activeMenu, colors, t, lang, theme, selectedPatientId, patients]);
 
   return (
     <div style={{ background: colors.pageBg, minHeight: '100vh', fontFamily: 'Inter, Arial, sans-serif', display: 'flex', flexDirection: 'column' }}>
@@ -1480,6 +1574,7 @@ function App() {
           </main>
         </div>
       </div>
+      {showAddModal && <AddPatientModal colors={colors} t={t} onClose={() => setShowAddModal(false)} onAdd={handleAddPatient} />}
     </div>
   );
 }
