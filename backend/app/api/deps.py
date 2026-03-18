@@ -24,3 +24,15 @@ def require_admin(current_user: User = Depends(get_current_user)) -> User:
     if current_user.role != UserRole.ADMIN:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Admin role required')
     return current_user
+
+
+def require_patient(current_user: User = Depends(get_current_user)) -> User:
+    if current_user.role != UserRole.PATIENT:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Patient role required')
+    return current_user
+
+
+def require_doctor(current_user: User = Depends(get_current_user)) -> User:
+    if current_user.role != UserRole.DOCTOR:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Doctor role required')
+    return current_user

@@ -10,6 +10,7 @@ from app.db import Base
 class UserRole(str, enum.Enum):
     DOCTOR = 'DOCTOR'
     ADMIN = 'ADMIN'
+    PATIENT = 'PATIENT'
 
 
 class User(Base):
@@ -21,5 +22,6 @@ class User(Base):
     role: Mapped[UserRole] = mapped_column(Enum(UserRole, name='user_role'), nullable=False)
     full_name: Mapped[str] = mapped_column(String(255), nullable=False)
     phone: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    invite_code: Mapped[str | None] = mapped_column(String(10), unique=True, nullable=True, index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
