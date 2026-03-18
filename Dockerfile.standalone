@@ -1,0 +1,38 @@
+# Stage 1: build frontend
+FROM node:20-alpine AS web-build
+WORKDIR /web
+COPY web/package.json ./package.json
+RUN npm install
+COPY web/ ./
+RUN npm run build
+
+# Stage 2: build backend runtime
+FROM python:3.11-slim
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/app ./app
+COPY --from=web-build /web/dist ./app/static
+
+# Non-secret defaults only
+ENV DATABASE_URL=sqlite:////app/data/health.db
+ENV CORS_ORIGINS=http://localhost:8080
+ENV ADMIN_EMAIL=admin@example.com
+ENV ADMIN_FULL_NAME=System Admin
+
+RUN mkdir -p /app/data
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=10s --timeout=3s --retries=12 CMD curl -fsS http://127.0.0.1:8080/api/v1/health || exit 1
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
