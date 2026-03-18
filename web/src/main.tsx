@@ -802,12 +802,10 @@ function DashboardPage({ colors, t }: { colors: Colors; t: Record<string, string
           <Line text="Elena Petrova" badge="4 min" />
         </Panel>
         <Panel title={t.quickActions} colors={colors}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            {[t.addPatient, t.importProfile, t.exportProfile].map((action) => (
-              <button key={action} onClick={() => window.alert(`${action} clicked`)} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 8px', fontWeight: 600, cursor: 'pointer' }}>
-                {action}
-              </button>
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 8 }}>
+            <button onClick={() => window.alert(`${t.addPatient} clicked`)} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 8px', fontWeight: 600, cursor: 'pointer' }}>
+              {t.addPatient}
+            </button>
           </div>
         </Panel>
       </div>
@@ -1024,15 +1022,6 @@ function PatientProfilePage({ patient, colors, t, lang, onBack }: { patient: Pat
         </MGrid>
       </Section>
 
-      {/* ── Fitness ── */}
-      <Section title={t.catFitness} colors={colors} defaultOpen={false}>
-        <MGrid>
-          <MetricCard label={t.mVo2max} value={`${h.vo2max}`} unit="ml/kg/min" color={h.vo2max < 30 ? '#f59e0b' : '#22c55e'} colors={colors} />
-          <MetricCard label={t.mCardioLoad} value={`${h.cardioLoad}`} unit="/100" color={scaleColor(h.cardioLoad, 60, 80)} colors={colors} />
-          <MetricCard label={t.mTrainLoad} value={`${h.trainLoad}`} unit="" colors={colors} />
-          <MetricCard label={t.mRecoveryTime} value={`${h.recoveryTime}`} unit={t.hrs} color={h.recoveryTime > 24 ? '#f59e0b' : undefined} colors={colors} />
-        </MGrid>
-      </Section>
 
       {/* ── Body Composition ── */}
       <Section title={t.catBody} colors={colors}>
