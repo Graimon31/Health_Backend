@@ -41,7 +41,7 @@ if (-not $healthy) {
 }
 
 Write-Output "[4/5] Verifying that the new dashboard UI is inside container..."
-$check = docker exec $ContainerName sh -c "grep -q 'Search patients' /app/static/index.html; echo $?"
+$check = docker exec $ContainerName sh -c "grep -q 'Поиск пациентов' /app/static/index.html; echo $?"
 if ($check -eq '0') {
   Write-Output "✅ New dashboard build detected."
 } else {
