@@ -7,8 +7,10 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from app.api.auth import router as auth_router
+from app.api.prediction import router as prediction_router
 from app.core.config import settings
 from app.db import Base, engine
+from app.models.patient import HealthMeasurement, Patient  # noqa: F401 — ensure tables created
 from app.models.user import User, UserRole
 from app.security import hash_password
 
@@ -23,6 +25,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(prediction_router)
 
 static_dir = Path(__file__).parent / 'static'
 assets_dir = static_dir / 'assets'

@@ -166,6 +166,99 @@ Health_Backend/
 
 ---
 
+## ML Risk Prediction (7-day Patient Risk)
+
+### Обзор
+
+Модуль ML прогнозирует вероятность ухудшения состояния пациента в ближайшие 7 дней
+на основе временных рядов показателей здоровья (ЧСС, АД, SpO2, глюкоза, стресс, сон).
+
+> **Disclaimer:** Это инструмент поддержки принятия решений (decision support),
+> **не** медицинский диагноз. Результат должен интерпретироваться врачом.
+
+### Архитектура
+
+```
+backend/ml/
+  config.py       # Все константы и гиперпараметры
+  features.py     # Feature engineering (агрегаты 3/7/14 дней)
+  dataset.py      # Загрузка данных из БД / CSV, создание target
+  train.py        # Обучение, оценка, сохранение артефактов
+  infer.py        # Загрузка модели, inference
+  explain.py      # SHAP / feature importance
+  artifacts/      # model.pkl, feature_schema.json, metadata.json
+```
+
+### Обучение модели
+
+```bash
+cd backend
+
+# Из базы данных
+python -m ml.train --source db
+
+# Из CSV-файла
+python -m ml.train --source csv --path data/train.csv
+```
+
+Артефакты сохраняются в `backend/ml/artifacts/`:
+- `model.pkl` — обученная модель (LightGBM / XGBoost / RandomForest)
+- `feature_schema.json` — порядок и список признаков
+- `metadata.json` — версия, threshold, метрики, дата обучения
+
+### Запуск API с моделью
+
+```bash
+cd backend
+DATABASE_URL=sqlite:///./health.db JWT_SECRET=dev uvicorn app.main:app --reload --port 8000
+```
+
+### Prediction endpoint
+
+```
+GET /api/v1/prediction/{patient_id}
+```
+
+Пример ответа (200):
+```json
+{
+  "patient_id": 123,
+  "risk_probability": 0.78,
+  "risk_level": "high",
+  "threshold": 0.65,
+  "top_factors": [
+    {"name": "bp_sys_trend_7d", "impact": 0.21},
+    {"name": "sleep_mean_7d", "impact": 0.14},
+    {"name": "spo2_last_value", "impact": 0.11}
+  ],
+  "model_version": "risk_lgbm_20260318_1234",
+  "generated_at": "2026-03-18T12:34:56Z"
+}
+```
+
+Коды ошибок:
+| Код | Причина |
+|-----|---------|
+| 404 | Пациент не найден |
+| 422 | Недостаточно данных для построения feature window |
+| 503 | Модель не загружена (артефакты отсутствуют) |
+
+### Запуск тестов
+
+```bash
+cd backend
+pytest -q
+```
+
+### Ограничения
+
+- Модель обучена на исторических данных и может не учитывать новые паттерны (concept drift)
+- Минимум 3 записи за последние 14 дней для генерации прогноза
+- Cold start: при первом запуске без обученной модели endpoint возвращает 503
+- Результат — вероятность, а не диагноз
+
+---
+
 ## Решение проблем
 
 **Порт 8080 занят:**
