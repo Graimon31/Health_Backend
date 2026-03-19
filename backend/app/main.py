@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.api.access import router as access_router
@@ -47,6 +48,14 @@ if assets_dir.exists():
 @app.on_event('startup')
 def on_startup() -> None:
     Base.metadata.create_all(bind=engine)
+    # Add columns that may be missing from older database schemas
+    with engine.connect() as conn:
+        for col, col_type in [('nickname', 'VARCHAR(50)'), ('invite_code', 'VARCHAR(10)')]:
+            try:
+                conn.execute(text(f'ALTER TABLE users ADD COLUMN {col} {col_type}'))
+                conn.commit()
+            except Exception:
+                conn.rollback()
     with Session(engine) as db:
         admin = db.query(User).filter(User.email == settings.admin_email).first()
         if admin is None:
