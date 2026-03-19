@@ -160,7 +160,7 @@ const translations: Record<Lang, Record<string, string>> = {
     forecastTitle: 'Health Forecast & Predictions',
     riskLevel: 'Risk Level', prediction: 'Prediction', recommendation: 'Recommendation',
     lowRisk: 'Low Risk', moderateRisk: 'Moderate Risk', highRisk: 'High Risk',
-    // Add patient modal
+    // Add patient wizard
     addPatientTitle: 'Add New Patient',
     patientName: 'Full Name',
     patientAge: 'Age',
@@ -169,6 +169,53 @@ const translations: Record<Lang, Record<string, string>> = {
     cancel: 'Cancel',
     create: 'Create',
     fieldRequired: 'Please fill in all required fields',
+    // Wizard steps
+    wizAskApp: 'Does the patient use the mobile app?',
+    wizNoAppTitle: 'Unable to add patient',
+    wizNoAppText: 'Unfortunately, it is not possible to add the patient. We recommend asking the patient to register in the app if they have health monitoring devices.',
+    wizClose: 'Close',
+    wizFormTitle: 'Patient Information',
+    wizSectionIdentity: 'Identification & Contact',
+    wizSectionClinical: 'Clinical Information',
+    wizLanguage: 'Preferred Language',
+    wizLangPlaceholder: 'e.g. Russian, English',
+    wizEmergencyContact: 'Emergency Contact',
+    wizChiefComplaint: 'Chief Complaint / Reason for Visit',
+    wizMedicalHistory: 'Medical History',
+    wizSocialHistory: 'Social History',
+    wizSocialPlaceholder: 'Smoking, alcohol, lifestyle, occupation...',
+    wizNext: 'Next',
+    wizFullNameReq: 'Full name is required',
+    wizComplaintReq: 'Chief complaint is required',
+    wizNicknameTitle: 'Patient Nickname',
+    wizNicknameDesc: 'Enter the patient\'s nickname from the mobile app to link accounts.',
+    wizNicknamePlaceholder: 'Enter nickname...',
+    wizCheck: 'Check',
+    wizNicknameFound: 'Patient found! You can proceed.',
+    wizNicknameNotFound: 'Patient with this nickname was not found. Please check and try again.',
+    wizNicknameReq: 'Please enter and verify the patient nickname',
+    wizNicknameLabel: 'Nickname',
+    wizAccessTitle: 'Access Type',
+    wizAccessDesc: 'Choose the type of access to the patient\'s health data from the mobile app.',
+    wizOneTime: 'One-time Access',
+    wizOneTimeDesc: 'Receive a single data snapshot (last 24-72 hours). Access expires after viewing or within 24 hours.',
+    wizPermanent: 'Permanent Access',
+    wizPermanentDesc: 'Continuous access to updated health data. Maximum period — 365 days. Patient can revoke at any time.',
+    wizSelectAccess: 'Please select an access type',
+    wizSendRequest: 'Send Request',
+    wizPeriodTitle: 'Access Period',
+    wizPeriodDesc: 'Select the start and end dates for permanent access. Maximum duration is 365 days.',
+    wizDateStart: 'Start Date',
+    wizDateEnd: 'End Date',
+    wizDays: 'Duration (days)',
+    wizPeriodReq: 'Start and end dates are required',
+    wizEndAfterStart: 'End date must be after start date',
+    wizMaxPeriod: 'Access period cannot exceed 365 days',
+    wizRequestSent: 'Request Sent!',
+    wizStatusPending: 'The patient will receive a notification in the mobile app. Once they accept, you will have access to their health data.',
+    wizAccessLabel: 'Access Type',
+    wizPeriodLabel: 'Period',
+    wizPendingBadge: 'Awaiting patient response',
   },
   ru: {
     dashboard: 'Главная',
@@ -324,7 +371,7 @@ const translations: Record<Lang, Record<string, string>> = {
     forecastTitle: 'Прогноз здоровья и предсказания',
     riskLevel: 'Уровень риска', prediction: 'Прогноз', recommendation: 'Рекомендация',
     lowRisk: 'Низкий риск', moderateRisk: 'Умеренный риск', highRisk: 'Высокий риск',
-    // Add patient modal
+    // Add patient wizard
     addPatientTitle: 'Добавить нового пациента',
     patientName: 'ФИО',
     patientAge: 'Возраст',
@@ -333,6 +380,53 @@ const translations: Record<Lang, Record<string, string>> = {
     cancel: 'Отмена',
     create: 'Создать',
     fieldRequired: 'Пожалуйста, заполните все обязательные поля',
+    // Wizard steps
+    wizAskApp: 'Пациент пользуется мобильным приложением?',
+    wizNoAppTitle: 'Добавить пациента не получится',
+    wizNoAppText: 'К сожалению, добавить пациента не получится. Рекомендуем попросить пациента зарегистрироваться в приложении, если у него есть устройства для отслеживания показателей здоровья.',
+    wizClose: 'Закрыть',
+    wizFormTitle: 'Данные пациента',
+    wizSectionIdentity: 'Идентификация и контакты',
+    wizSectionClinical: 'Клиническая информация',
+    wizLanguage: 'Язык общения',
+    wizLangPlaceholder: 'напр. Русский, Английский',
+    wizEmergencyContact: 'Экстренный контакт',
+    wizChiefComplaint: 'Жалоба / причина визита',
+    wizMedicalHistory: 'Анамнез текущего заболевания',
+    wizSocialHistory: 'Социальный анамнез',
+    wizSocialPlaceholder: 'Курение, алкоголь, образ жизни, работа...',
+    wizNext: 'Далее',
+    wizFullNameReq: 'ФИО обязательно для заполнения',
+    wizComplaintReq: 'Жалоба / причина визита обязательна',
+    wizNicknameTitle: 'Ник пациента',
+    wizNicknameDesc: 'Введите ник пациента из мобильного приложения для связки аккаунтов.',
+    wizNicknamePlaceholder: 'Введите ник...',
+    wizCheck: 'Проверить',
+    wizNicknameFound: 'Пациент найден! Можно продолжить.',
+    wizNicknameNotFound: 'Пациент с таким ником не найден. Проверьте и попробуйте снова.',
+    wizNicknameReq: 'Введите и проверьте ник пациента',
+    wizNicknameLabel: 'Ник',
+    wizAccessTitle: 'Тип доступа',
+    wizAccessDesc: 'Выберите тип доступа к данным здоровья пациента из мобильного приложения.',
+    wizOneTime: 'Разовый доступ',
+    wizOneTimeDesc: 'Получить единичный пакет данных (за последние 24-72 часа). Доступ закроется после просмотра или через 24 часа.',
+    wizPermanent: 'Постоянный доступ',
+    wizPermanentDesc: 'Постоянный доступ к обновляемым данным здоровья. Максимальный срок — 365 дней. Пациент может отозвать доступ в любой момент.',
+    wizSelectAccess: 'Выберите тип доступа',
+    wizSendRequest: 'Отправить запрос',
+    wizPeriodTitle: 'Период доступа',
+    wizPeriodDesc: 'Выберите даты начала и окончания постоянного доступа. Максимальная длительность — 365 дней.',
+    wizDateStart: 'Дата начала',
+    wizDateEnd: 'Дата окончания',
+    wizDays: 'Длительность (дней)',
+    wizPeriodReq: 'Даты начала и окончания обязательны',
+    wizEndAfterStart: 'Дата окончания должна быть позже даты начала',
+    wizMaxPeriod: 'Период доступа не может превышать 365 дней',
+    wizRequestSent: 'Запрос отправлен!',
+    wizStatusPending: 'Пациент получит уведомление в мобильном приложении. После подтверждения вы получите доступ к его данным здоровья.',
+    wizAccessLabel: 'Тип доступа',
+    wizPeriodLabel: 'Период',
+    wizPendingBadge: 'Ожидание ответа пациента',
   },
 };
 
@@ -785,64 +879,393 @@ function LineChart({ data1, data2, label1, label2, colors, months }: {
   );
 }
 
-/* ─── Add Patient Modal ─── */
+/* ─── Add Patient Wizard (multi-step) ─── */
 
-function AddPatientModal({ colors, t, onClose, onAdd }: { colors: Colors; t: Record<string, string>; onClose: () => void; onAdd: (p: { name: string; age: number; diagnosis: string; phone: string }) => void }) {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [diagnosis, setDiagnosis] = useState('');
-  const [phone, setPhone] = useState('');
+type WizardStep = 'ask_app' | 'no_app_info' | 'patient_form' | 'nickname' | 'access_type' | 'access_period' | 'status';
+type AccessChoice = 'one_time' | 'permanent';
+
+interface WizardData {
+  // Form FR-03
+  fullName: string; dob: string; phone: string; address: string;
+  emergencyContact: string; language: string;
+  chiefComplaint: string; medicalHistory: string;
+  medications: string; allergies: string; socialHistory: string;
+  // Nickname FR-04
+  nickname: string; nicknameValid: boolean; patientId: number | null;
+  // Access FR-05/06/07
+  accessType: AccessChoice | null;
+  accessStart: string; accessEnd: string;
+}
+
+const emptyWizard: WizardData = {
+  fullName: '', dob: '', phone: '', address: '',
+  emergencyContact: '', language: '',
+  chiefComplaint: '', medicalHistory: '',
+  medications: '', allergies: '', socialHistory: '',
+  nickname: '', nicknameValid: false, patientId: null,
+  accessType: null, accessStart: '', accessEnd: '',
+};
+
+function AddPatientWizard({ colors, t, onClose, onAdd }: {
+  colors: Colors; t: Record<string, string>;
+  onClose: () => void;
+  onAdd: (p: { name: string; age: number; diagnosis: string; phone: string }) => void;
+}) {
+  const [step, setStep] = useState<WizardStep>('ask_app');
+  const [data, setData] = useState<WizardData>({ ...emptyWizard });
   const [error, setError] = useState('');
+  const [nicknameChecking, setNicknameChecking] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
 
-  const handleSubmit = () => {
-    if (!name.trim() || !age.trim() || !diagnosis.trim()) {
-      setError(t.fieldRequired);
-      return;
-    }
-    onAdd({ name: name.trim(), age: parseInt(age, 10), diagnosis: diagnosis.trim(), phone: phone.trim() });
-    onClose();
-  };
+  const set = (field: keyof WizardData, value: string | boolean | number | null) =>
+    setData((prev) => ({ ...prev, [field]: value }));
 
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '10px 14px', borderRadius: 8,
     border: `1px solid ${colors.border}`, background: colors.inputBg,
     color: colors.text, fontSize: 14, boxSizing: 'border-box', outline: 'none',
   };
+  const textareaStyle: React.CSSProperties = { ...inputStyle, minHeight: 60, resize: 'vertical' } as React.CSSProperties;
   const labelStyle: React.CSSProperties = { display: 'block', marginBottom: 4, fontWeight: 600, fontSize: 14, color: colors.textMuted };
+  const btnPrimary: React.CSSProperties = { border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 22px', fontWeight: 600, cursor: 'pointer', fontSize: 14 };
+  const btnSecondary: React.CSSProperties = { border: `1px solid ${colors.border}`, borderRadius: 8, background: 'transparent', color: colors.text, padding: '10px 22px', fontWeight: 600, cursor: 'pointer', fontSize: 14 };
+  const btnDanger: React.CSSProperties = { ...btnPrimary, background: colors.danger };
 
-  return (
+  // Step indicators
+  const allSteps: WizardStep[] = ['ask_app', 'patient_form', 'nickname', 'access_type', 'access_period', 'status'];
+  const stepIdx = allSteps.indexOf(step);
+
+  // ── Validation helpers ──
+  const validateForm = (): boolean => {
+    if (!data.fullName.trim()) { setError(t.wizFullNameReq); return false; }
+    if (!data.chiefComplaint.trim()) { setError(t.wizComplaintReq); return false; }
+    setError('');
+    return true;
+  };
+
+  const handleCheckNickname = () => {
+    if (!data.nickname.trim()) { setError(t.wizNicknameReq); return; }
+    setNicknameChecking(true);
+    setError('');
+    // Simulating API call — in production this would be fetch('/api/v1/access/check-nickname')
+    setTimeout(() => {
+      // Demo: accept nicknames that are 3+ chars
+      const found = data.nickname.trim().length >= 3;
+      set('nicknameValid', found);
+      set('patientId', found ? Math.floor(Math.random() * 1000) + 100 : null);
+      if (!found) setError(t.wizNicknameNotFound);
+      setNicknameChecking(false);
+    }, 800);
+  };
+
+  const validatePeriod = (): boolean => {
+    if (!data.accessStart || !data.accessEnd) { setError(t.wizPeriodReq); return false; }
+    const start = new Date(data.accessStart);
+    const end = new Date(data.accessEnd);
+    if (end <= start) { setError(t.wizEndAfterStart); return false; }
+    const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    if (days > 365) { setError(t.wizMaxPeriod); return false; }
+    setError('');
+    return true;
+  };
+
+  const handleSendRequest = () => {
+    // Calculate age from dob
+    let age = 0;
+    if (data.dob) {
+      const birthDate = new Date(data.dob);
+      const today = new Date();
+      age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+    }
+
+    onAdd({
+      name: data.fullName.trim(),
+      age,
+      diagnosis: data.chiefComplaint.trim(),
+      phone: data.phone.trim(),
+    });
+    setRequestSent(true);
+    setStep('status');
+  };
+
+  const Overlay = ({ children }: { children: React.ReactNode }) => (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ background: colors.panel, borderRadius: 14, padding: 28, width: 420, maxWidth: '90vw', border: `1px solid ${colors.border}` }}>
-        <h2 style={{ margin: '0 0 20px', color: colors.text }}>{t.addPatientTitle}</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div>
-            <label style={labelStyle}>{t.patientName} *</label>
-            <input value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle}>{t.patientAge} *</label>
-            <input type="number" min="0" max="150" value={age} onChange={(e) => setAge(e.target.value)} style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle}>{t.patientDiagnosis} *</label>
-            <input value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)} style={inputStyle} />
-          </div>
-          <div>
-            <label style={labelStyle}>{t.patientPhone}</label>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} style={inputStyle} />
-          </div>
-          {error && <div style={{ color: colors.danger, fontSize: 13, fontWeight: 600 }}>{error}</div>}
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 6 }}>
-            <button onClick={onClose} style={{ border: `1px solid ${colors.border}`, borderRadius: 8, background: 'transparent', color: colors.text, padding: '10px 20px', fontWeight: 600, cursor: 'pointer' }}>
-              {t.cancel}
-            </button>
-            <button onClick={handleSubmit} style={{ border: 'none', borderRadius: 8, background: colors.button, color: '#fff', padding: '10px 20px', fontWeight: 600, cursor: 'pointer' }}>
-              {t.create}
-            </button>
-          </div>
-        </div>
+      <div onClick={(e) => e.stopPropagation()} style={{
+        background: colors.panel, borderRadius: 14, padding: 28,
+        width: step === 'patient_form' ? 600 : 480, maxWidth: '92vw',
+        maxHeight: '90vh', overflowY: 'auto',
+        border: `1px solid ${colors.border}`,
+      }}>
+        {children}
       </div>
     </div>
+  );
+
+  // ── Step progress bar ──
+  const Progress = () => {
+    if (step === 'ask_app' || step === 'no_app_info') return null;
+    const labels_en = ['Form', 'Nickname', 'Access', 'Period', 'Done'];
+    const labels_ru = ['\u0424\u043e\u0440\u043c\u0430', '\u041d\u0438\u043a', '\u0414\u043e\u0441\u0442\u0443\u043f', '\u041f\u0435\u0440\u0438\u043e\u0434', '\u0413\u043e\u0442\u043e\u0432\u043e'];
+    const labels = t.dashboard === 'Главная' ? labels_ru : labels_en;
+    const active = stepIdx - 1; // offset because ask_app is step 0
+    return (
+      <div style={{ display: 'flex', gap: 4, marginBottom: 20 }}>
+        {labels.map((l, i) => (
+          <div key={l} style={{ flex: 1, textAlign: 'center' }}>
+            <div style={{
+              height: 4, borderRadius: 2, marginBottom: 4,
+              background: i <= active ? colors.button : colors.border,
+            }} />
+            <span style={{ fontSize: 11, color: i <= active ? colors.button : colors.textMuted, fontWeight: 600 }}>{l}</span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // ══════════════════════════════════════
+  // Step 1: Ask if patient uses mobile app
+  // ══════════════════════════════════════
+  if (step === 'ask_app') return (
+    <Overlay>
+      <h2 style={{ margin: '0 0 16px', color: colors.text }}>{t.addPatientTitle}</h2>
+      <p style={{ fontSize: 16, color: colors.text, marginBottom: 24, lineHeight: 1.5 }}>{t.wizAskApp}</p>
+      <div style={{ display: 'flex', gap: 12 }}>
+        <button onClick={() => { setStep('patient_form'); setError(''); }} style={{ ...btnPrimary, flex: 1, padding: '14px 0', fontSize: 16 }}>{t.yes}</button>
+        <button onClick={() => setStep('no_app_info')} style={{ ...btnSecondary, flex: 1, padding: '14px 0', fontSize: 16 }}>{t.no}</button>
+      </div>
+    </Overlay>
+  );
+
+  // ══════════════════════════════════════
+  // Step 1b: No app — info message (FR-02)
+  // ══════════════════════════════════════
+  if (step === 'no_app_info') return (
+    <Overlay>
+      <div style={{ textAlign: 'center', padding: '10px 0' }}>
+        <div style={{ fontSize: 48, marginBottom: 16 }}>&#x1F4F1;</div>
+        <h2 style={{ margin: '0 0 16px', color: colors.text }}>{t.wizNoAppTitle}</h2>
+        <p style={{ fontSize: 15, color: colors.textMuted, lineHeight: 1.6, marginBottom: 24 }}>{t.wizNoAppText}</p>
+        <button onClick={onClose} style={btnPrimary}>{t.wizClose}</button>
+      </div>
+    </Overlay>
+  );
+
+  // ══════════════════════════════════════
+  // Step 2: Patient data form (FR-03)
+  // ══════════════════════════════════════
+  if (step === 'patient_form') return (
+    <Overlay>
+      <Progress />
+      <h2 style={{ margin: '0 0 16px', color: colors.text }}>{t.wizFormTitle}</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {/* Identity & contact */}
+        <h4 style={{ margin: '4px 0 0', color: colors.textMuted, fontSize: 13, textTransform: 'uppercase', letterSpacing: 1 }}>{t.wizSectionIdentity}</h4>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <div>
+            <label style={labelStyle}>{t.patientName} *</label>
+            <input value={data.fullName} onChange={(e) => set('fullName', e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.dateOfBirth}</label>
+            <input type="date" value={data.dob} onChange={(e) => set('dob', e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.phone}</label>
+            <input value={data.phone} onChange={(e) => set('phone', e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.wizLanguage}</label>
+            <input value={data.language} onChange={(e) => set('language', e.target.value)} style={inputStyle} placeholder={t.wizLangPlaceholder} />
+          </div>
+        </div>
+        <div>
+          <label style={labelStyle}>{t.address}</label>
+          <input value={data.address} onChange={(e) => set('address', e.target.value)} style={inputStyle} />
+        </div>
+        <div>
+          <label style={labelStyle}>{t.wizEmergencyContact}</label>
+          <input value={data.emergencyContact} onChange={(e) => set('emergencyContact', e.target.value)} style={inputStyle} />
+        </div>
+
+        {/* Clinical */}
+        <h4 style={{ margin: '8px 0 0', color: colors.textMuted, fontSize: 13, textTransform: 'uppercase', letterSpacing: 1 }}>{t.wizSectionClinical}</h4>
+        <div>
+          <label style={labelStyle}>{t.wizChiefComplaint} *</label>
+          <textarea value={data.chiefComplaint} onChange={(e) => set('chiefComplaint', e.target.value)} style={textareaStyle} />
+        </div>
+        <div>
+          <label style={labelStyle}>{t.wizMedicalHistory}</label>
+          <textarea value={data.medicalHistory} onChange={(e) => set('medicalHistory', e.target.value)} style={textareaStyle} />
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <div>
+            <label style={labelStyle}>{t.medications}</label>
+            <textarea value={data.medications} onChange={(e) => set('medications', e.target.value)} style={textareaStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>{t.allergies}</label>
+            <textarea value={data.allergies} onChange={(e) => set('allergies', e.target.value)} style={textareaStyle} />
+          </div>
+        </div>
+        <div>
+          <label style={labelStyle}>{t.wizSocialHistory}</label>
+          <textarea value={data.socialHistory} onChange={(e) => set('socialHistory', e.target.value)} style={textareaStyle} placeholder={t.wizSocialPlaceholder} />
+        </div>
+
+        {error && <div style={{ color: colors.danger, fontSize: 13, fontWeight: 600 }}>{error}</div>}
+        <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 4 }}>
+          <button onClick={() => setStep('ask_app')} style={btnSecondary}>{t.back}</button>
+          <button onClick={() => { if (validateForm()) setStep('nickname'); }} style={btnPrimary}>{t.wizNext}</button>
+        </div>
+      </div>
+    </Overlay>
+  );
+
+  // ══════════════════════════════════════
+  // Step 3: Nickname input + validation (FR-04)
+  // ══════════════════════════════════════
+  if (step === 'nickname') return (
+    <Overlay>
+      <Progress />
+      <h2 style={{ margin: '0 0 8px', color: colors.text }}>{t.wizNicknameTitle}</h2>
+      <p style={{ fontSize: 14, color: colors.textMuted, marginBottom: 20, lineHeight: 1.5 }}>{t.wizNicknameDesc}</p>
+      <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
+        <input
+          value={data.nickname}
+          onChange={(e) => { set('nickname', e.target.value); set('nicknameValid', false); setError(''); }}
+          placeholder={t.wizNicknamePlaceholder}
+          style={{ ...inputStyle, flex: 1 }}
+          onKeyDown={(e) => { if (e.key === 'Enter') handleCheckNickname(); }}
+        />
+        <button onClick={handleCheckNickname} disabled={nicknameChecking} style={{ ...btnPrimary, opacity: nicknameChecking ? 0.6 : 1 }}>
+          {nicknameChecking ? '...' : t.wizCheck}
+        </button>
+      </div>
+      {data.nicknameValid && (
+        <div style={{ background: '#22c55e22', border: '1px solid #22c55e', borderRadius: 8, padding: '10px 14px', marginBottom: 12, color: '#22c55e', fontWeight: 600, fontSize: 14 }}>
+          {t.wizNicknameFound}
+        </div>
+      )}
+      {error && <div style={{ color: colors.danger, fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{error}</div>}
+      <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+        <button onClick={() => { setStep('patient_form'); setError(''); }} style={btnSecondary}>{t.back}</button>
+        <button onClick={() => { if (data.nicknameValid) { setStep('access_type'); setError(''); } else setError(t.wizNicknameReq); }} style={{ ...btnPrimary, opacity: data.nicknameValid ? 1 : 0.5 }}>{t.wizNext}</button>
+      </div>
+    </Overlay>
+  );
+
+  // ══════════════════════════════════════
+  // Step 4: Access type selection (FR-05)
+  // ══════════════════════════════════════
+  if (step === 'access_type') return (
+    <Overlay>
+      <Progress />
+      <h2 style={{ margin: '0 0 8px', color: colors.text }}>{t.wizAccessTitle}</h2>
+      <p style={{ fontSize: 14, color: colors.textMuted, marginBottom: 20, lineHeight: 1.5 }}>{t.wizAccessDesc}</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
+        {(['one_time', 'permanent'] as AccessChoice[]).map((type) => {
+          const selected = data.accessType === type;
+          return (
+            <button
+              key={type}
+              onClick={() => set('accessType', type)}
+              style={{
+                border: `2px solid ${selected ? colors.button : colors.border}`,
+                borderRadius: 10, padding: '16px 18px', background: selected ? colors.button + '11' : 'transparent',
+                cursor: 'pointer', textAlign: 'left', transition: 'all 0.15s',
+              }}
+            >
+              <div style={{ fontWeight: 700, fontSize: 15, color: colors.text, marginBottom: 4 }}>
+                {type === 'one_time' ? t.wizOneTime : t.wizPermanent}
+              </div>
+              <div style={{ fontSize: 13, color: colors.textMuted, lineHeight: 1.4 }}>
+                {type === 'one_time' ? t.wizOneTimeDesc : t.wizPermanentDesc}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      {error && <div style={{ color: colors.danger, fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{error}</div>}
+      <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+        <button onClick={() => { setStep('nickname'); setError(''); }} style={btnSecondary}>{t.back}</button>
+        <button onClick={() => {
+          if (!data.accessType) { setError(t.wizSelectAccess); return; }
+          setError('');
+          if (data.accessType === 'permanent') setStep('access_period');
+          else handleSendRequest();
+        }} style={{ ...btnPrimary, opacity: data.accessType ? 1 : 0.5 }}>{data.accessType === 'permanent' ? t.wizNext : t.wizSendRequest}</button>
+      </div>
+    </Overlay>
+  );
+
+  // ══════════════════════════════════════
+  // Step 5: Access period for permanent (FR-07)
+  // ══════════════════════════════════════
+  if (step === 'access_period') return (
+    <Overlay>
+      <Progress />
+      <h2 style={{ margin: '0 0 8px', color: colors.text }}>{t.wizPeriodTitle}</h2>
+      <p style={{ fontSize: 14, color: colors.textMuted, marginBottom: 20, lineHeight: 1.5 }}>{t.wizPeriodDesc}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+        <div>
+          <label style={labelStyle}>{t.wizDateStart}</label>
+          <input type="date" value={data.accessStart} onChange={(e) => set('accessStart', e.target.value)} style={inputStyle} />
+        </div>
+        <div>
+          <label style={labelStyle}>{t.wizDateEnd}</label>
+          <input type="date" value={data.accessEnd} onChange={(e) => set('accessEnd', e.target.value)} style={inputStyle} />
+        </div>
+      </div>
+      {data.accessStart && data.accessEnd && (() => {
+        const days = Math.ceil((new Date(data.accessEnd).getTime() - new Date(data.accessStart).getTime()) / (1000 * 60 * 60 * 24));
+        return days > 0 ? <div style={{ fontSize: 13, color: days > 365 ? colors.danger : colors.textMuted, marginBottom: 12 }}>{t.wizDays}: {days} / 365</div> : null;
+      })()}
+      {error && <div style={{ color: colors.danger, fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{error}</div>}
+      <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+        <button onClick={() => { setStep('access_type'); setError(''); }} style={btnSecondary}>{t.back}</button>
+        <button onClick={() => { if (validatePeriod()) handleSendRequest(); }} style={btnPrimary}>{t.wizSendRequest}</button>
+      </div>
+    </Overlay>
+  );
+
+  // ══════════════════════════════════════
+  // Step 6: Status screen (FR-08 preview)
+  // ══════════════════════════════════════
+  return (
+    <Overlay>
+      <div style={{ textAlign: 'center', padding: '10px 0' }}>
+        <div style={{ fontSize: 48, marginBottom: 16 }}>&#x2705;</div>
+        <h2 style={{ margin: '0 0 12px', color: colors.text }}>{t.wizRequestSent}</h2>
+        <p style={{ fontSize: 15, color: colors.textMuted, lineHeight: 1.6, marginBottom: 8 }}>
+          {t.wizStatusPending}
+        </p>
+        <div style={{
+          background: colors.inputBg, borderRadius: 10, padding: 16, marginBottom: 20,
+          border: `1px solid ${colors.border}`, textAlign: 'left',
+        }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 14 }}>
+            <div><span style={{ color: colors.textMuted }}>{t.patientName}:</span></div>
+            <div style={{ fontWeight: 600 }}>{data.fullName}</div>
+            <div><span style={{ color: colors.textMuted }}>{t.wizNicknameLabel}:</span></div>
+            <div style={{ fontWeight: 600 }}>@{data.nickname}</div>
+            <div><span style={{ color: colors.textMuted }}>{t.wizAccessLabel}:</span></div>
+            <div style={{ fontWeight: 600 }}>{data.accessType === 'one_time' ? t.wizOneTime : t.wizPermanent}</div>
+            {data.accessType === 'permanent' && data.accessStart && (
+              <>
+                <div><span style={{ color: colors.textMuted }}>{t.wizPeriodLabel}:</span></div>
+                <div style={{ fontWeight: 600 }}>{data.accessStart} — {data.accessEnd}</div>
+              </>
+            )}
+            <div><span style={{ color: colors.textMuted }}>{t.status}:</span></div>
+            <div style={{ fontWeight: 600, color: '#f59e0b' }}>{t.wizPendingBadge}</div>
+          </div>
+        </div>
+        <button onClick={onClose} style={btnPrimary}>{t.wizClose}</button>
+      </div>
+    </Overlay>
   );
 }
 
@@ -1574,7 +1997,7 @@ function App() {
           </main>
         </div>
       </div>
-      {showAddModal && <AddPatientModal colors={colors} t={t} onClose={() => setShowAddModal(false)} onAdd={handleAddPatient} />}
+      {showAddModal && <AddPatientWizard colors={colors} t={t} onClose={() => setShowAddModal(false)} onAdd={handleAddPatient} />}
     </div>
   );
 }
