@@ -47,6 +47,23 @@ if assets_dir.exists():
 @app.on_event('startup')
 def on_startup() -> None:
     Base.metadata.create_all(bind=engine)
+
+    # Auto-migrate: add missing columns to existing tables
+    from sqlalchemy import inspect, text
+    with engine.connect() as conn:
+        inspector = inspect(engine)
+        for table_name, table in Base.metadata.tables.items():
+            if table_name not in inspector.get_table_names():
+                continue
+            existing_cols = {c['name'] for c in inspector.get_columns(table_name)}
+            for col in table.columns:
+                if col.name not in existing_cols:
+                    col_type = col.type.compile(dialect=engine.dialect)
+                    nullable = 'NULL' if col.nullable else 'NOT NULL'
+                    sql = f'ALTER TABLE {table_name} ADD COLUMN {col.name} {col_type} {nullable}'
+                    conn.execute(text(sql))
+        conn.commit()
+
     with Session(engine) as db:
         admin = db.query(User).filter(User.email == settings.admin_email).first()
         if admin is None:
